@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { ProductList } from '../../components/product-list/product-list';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
@@ -11,6 +12,9 @@ import { productCards } from '../../mocks/product-card-mocks';
 function Catalog () {
   return (
     <div className="wrapper">
+      <Helmet>
+        <title>Camera shop. Каталог</title>
+      </Helmet>
       <Header />
       <main>
         <Banner />
