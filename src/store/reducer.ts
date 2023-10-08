@@ -1,10 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { loadProducts } from './action';
+import { loadProducts, setProductsDataLoadingStatus } from './action';
+import { ProductType } from '../types/product-type';
 
-import { products } from '../mocks/product-mocks';
+//import { products } from '../mocks/product-mocks';
 
-const initialState = {
-  products: products,
+type InitialState = {
+  products: ProductType[];
+  areProductsLoading: boolean;
+}
+const initialState: InitialState = {
+  products: [],
+  areProductsLoading: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -12,8 +18,11 @@ const reducer = createReducer(initialState, (builder) => {
 
     .addCase(loadProducts, (state, action) => {
       state.products = action.payload;
+    })
+
+    .addCase(setProductsDataLoadingStatus, (state, action) => {
+      state.areProductsLoading = action.payload;
     });
 });
 
 export { reducer };
-

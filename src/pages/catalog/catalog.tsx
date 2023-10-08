@@ -7,12 +7,20 @@ import { Breadcrumbs } from '../../components/breadcrumbs/breadcrumbs';
 import { Filter } from '../../components/filter/filter';
 import { Sorting } from '../../components/sorting/sorting';
 import { Pagination } from '../../components/pagination/pagination';
+import { LoadingPage } from '../loading-page/loading-page';
 import { useAppSelector } from '../../hooks';
 //import { products } from '../../mocks/product-mocks';
 
 function Catalog () {
 
   const products = useAppSelector((state) => state.products);
+  const areProductsLoading = useAppSelector((state) => state.areProductsLoading);
+
+  if (areProductsLoading) {
+    return (
+      <LoadingPage />
+    );
+  }
 
   return (
     <div className="wrapper">
