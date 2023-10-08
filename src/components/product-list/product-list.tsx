@@ -1,15 +1,15 @@
 import { ProductCard } from '../product-card/product-card';
-import { ProductCardType } from '../../types/product-card-type';
+import { ProductType } from '../../types/product-type';
 
 type ProductListProps = {
-  products: ProductCardType[];
+  products: ProductType[];
 }
 
 function ProductList ({ products }: ProductListProps) {
   return (
     <div className="cards catalog__cards">
       {products.map((product) => (
-        <ProductCard key={product.id} productCard={product}/>
+        <ProductCard key={product.id} product={product}/>
       ))}
     </div>
 

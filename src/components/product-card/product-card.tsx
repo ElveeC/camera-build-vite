@@ -1,10 +1,10 @@
-import { ProductCardType } from '../../types/product-card-type';
+import { ProductType } from '../../types/product-type';
 
 type ProductCardProps = {
- productCard: ProductCardType;
+ product: ProductType;
 }
 
-function ProductCard ({ productCard }: ProductCardProps) {
+function ProductCard ({ product }: ProductCardProps) {
   const {
     previewImgWebp,
     previewImgWebp2x,
@@ -14,7 +14,7 @@ function ProductCard ({ productCard }: ProductCardProps) {
     rating,
     reviewCount,
     price
-  } = productCard;
+  } = product;
 
   return (
     <div className="product-card">

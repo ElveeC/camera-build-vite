@@ -1,4 +1,4 @@
-const productCards = [
+const products = [
   {
     id: 1,
     name: 'fdsf',
@@ -7,7 +7,7 @@ const productCards = [
     category: 'fdsfdsf',
     description: 'fdsfdsfsdfds sfsfsf dsfsf',
     level: 'dsf',
-    price: 4500,
+    price: 7500,
     rating: 4,
     reviewCount: 40,
     previewImg: 'img/content/das-auge.jpg',
@@ -24,7 +24,7 @@ const productCards = [
     category: 'fdsfdsf',
     description: 'fdsfdsfsdfds sfsfsf dsfsf',
     level: 'dsf',
-    price: 450,
+    price: 6500,
     rating: 5,
     reviewCount: 10,
     previewImg: 'img/content/das-auge.jpg',
@@ -41,7 +41,7 @@ const productCards = [
     category: 'fdsfdsf',
     description: 'fdsfdsfsdfds sfsfsf dsfsf',
     level: 'dsf',
-    price: 471,
+    price: 4710,
     rating: 2,
     reviewCount: 28,
     previewImg: 'img/content/das-auge.jpg',
@@ -52,4 +52,4 @@ const productCards = [
 
 ];
 
-export { productCards };
+export { products };

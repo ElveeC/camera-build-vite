@@ -1,4 +1,4 @@
-export type ProductCardType = {
+export type ProductType = {
   id: number;
   name: string;
   vendorCode: string;

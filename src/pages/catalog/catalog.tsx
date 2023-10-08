@@ -7,9 +7,13 @@ import { Breadcrumbs } from '../../components/breadcrumbs/breadcrumbs';
 import { Filter } from '../../components/filter/filter';
 import { Sorting } from '../../components/sorting/sorting';
 import { Pagination } from '../../components/pagination/pagination';
-import { productCards } from '../../mocks/product-card-mocks';
+import { useAppSelector } from '../../hooks';
+//import { products } from '../../mocks/product-mocks';
 
 function Catalog () {
+
+  const products = useAppSelector((state) => state.products);
+
   return (
     <div className="wrapper">
       <Helmet>
@@ -29,7 +33,7 @@ function Catalog () {
                 </div>
                 <div className="catalog__content">
                   <Sorting />
-                  <ProductList products={productCards}/>
+                  <ProductList products={products}/>
                   <Pagination />
                 </div>
               </div>
