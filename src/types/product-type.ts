@@ -1,6 +1,13 @@
-export type ProductType = {
+export type PromoType = {
   id: number;
   name: string;
+  previewImg: string;
+  previewImg2x: string;
+  previewImgWebp: string;
+  previewImgWebp2x: string;
+}
+
+export type ProductType = PromoType & {
   vendorCode: string;
   type: string;
   category: string;
@@ -9,8 +16,4 @@ export type ProductType = {
   price: number;
   rating: number;
   reviewCount: number;
-  previewImg: string;
-  previewImg2x: string;
-  previewImgWebp: string;
-  previewImgWebp2x: string;
 }

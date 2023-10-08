@@ -10,16 +10,16 @@ import { Pagination } from '../../components/pagination/pagination';
 import { LoadingPage } from '../loading-page/loading-page';
 import { useAppSelector } from '../../hooks';
 import { getProducts, getProductsLoadingStatus } from '../../store/data-process/data-process-selectors';
-//import { products } from '../../mocks/product-mocks';
+import { getPromoLoadingStatus } from '../../store/promo-process/promo-process-selectors';
+
 
 function Catalog () {
 
-  //const products = useAppSelector((state) => state.products);
-  //const areProductsLoading = useAppSelector((state) => state.areProductsLoading);
   const products = useAppSelector(getProducts);
   const areProductsLoading = useAppSelector(getProductsLoadingStatus);
+  const arePromoProductsLoading = useAppSelector(getPromoLoadingStatus);
 
-  if (areProductsLoading) {
+  if (areProductsLoading || arePromoProductsLoading) {
     return (
       <LoadingPage />
     );
