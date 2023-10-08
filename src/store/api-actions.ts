@@ -1,20 +1,18 @@
-import {AxiosInstance} from 'axios';
+import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { ProductType } from '../types/product-type.js';
-import { loadProducts, setProductsDataLoadingStatus } from './action';
-import { APIRoute } from '../const';
+//import { loadProducts, setProductsDataLoadingStatus } from './action';
+import { APIRoute, NameSpace } from '../const';
 
-export const fetchQuestionAction = createAsyncThunk<void, undefined, {
+export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchProducts',
-  async (_arg, {dispatch, extra: api}) => {
-    dispatch(setProductsDataLoadingStatus(true));
+  `${NameSpace.Data}/fetchProducts`,
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<ProductType[]>(APIRoute.Products);
-    dispatch(loadProducts(data));
-    dispatch(setProductsDataLoadingStatus(false));
+    return data;
   },
 );

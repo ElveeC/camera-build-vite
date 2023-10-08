@@ -8,9 +8,9 @@ import browserHistory from './browser-history';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { App } from './components/app/app';
-import { fetchQuestionAction } from './store/api-actions';
+import { fetchProductsAction } from './store/api-actions';
 
-store.dispatch(fetchQuestionAction());
+store.dispatch(fetchProductsAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
