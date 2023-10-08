@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -11,29 +11,27 @@ function App () {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path={AppRoute.Catalog}
-            element={<Catalog />}
-          />
+      <Routes>
+        <Route
+          path={AppRoute.Catalog}
+          element={<Catalog />}
+        />
 
-          <Route
-            path={`${AppRoute.Product}/:id`}
-            element={<ProductPage />}
-          />
+        <Route
+          path={`${AppRoute.Product}/:id`}
+          element={<ProductPage />}
+        />
 
-          <Route
-            path={AppRoute.Basket}
-            element={<Basket />}
-          />
+        <Route
+          path={AppRoute.Basket}
+          element={<Basket />}
+        />
 
-          <Route
-            path="*"
-            element={<NotFoundPage />}
-          />
-        </Routes>
-      </BrowserRouter>
+        <Route
+          path="*"
+          element={<NotFoundPage />}
+        />
+      </Routes>
     </HelmetProvider>
   );
 }

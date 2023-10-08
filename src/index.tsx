@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { store } from './store';
+import HistoryRouter from './components/history-router/history-router';
+import browserHistory from './browser-history';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { App } from './components/app/app';
 import { fetchQuestionAction } from './store/api-actions';
@@ -15,7 +19,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HistoryRouter history={browserHistory}>
+        <ToastContainer />
+        <App />
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>
 );
