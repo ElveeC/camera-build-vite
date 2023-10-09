@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { fetchProductsAction } from '../api-actions';
+import { fetchProductsAction, fetchProductAction } from '../api-actions';
 import { DataProcessType } from '../../types/state';
 
 const initialState: DataProcessType = {
   products: [],
-  areProductsLoading: false
+  areProductsLoading: false,
+  product: null,
+  isProductLoading: false
 };
 
 export const dataProcess = createSlice({
@@ -21,6 +23,14 @@ export const dataProcess = createSlice({
       .addCase(fetchProductsAction.fulfilled, (state, action) => {
         state.products = action.payload;
         state.areProductsLoading = false;
+      })
+
+      .addCase(fetchProductAction.pending, (state) => {
+        state.isProductLoading = true;
+      })
+      .addCase(fetchProductAction.fulfilled, (state, action) => {
+        state.product = action.payload;
+        state.isProductLoading = false;
       });
   }
 });

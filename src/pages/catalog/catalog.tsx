@@ -8,6 +8,7 @@ import { Filter } from '../../components/filter/filter';
 import { Sorting } from '../../components/sorting/sorting';
 import { Pagination } from '../../components/pagination/pagination';
 import { LoadingPage } from '../loading-page/loading-page';
+//import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getProducts, getProductsLoadingStatus } from '../../store/data-process/data-process-selectors';
 import { getPromoLoadingStatus } from '../../store/promo-process/promo-process-selectors';

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { ProductType } from '../../types/product-type';
 
 type ProductCardProps = {
@@ -6,6 +8,7 @@ type ProductCardProps = {
 
 function ProductCard ({ product }: ProductCardProps) {
   const {
+    id,
     previewImgWebp,
     previewImgWebp2x,
     previewImg,
@@ -15,6 +18,8 @@ function ProductCard ({ product }: ProductCardProps) {
     reviewCount,
     price
   } = product;
+  //<source type="image/webp" srcSet={`../../${previewImgWebp}, ../../${previewImgWebp2x} 2x`} />
+  //<img src={`../../${previewImg}`} srcSet={`../../${previewImg2x} 2x`} width="280" height="240" alt={`${name}.`} />
 
   return (
     <div className="product-card">
@@ -51,8 +56,8 @@ function ProductCard ({ product }: ProductCardProps) {
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
         </button>
-        <a className="btn btn--transparent" href="#">Подробнее
-        </a>
+        <Link className="btn btn--transparent" to={`${AppRoute.Product}/${id}`}>Подробнее
+        </Link>
       </div>
     </div>
   );

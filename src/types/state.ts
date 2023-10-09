@@ -4,6 +4,8 @@ import { ProductType, PromoType } from './product-type.js';
 export type DataProcessType = {
   products: ProductType[];
   areProductsLoading: boolean;
+  product: ProductType | null;
+  isProductLoading: boolean;
 }
 
 export type PromoProcessType = {
