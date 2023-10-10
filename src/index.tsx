@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { store } from './store';
 import HistoryRouter from './components/history-router/history-router';
 import browserHistory from './browser-history';
+import { ScrollToTop } from './components/scroll-to-top/scroll-to-top';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { App } from './components/app/app';
@@ -22,6 +23,7 @@ root.render(
     <Provider store={store}>
       <HistoryRouter history={browserHistory}>
         <ToastContainer />
+        <ScrollToTop />
         <App />
       </HistoryRouter>
     </Provider>
