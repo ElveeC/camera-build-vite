@@ -45,7 +45,6 @@ function Banner () {
       ))}
     </Swiper>
   );
-
 }
 
 export { Banner };
