@@ -19,5 +19,10 @@ export enum NameSpace {
   Similar = 'SIMILAR',
   Reviews = 'REVIEWS',
   Promo = 'PROMO',
+}
 
+export enum BannerSlider {
+  Speed = 700,
+  AutoPlayDelay = 3000,
+  SlidesPerView = 1
 }
