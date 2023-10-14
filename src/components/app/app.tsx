@@ -12,10 +12,10 @@ function App () {
   return (
     <HelmetProvider>
       <Routes>
-        <Route
-          path={AppRoute.Catalog}
-          element={<Catalog />}
-        />
+
+        <Route path={AppRoute.Catalog} element={<Catalog />}>
+          <Route path="catalog/:page" element={<Catalog />} />
+        </Route>
 
         <Route
           path={`${AppRoute.Product}/:id`}

@@ -31,8 +31,8 @@ function Banner () {
         <SwiperSlide key={product.id}>
           <div className="banner">
             <picture>
-              <source type="image/webp" srcSet={`${product.previewImgWebp}, ${product.previewImgWebp2x} 2x`} />
-              <img src={product.previewImg} srcSet={`${product.previewImg2x} 2x`} width="1280" height="280" alt={`${product.name}.`} />
+              <source type="image/webp" srcSet={`../../${product.previewImgWebp}, ../../${product.previewImgWebp2x} 2x`} />
+              <img src={`../../${product.previewImg}`} srcSet={`../../${product.previewImg2x} 2x`} width="1280" height="280" alt={`${product.name}.`} />
             </picture>
             <p className="banner__info">
               <span className="banner__message">Новинка!</span>

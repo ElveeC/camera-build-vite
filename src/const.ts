@@ -26,3 +26,6 @@ export enum BannerSlider {
   AutoPlayDelay = 3000,
   SlidesPerView = 1
 }
+
+export const CARDS_PER_PAGE_NUMBER = 9;
+export const BUTTONS_PER_PAGE_COUNT = 3;
