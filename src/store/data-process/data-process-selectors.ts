@@ -7,3 +7,5 @@ export const getProductsLoadingStatus = (state: State): boolean => state[NameSpa
 
 export const getProduct = (state: State): ProductType | null => state[NameSpace.Data].product;
 export const getProductLoadingStatus = (state: State): boolean => state[NameSpace.Data].isProductLoading;
+
+export const getSelectedProduct = (state: State): ProductType | null =>state[NameSpace.Data].selectedProduct;

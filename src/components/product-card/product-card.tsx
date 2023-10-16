@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { setSelectedProduct } from '../../store/data-process/data-process';
 import { AppRoute } from '../../const';
 import { ProductType } from '../../types/product-type';
 
@@ -18,6 +20,12 @@ function ProductCard ({ product }: ProductCardProps) {
     reviewCount,
     price
   } = product;
+
+  const dispatch = useAppDispatch();
+
+  const handleBuyButtonClick = () => {
+    dispatch(setSelectedProduct(product));
+  };
 
   return (
     <div className="product-card">
@@ -52,7 +60,7 @@ function ProductCard ({ product }: ProductCardProps) {
         </p>
       </div>
       <div className="product-card__buttons">
-        <button className="btn btn--purple product-card__btn" type="button">Купить
+        <button className="btn btn--purple product-card__btn" type="button" onClick={handleBuyButtonClick}>Купить
         </button>
         <Link className="btn btn--transparent" to={`${AppRoute.Product}/${id}`}>Подробнее
         </Link>

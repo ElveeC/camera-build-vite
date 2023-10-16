@@ -6,6 +6,7 @@ export type DataProcessType = {
   areProductsLoading: boolean;
   product: ProductType | null;
   isProductLoading: boolean;
+  selectedProduct: ProductType | null;
 }
 
 export type PromoProcessType = {

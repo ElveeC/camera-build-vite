@@ -1,19 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { fetchProductsAction, fetchProductAction } from '../api-actions';
 import { DataProcessType } from '../../types/state';
+import { ProductType } from '../../types/product-type';
 
 const initialState: DataProcessType = {
   products: [],
   areProductsLoading: false,
   product: null,
-  isProductLoading: false
+  isProductLoading: false,
+  selectedProduct: null,
 };
 
 export const dataProcess = createSlice({
   name: NameSpace.Data,
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedProduct: (state, action: PayloadAction<ProductType>) => {
+      state.selectedProduct = action.payload;
+    },
+
+    resetSelectedProduct: (state) => {
+      state.selectedProduct = null;
+    },
+  },
   extraReducers(builder) {
     builder
 
@@ -34,3 +44,5 @@ export const dataProcess = createSlice({
       });
   }
 });
+
+export const { setSelectedProduct, resetSelectedProduct } = dataProcess.actions;
