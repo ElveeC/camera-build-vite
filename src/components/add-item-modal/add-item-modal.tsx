@@ -1,8 +1,10 @@
 //import { useState } from 'react';
 //import cn from 'classnames';
+import { Navigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getSelectedProduct } from '../../store/data-process/data-process-selectors';
 import { resetSelectedProduct } from '../../store/data-process/data-process';
+import { AppRoute } from '../../const';
 
 /*type AddItemModalProps = {
   isActive: boolean;
@@ -11,28 +13,13 @@ import { resetSelectedProduct } from '../../store/data-process/data-process';
 function AddItemModal (/*isActive: AddItemModalProps*/) {
   //const [isActive, setActive] = useState(false);
 
-  const selectedProduct = useAppSelector(getSelectedProduct);
   const dispatch = useAppDispatch();
 
-  const handleCloseButtonClick = () => {
-    dispatch(resetSelectedProduct());
-    //isActive = false;
-  };
+  const selectedProduct = useAppSelector(getSelectedProduct);
 
   if (!selectedProduct) {
     return '';
   }
-
-  /*if (selectedProduct) {
-    setActive(true);
-  } else {
-    return '';
-  }*/
-
-  /*const handleCloseButtonClick = () => {
-    setActive(false);
-  };*/
-
   const {
     previewImgWebp,
     previewImgWebp2x,
@@ -44,6 +31,26 @@ function AddItemModal (/*isActive: AddItemModalProps*/) {
     level,
     price
   } = selectedProduct;
+
+  const handleCloseButtonClick = () => {
+    dispatch(resetSelectedProduct());
+    //isActive = false;
+  };
+
+  const handleBasketButtonClick = () => (
+    <Navigate to={AppRoute.Basket} />
+  );
+
+  /*if (selectedProduct) {
+    setActive(true);
+  } else {
+    return '';
+  }*/
+
+  /*const handleCloseButtonClick = () => {
+    setActive(false);
+  };*/
+
 
   /*const dispatch = useAppDispatch;
   dispatch(setAddModalActive(true));
@@ -78,7 +85,7 @@ function AddItemModal (/*isActive: AddItemModalProps*/) {
             </div>
           </div>
           <div className="modal__buttons">
-            <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button">
+            <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button" onClick={handleBasketButtonClick}>
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
               </svg>Добавить в корзину

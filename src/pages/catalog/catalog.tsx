@@ -14,7 +14,7 @@ import { LoadingPage } from '../loading-page/loading-page';
 import { useAppSelector/*, useAppDispatch*/ } from '../../hooks';
 import { getProducts, getProductsLoadingStatus } from '../../store/data-process/data-process-selectors';
 import { getPromoLoadingStatus } from '../../store/promo-process/promo-process-selectors';
-import { CARDS_PER_PAGE_NUMBER } from '../../const';
+import { CARDS_PER_PAGE_NUMBER, AppRoute } from '../../const';
 
 
 function Catalog () {
@@ -54,7 +54,7 @@ function Catalog () {
       <main>
         <Banner />
         <div className="page-content">
-          <Breadcrumbs />
+          <Breadcrumbs currentPage={AppRoute.Catalog}/>
           <section className="catalog">
             <div className="container">
               <h1 className="title title--h2">Каталог фото- и видеотехники</h1>
