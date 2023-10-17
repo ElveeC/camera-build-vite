@@ -14,6 +14,11 @@ export type PromoProcessType = {
   arePromoProductsLoading: boolean;
 }
 
+export type SimilarProcessType = {
+  similarProducts: ProductType[];
+  areSimilarProductsLoading: boolean;
+}
+
 export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;

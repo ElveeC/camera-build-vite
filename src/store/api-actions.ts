@@ -39,3 +39,15 @@ export const fetchProductAction = createAsyncThunk<ProductType, string, {
     return data;
   },
 );
+
+export const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Similar}/fetchSimilarProducts`,
+  async (id, {extra: api}) => {
+    const {data} = await api.get<ProductType[]>(`${APIRoute.Products}/${id}/similar`);
+    return data;
+  },
+);
