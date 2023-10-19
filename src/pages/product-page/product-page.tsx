@@ -6,6 +6,7 @@ import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Breadcrumbs } from '../../components/breadcrumbs/breadcrumbs';
 import { SimilarProductsSlider } from '../../components/similar-products-slider/similar-products-slider';
+import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
 
 import { LoadingPage } from '../loading-page/loading-page';
 import { NotFoundPage } from '../not-found-page/not-found-page';
@@ -259,6 +260,7 @@ function ProductPage () {
             </section>
           </div>
         </div>
+        <AddItemModal />
       </main>
       <Link className="up-btn" to="#header">
         <svg width="12" height="18" aria-hidden="true">

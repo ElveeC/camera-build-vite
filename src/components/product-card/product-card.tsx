@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import cn from 'classnames';
+
 import { useAppDispatch } from '../../hooks';
 import { setSelectedProduct } from '../../store/data-process/data-process';
 import { AppRoute } from '../../const';
@@ -6,9 +8,10 @@ import { ProductType } from '../../types/product-type';
 
 type ProductCardProps = {
  product: ProductType;
+ isSimilar: boolean;
 }
 
-function ProductCard ({ product }: ProductCardProps) {
+function ProductCard ({ product, isSimilar }: ProductCardProps) {
   const {
     id,
     previewImgWebp,
@@ -28,7 +31,11 @@ function ProductCard ({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="product-card">
+    <div className={cn(
+      'product-card',
+      { 'is-active': isSimilar}
+    )}
+    >
       <div className="product-card__img">
         <picture>
           <source type="image/webp" srcSet={`../../${previewImgWebp}, ../../${previewImgWebp2x} 2x`} />

@@ -21,7 +21,7 @@ export enum NameSpace {
   Promo = 'PROMO',
 }
 
-export enum BannerSlider {
+export enum BannerSliderData {
   Speed = 700,
   AutoPlayDelay = 3000,
   SlidesPerView = 1
@@ -29,3 +29,10 @@ export enum BannerSlider {
 
 export const CARDS_PER_PAGE_NUMBER = 9;
 export const BUTTONS_PER_PAGE_COUNT = 3;
+
+export enum SimilarProductsSliderData {
+  Speed = 2000,
+  SlidesPerGroup = 3,
+  SlidesPerView = 3,
+  SpaceBetween = 30
+}

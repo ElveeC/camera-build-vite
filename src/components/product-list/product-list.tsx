@@ -9,7 +9,7 @@ function ProductList ({ products }: ProductListProps) {
   return (
     <div className="cards catalog__cards">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product}/>
+        <ProductCard key={product.id} product={product} isSimilar={false}/>
       ))}
     </div>
 

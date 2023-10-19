@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
-import { AppRoute, BannerSlider } from '../../const';
+import { AppRoute, BannerSliderData } from '../../const';
 import 'swiper/css/bundle';
 import './banner.css';
 
@@ -15,9 +15,9 @@ function Banner () {
   return (
     <Swiper
       modules={[Pagination, Autoplay]}
-      autoplay={{ delay: BannerSlider.AutoPlayDelay }}
-      slidesPerView={BannerSlider.SlidesPerView}
-      speed={BannerSlider.Speed}
+      autoplay={{ delay: BannerSliderData.AutoPlayDelay }}
+      slidesPerView={BannerSliderData.SlidesPerView}
+      speed={BannerSliderData.Speed}
       loop
       pagination={{
         clickable: true,

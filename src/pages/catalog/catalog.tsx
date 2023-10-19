@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 //import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+
 import { ProductList } from '../../components/product-list/product-list';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
@@ -10,10 +11,13 @@ import { Filter } from '../../components/filter/filter';
 import { Sorting } from '../../components/sorting/sorting';
 import { Pagination } from '../../components/pagination/pagination';
 import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
+
 import { LoadingPage } from '../loading-page/loading-page';
+
 import { useAppSelector/*, useAppDispatch*/ } from '../../hooks';
 import { getProducts, getProductsLoadingStatus } from '../../store/data-process/data-process-selectors';
 import { getPromoLoadingStatus } from '../../store/promo-process/promo-process-selectors';
+
 import { CARDS_PER_PAGE_NUMBER, AppRoute } from '../../const';
 
 
