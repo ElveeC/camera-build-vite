@@ -36,3 +36,8 @@ export enum SimilarProductsSliderData {
   SlidesPerView = 3,
   SpaceBetween = 30
 }
+
+export enum InfoOption {
+  Description = 'description',
+  Specifications = 'specifications'
+}
