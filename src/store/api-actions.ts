@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { ProductType, PromoType } from '../types/product-type.js';
+import { ReviewType } from '../types/review-type.js';
 import { APIRoute, NameSpace } from '../const';
 
 export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
@@ -48,6 +49,18 @@ export const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number
   `${NameSpace.Similar}/fetchSimilarProducts`,
   async (id, {extra: api}) => {
     const {data} = await api.get<ProductType[]>(`${APIRoute.Products}/${id}/similar`);
+    return data;
+  },
+);
+
+export const fetchReviewsAction = createAsyncThunk<ReviewType[], number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Reviews}/fetchReviews`,
+  async (id, {extra: api}) => {
+    const {data} = await api.get<ReviewType[]>(`${APIRoute.Products}/${id}/reviews`);
     return data;
   },
 );

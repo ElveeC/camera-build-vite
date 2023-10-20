@@ -1,5 +1,6 @@
 import { store } from '../store/index.js';
 import { ProductType, PromoType } from './product-type.js';
+import { ReviewType } from './review-type.js';
 
 export type DataProcessType = {
   products: ProductType[];
@@ -17,6 +18,11 @@ export type PromoProcessType = {
 export type SimilarProcessType = {
   similarProducts: ProductType[];
   areSimilarProductsLoading: boolean;
+}
+
+export type ReviewsProcessType = {
+  reviews: ReviewType[];
+  areReviewsLoading: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;
