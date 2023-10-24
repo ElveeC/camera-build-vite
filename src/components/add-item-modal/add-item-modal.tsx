@@ -20,6 +20,7 @@ function AddItemModal (/*isActive: AddItemModalProps*/) {
   if (!selectedProduct) {
     return '';
   }
+
   const {
     previewImgWebp,
     previewImgWebp2x,

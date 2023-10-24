@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { Header } from '../../components/header/header';
@@ -9,6 +9,7 @@ import { SimilarProductsSlider } from '../../components/similar-products-slider/
 import { ProductTabs } from '../../components/product-tabs/product-tabs';
 import { Reviews } from '../../components/reviews/reviews';
 import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
+import { AddReviewModal } from '../../components/add-review-modal/add-review-modal';
 import { Rating } from '../../components/rating/rating';
 
 import { LoadingPage } from '../loading-page/loading-page';
@@ -20,7 +21,7 @@ import { fetchProductAction } from '../../store/api-actions';
 import { getProduct, getProductLoadingStatus } from '../../store/data-process/data-process-selectors';
 
 function ProductPage () {
-
+  const [ isReviewModalActive, setReviewModalActive ] = useState(false);
   const currentProduct = useParams();
   const selectedProduct = useAppSelector(getProduct);
   const isProductLoading = useAppSelector(getProductLoadingStatus);
@@ -60,6 +61,14 @@ function ProductPage () {
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const handleAddReviewButtoClick = () => {
+    setReviewModalActive(!isReviewModalActive);
+  };
+
+  const handleCloseButtonClick = () => {
+    setReviewModalActive(!isReviewModalActive);
   };
 
   return (
@@ -103,9 +112,12 @@ function ProductPage () {
             <SimilarProductsSlider id={id}/>
           </div>
           <div className="page-content__section">
-            <Reviews cameraId={id}/>
+            <Reviews cameraId={id} onAddReviewButtonClick={handleAddReviewButtoClick}/>
           </div>
         </div>
+        {isReviewModalActive
+        &&
+        <AddReviewModal onCloseButtonClick={handleCloseButtonClick}/>}
         <AddItemModal />
       </main>
       <Link className="up-btn" to="#header" onClick={handleUpButtonClick}>

@@ -11,9 +11,10 @@ import { REVIEWS_TO_SHOW_COUNT } from '../../const';
 
 type ReviewsProps = {
   cameraId: number;
+  onAddReviewButtonClick: () => void;
 }
 
-function Reviews ({ cameraId }: ReviewsProps) {
+function Reviews ({ cameraId, onAddReviewButtonClick }: ReviewsProps) {
   const [ reviewsToShowCount, setReviewsToShowCount ] = useState(REVIEWS_TO_SHOW_COUNT);
 
   const dispatch = useAppDispatch();
@@ -47,7 +48,7 @@ function Reviews ({ cameraId }: ReviewsProps) {
       <div className="container">
         <div className="page-content__headed">
           <h2 className="title title--h3">Отзывы</h2>
-          <button className="btn" type="button">Оставить свой отзыв</button>
+          <button className="btn" type="button" onClick={onAddReviewButtonClick}>Оставить свой отзыв</button>
         </div>
         <ul className="review-block__list">
           {reviewsToShow.map((review) =>

@@ -1,3 +1,4 @@
+import { Rating } from '../rating/rating';
 import { ReviewType } from '../../types/review-type';
 import { humanizeDate } from '../../utils';
 type ReviewProps = {
@@ -12,21 +13,7 @@ function Review ({ reviewItem }: ReviewProps) {
         <time className="review-card__data" dateTime={createAt}>{humanizeDate(createAt)}</time>
       </div>
       <div className="rate review-card__rate">
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
-        </svg>
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
-        </svg>
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
-        </svg>
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
-        </svg>
-        <svg width="17" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
-        </svg>
+        <Rating rating={rating}/>
         <p className="visually-hidden">Оценка: {rating}</p>
       </div>
       <ul className="review-card__list">
