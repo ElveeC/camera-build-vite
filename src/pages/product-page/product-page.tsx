@@ -54,6 +54,13 @@ function ProductPage () {
     price,
   } = selectedProduct;
 
+  const handleUpButtonClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div className="wrapper">
       <Helmet>
@@ -113,7 +120,7 @@ function ProductPage () {
         </div>
         <AddItemModal />
       </main>
-      <Link className="up-btn" to="#header">
+      <Link className="up-btn" to="#header" onClick={handleUpButtonClick}>
         <svg width="12" height="18" aria-hidden="true">
           <use xlinkHref="#icon-arrow2"></use>
         </svg>

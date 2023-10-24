@@ -4,7 +4,7 @@ type ReviewProps = {
   reviewItem: ReviewType;
 }
 function Review ({ reviewItem }: ReviewProps) {
-  const { userName, createAt, advantage, disadvantage, review } = reviewItem;
+  const { userName, createAt, advantage, disadvantage, review, rating } = reviewItem;
   return (
     <li className="review-card">
       <div className="review-card__head">
@@ -27,7 +27,7 @@ function Review ({ reviewItem }: ReviewProps) {
         <svg width="17" height="16" aria-hidden="true">
           <use xlinkHref="#icon-full-star"></use>
         </svg>
-        <p className="visually-hidden">Оценка: 5</p>
+        <p className="visually-hidden">Оценка: {rating}</p>
       </div>
       <ul className="review-card__list">
         <li className="item-list"><span className="item-list__title">Достоинства:</span>

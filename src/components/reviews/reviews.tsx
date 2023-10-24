@@ -14,7 +14,6 @@ type ReviewsProps = {
 }
 
 function Reviews ({ cameraId }: ReviewsProps) {
-  //const [ sliceToShow, setSliceToShow ] = useState(1);
   const [ reviewsToShowCount, setReviewsToShowCount ] = useState(REVIEWS_TO_SHOW_COUNT);
 
   const dispatch = useAppDispatch();
@@ -36,14 +35,12 @@ function Reviews ({ cameraId }: ReviewsProps) {
   }
 
   const sortedReviews = reviews.slice().sort((a: ReviewType, b: ReviewType) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime());
-  //const reviewsSliceCount = sortedReviews.length / 3;
+
   const handleMoreButtonClick = () => {
-    //setSliceToShow(sliceToShow + 1);
     setReviewsToShowCount(reviewsToShowCount + REVIEWS_TO_SHOW_COUNT);
   };
 
   const reviewsToShow = sortedReviews.slice(0, reviewsToShowCount);
-
 
   return (
     <section className="review-block">
