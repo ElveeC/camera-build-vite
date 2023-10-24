@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
+dayjs.locale('ru');
 
 export const calculateFirstPageInSlice = (currentPage: number, buttonsPerPageCount: number) => {
   let firstPageInSlice = 1;
