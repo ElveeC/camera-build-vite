@@ -42,3 +42,7 @@ const DateFormat = {
   DMMMM: 'D MMMM',
 };
 export const humanizeDate = (date: string) => date ? dayjs(date).format(DateFormat.DMMMM) : '';
+
+const TOTAL_STARS_COUNT = 5;
+export const createFullStarsArray = (rating: number) => Array.from({ length: rating}, () => '');
+export const createStarsArray = (rating: number) => Array.from({ length: TOTAL_STARS_COUNT - rating}, () => '');

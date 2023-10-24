@@ -3,6 +3,8 @@ import cn from 'classnames';
 
 import { useAppDispatch } from '../../hooks';
 import { setSelectedProduct } from '../../store/data-process/data-process';
+
+import { Rating } from '../rating/rating';
 import { AppRoute } from '../../const';
 import { ProductType } from '../../types/product-type';
 
@@ -44,21 +46,7 @@ function ProductCard ({ product, isSimilar }: ProductCardProps) {
       </div>
       <div className="product-card__info">
         <div className="rate product-card__rate">
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
+          <Rating rating={rating}/>
           <p className="visually-hidden">Рейтинг: {rating}</p>
           <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
         </div>

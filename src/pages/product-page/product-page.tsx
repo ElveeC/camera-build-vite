@@ -9,6 +9,7 @@ import { SimilarProductsSlider } from '../../components/similar-products-slider/
 import { ProductTabs } from '../../components/product-tabs/product-tabs';
 import { Reviews } from '../../components/reviews/reviews';
 import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
+import { Rating } from '../../components/rating/rating';
 
 import { LoadingPage } from '../loading-page/loading-page';
 import { NotFoundPage } from '../not-found-page/not-found-page';
@@ -82,24 +83,11 @@ function ProductPage () {
                 <div className="product__content">
                   <h1 className="title title--h3">{name}</h1>
                   <div className="rate product__rate">
-                    <svg width="17" height="16" aria-hidden="true">
-                      <use xlinkHref="#icon-full-star"></use>
-                    </svg>
-                    <svg width="17" height="16" aria-hidden="true">
-                      <use xlinkHref="#icon-full-star"></use>
-                    </svg>
-                    <svg width="17" height="16" aria-hidden="true">
-                      <use xlinkHref="#icon-full-star"></use>
-                    </svg>
-                    <svg width="17" height="16" aria-hidden="true">
-                      <use xlinkHref="#icon-full-star"></use>
-                    </svg>
-                    <svg width="17" height="16" aria-hidden="true">
-                      <use xlinkHref="#icon-star"></use>
-                    </svg>
+                    <Rating rating={rating} />
                     <p className="visually-hidden">Рейтинг: {rating}</p>
                     <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
                   </div>
+
                   <p className="product__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
                   <button className="btn btn--purple" type="button">
                     <svg width="24" height="16" aria-hidden="true">
