@@ -29,6 +29,7 @@ export enum BannerSliderData {
 
 export const CARDS_PER_PAGE_NUMBER = 9;
 export const BUTTONS_PER_PAGE_COUNT = 3;
+export const REVIEWS_TO_SHOW_COUNT = 3;
 
 export enum SimilarProductsSliderData {
   Speed = 2000,

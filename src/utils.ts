@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const calculateFirstPageInSlice = (currentPage: number, buttonsPerPageCount: number) => {
   let firstPageInSlice = 1;
   if (currentPage > buttonsPerPageCount) {
@@ -33,3 +35,8 @@ export const calculateCurrentSliceNumber = (currentPage: number, buttonsPerPageC
   }
   return currentSliceNumber;
 };
+
+const DateFormat = {
+  DMMMM: 'D MMMM',
+};
+export const humanizeDate = (date: string) => date ? dayjs(date).format(DateFormat.DMMMM) : '';
