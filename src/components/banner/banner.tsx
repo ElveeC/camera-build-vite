@@ -15,7 +15,10 @@ function Banner () {
   return (
     <Swiper
       modules={[Pagination, Autoplay]}
-      autoplay={{ delay: BannerSliderData.AutoPlayDelay }}
+      autoplay={{
+        delay: BannerSliderData.AutoPlayDelay,
+        disableOnInteraction: false
+      }}
       slidesPerView={BannerSliderData.SlidesPerView}
       speed={BannerSliderData.Speed}
       loop
