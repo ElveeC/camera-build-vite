@@ -64,11 +64,11 @@ function ProductPage () {
   };
 
   const handleAddReviewButtoClick = () => {
-    setReviewModalActive(!isReviewModalActive);
+    setReviewModalActive((prevReviewModalState) => !prevReviewModalState);
   };
 
   const handleCloseButtonClick = () => {
-    setReviewModalActive(!isReviewModalActive);
+    setReviewModalActive((prevReviewModalState) => !prevReviewModalState);
   };
 
   return (

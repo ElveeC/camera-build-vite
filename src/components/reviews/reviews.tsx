@@ -38,7 +38,7 @@ function Reviews ({ cameraId, onAddReviewButtonClick }: ReviewsProps) {
   const sortedReviews = reviews.slice().sort((a: ReviewType, b: ReviewType) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime());
 
   const handleMoreButtonClick = () => {
-    setReviewsToShowCount(reviewsToShowCount + REVIEWS_TO_SHOW_COUNT);
+    setReviewsToShowCount((prevReviewsToShowCount) => prevReviewsToShowCount + REVIEWS_TO_SHOW_COUNT);
   };
 
   const reviewsToShow = sortedReviews.slice(0, reviewsToShowCount);
