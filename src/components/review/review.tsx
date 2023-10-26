@@ -4,6 +4,7 @@ import { humanizeDate } from '../../utils';
 type ReviewProps = {
   reviewItem: ReviewType;
 }
+
 function Review ({ reviewItem }: ReviewProps) {
   const { userName, createAt, advantage, disadvantage, review, rating } = reviewItem;
   return (

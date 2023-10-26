@@ -10,6 +10,7 @@ import { ProductTabs } from '../../components/product-tabs/product-tabs';
 import { Reviews } from '../../components/reviews/reviews';
 import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
 import { AddReviewModal } from '../../components/add-review-modal/add-review-modal';
+import { ReviewSuccessModal } from '../../components/review-success-modal/review-success-modal';
 import { Rating } from '../../components/rating/rating';
 
 import { LoadingPage } from '../loading-page/loading-page';
@@ -19,6 +20,11 @@ import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchProductAction } from '../../store/api-actions';
 import { getProduct, getProductLoadingStatus } from '../../store/data-process/data-process-selectors';
+import { getRevieWSuccessModalStatus } from '../../store/reviews-process/reviews-process-selectors';
+
+import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process-selectors';
+import { fetchReviewsAction } from '../../store/api-actions';
+
 
 function ProductPage () {
   const [ isReviewModalActive, setReviewModalActive ] = useState(false);
@@ -26,15 +32,28 @@ function ProductPage () {
   const selectedProduct = useAppSelector(getProduct);
   const isProductLoading = useAppSelector(getProductLoadingStatus);
 
+  const reviews = useAppSelector(getReviews);
+  const areReviewsLoading = useAppSelector(getReviewsLoadingStatus);
+
+  const isReviewSuccessModalActive = useAppSelector(getRevieWSuccessModalStatus);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (currentProduct.id) {
-      dispatch(fetchProductAction(currentProduct.id));
-    }
-  }, [dispatch, currentProduct.id]);
+    let isMounted = true;
 
-  if (isProductLoading) {
+    if (isMounted) {
+      if (currentProduct.id) {
+        dispatch(fetchProductAction(Number(currentProduct.id)));
+        dispatch(fetchReviewsAction(Number(currentProduct.id)));
+      }
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, currentProduct.id, isReviewSuccessModalActive]);
+
+  if (isProductLoading || areReviewsLoading) {
     return (
       <LoadingPage />
     );
@@ -112,12 +131,16 @@ function ProductPage () {
             <SimilarProductsSlider id={id}/>
           </div>
           <div className="page-content__section">
-            <Reviews cameraId={id} onAddReviewButtonClick={handleAddReviewButtoClick}/>
+            <Reviews reviews={reviews} onAddReviewButtonClick={handleAddReviewButtoClick}/>
           </div>
         </div>
+        {isReviewSuccessModalActive
+        &&
+        <ReviewSuccessModal/>}
+
         {isReviewModalActive
         &&
-        <AddReviewModal onCloseButtonClick={handleCloseButtonClick}/>}
+        <AddReviewModal onCloseButtonClick={handleCloseButtonClick} cameraId={id}/>}
         <AddItemModal />
       </main>
       <Link className="up-btn" to="#header" onClick={handleUpButtonClick}>

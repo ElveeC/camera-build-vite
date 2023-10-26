@@ -1,35 +1,41 @@
-import { useEffect, useState } from 'react';
+import { /*useEffect,*/ useState } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process-selectors';
-import { fetchReviewsAction } from '../../store/api-actions';
+//import { useAppSelector, useAppDispatch } from '../../hooks';
+//import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process-selectors';
+//import { /*addReviewAction,*/ fetchReviewsAction } from '../../store/api-actions';
 
-import { ReviewsLoading } from '../reviews-loading/reviews-loading';
+//import { ReviewsLoading } from '../reviews-loading/reviews-loading';
 import { Review } from '../review/review';
 import { ReviewType } from '../../types/review-type';
 import { REVIEWS_TO_SHOW_COUNT } from '../../const';
 
 type ReviewsProps = {
-  cameraId: number;
+  //cameraId: number;
   onAddReviewButtonClick: () => void;
+  reviews: ReviewType[];
 }
 
-function Reviews ({ cameraId, onAddReviewButtonClick }: ReviewsProps) {
+function Reviews ({ /*cameraId,*/ onAddReviewButtonClick, reviews }: ReviewsProps) {
   const [ reviewsToShowCount, setReviewsToShowCount ] = useState(REVIEWS_TO_SHOW_COUNT);
 
-  const dispatch = useAppDispatch();
+  /*const dispatch = useAppDispatch();
   const reviews = useAppSelector(getReviews);
   const areReviewsLoading = useAppSelector(getReviewsLoadingStatus);
 
   useEffect(() => {
-    if (cameraId) {
+    let isMounted = true;
+
+    if (isMounted) {
       dispatch(fetchReviewsAction(cameraId));
     }
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, cameraId]);
 
   if (areReviewsLoading) {
     return <ReviewsLoading/>;
-  }
+  }*/
 
   if (!reviews.length) {
     return '';

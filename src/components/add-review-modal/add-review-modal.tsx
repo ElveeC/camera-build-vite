@@ -1,11 +1,15 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
+//import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-//import { useAppDispatch } from '../../hooks';
-//import { reviewSubmitAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks';
+import { addReviewAction } from '../../store/api-actions';
+import { changeReviewSuccessModalStatus } from '../../store/reviews-process/reviews-process';
 //import './add-review-modal.css';
+//import { AppRoute } from '../../const';
 
 
 type AddReviewModalProps = {
+  cameraId: number;
   onCloseButtonClick: () => void;
 }
 
@@ -18,32 +22,48 @@ type AddReviewFormValues = {
   rating: number;
 }
 
-function AddReviewModal ({ onCloseButtonClick }: AddReviewModalProps) {
-  //const dispatch = useAppDispatch();
-  //const REGEX_NAME = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z]{2,160}$/;
-
-  //const isTextValid = (value: string) => REGEX_NAME.test(value);
+function AddReviewModal ({ onCloseButtonClick, cameraId }: AddReviewModalProps) {
+  const dispatch = useAppDispatch();
+  //const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm<AddReviewFormValues>();
+  /*const onSubmit: SubmitHandler<AddReviewFormValues> = (data) => {
+    //const rating = Number(data.rating);
+    const reviewData = {...data, cameraId: cameraId, rating: Number(data.rating)};
+    dispatch(addReviewAction(reviewData));
+    console.log(reviewData);
+  };*/
+
+  //onCloseButtonClick();
+
+  // eslint-disable-next-line no-console
+  //console.log(userName);
+  // eslint-disable-next-line no-console
+  //console.log(advantage);
+  // eslint-disable-next-line no-console
+  //console.log(disadvantage);
+  // eslint-disable-next-line no-console
+  //console.log(review);
+  // eslint-disable-next-line no-console
+  //console.log(rating);
+  //};
+
   const onSubmit: SubmitHandler<AddReviewFormValues> = ({ userName, advantage, disadvantage, review, rating }) => {
 
-    /*dispatch(reviewSubmitAction({
+    dispatch(addReviewAction({
+      cameraId: cameraId,
       userName: userName,
       advantage: advantage,
       disadvantage: disadvantage,
       review: review,
-      rating: rating
-    }));*/
-    // eslint-disable-next-line no-console
-    console.log(userName);
-    // eslint-disable-next-line no-console
-    console.log(advantage);
-    // eslint-disable-next-line no-console
-    console.log(disadvantage);
-    // eslint-disable-next-line no-console
-    console.log(review);
-    // eslint-disable-next-line no-console
-    console.log(rating);
+      rating: Number(rating)
+    }));
+
+    dispatch(changeReviewSuccessModalStatus());
+    onCloseButtonClick();
+
+    //navigate(`${AppRoute.Product}/${cameraId}`);
+    //setSuccessModalActive();
   };
 
   return (

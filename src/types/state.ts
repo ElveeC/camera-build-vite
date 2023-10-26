@@ -23,6 +23,7 @@ export type SimilarProcessType = {
 export type ReviewsProcessType = {
   reviews: ReviewType[];
   areReviewsLoading: boolean;
+  isReviewSuccessModalActive: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;
