@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { fetchPromoProductsAction } from '../api-actions';
-import { PromoProcessType } from '../../types/state';
+import { PromoDataType } from '../../types/state';
 
-const initialState: PromoProcessType = {
+const initialState: PromoDataType = {
   promoProducts: [],
   arePromoProductsLoading: false
 };
 
-export const promoProcess = createSlice({
+export const promoData = createSlice({
   name: NameSpace.Promo,
   initialState,
   reducers: {},

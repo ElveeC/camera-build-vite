@@ -1,22 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { NameSpace } from '../../const';
 import { fetchReviewsAction, addReviewAction } from '../api-actions';
-import { ReviewsProcessType } from '../../types/state';
+import { ReviewsDataType } from '../../types/state';
 import { Status } from '../../const';
 
-const initialState: ReviewsProcessType = {
+const initialState: ReviewsDataType = {
   reviews: [],
   areReviewsLoading: false,
   setReviewPostingStatus: Status.Unsent,
+  isAddReviewModalActive: false
 };
 
-export const reviewsProcess = createSlice({
+export const reviewsData = createSlice({
   name: NameSpace.Reviews,
   initialState,
   reducers: {
     resetReviewPostingingStatus: (state) => {
       state.setReviewPostingStatus = Status.Unsent;
+    },
+
+    setAddReviewActive: (state, action: PayloadAction<boolean>) => {
+      state.isAddReviewModalActive = action.payload;
     },
   },
 
@@ -48,4 +53,4 @@ export const reviewsProcess = createSlice({
   }
 });
 
-export const { resetReviewPostingingStatus } = reviewsProcess.actions;
+export const { resetReviewPostingingStatus, setAddReviewActive } = reviewsData.actions;

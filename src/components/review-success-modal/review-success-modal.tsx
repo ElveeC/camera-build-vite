@@ -2,8 +2,8 @@
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 //import { changeReviewSuccessModalStatus } from '../../store/reviews-process/reviews-process';
-import { getReviewPostingStatus } from '../../store/reviews-process/reviews-process-selectors';
-import { resetReviewPostingingStatus } from '../../store/reviews-process/reviews-process';
+import { getReviewPostingStatus } from '../../store/reviews-data/reviews-data.selectors';
+import { resetReviewPostingingStatus } from '../../store/reviews-data/reviews-data';
 import { Status } from '../../const';
 
 function ReviewSuccessModal () {

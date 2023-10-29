@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { fetchSimilarProductsAction } from '../api-actions';
-import { SimilarProcessType } from '../../types/state';
+import { SimilarDataType } from '../../types/state';
 
-const initialState: SimilarProcessType = {
+const initialState: SimilarDataType = {
   similarProducts: [],
   areSimilarProductsLoading: false,
 };
 
-export const similarProcess = createSlice({
+export const similarData = createSlice({
   name: NameSpace.Similar,
   initialState,
   reducers: {

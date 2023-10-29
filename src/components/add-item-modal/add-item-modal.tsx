@@ -2,8 +2,8 @@
 //import cn from 'classnames';
 import { Navigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { getSelectedProduct } from '../../store/data-process/data-process-selectors';
-import { resetSelectedProduct } from '../../store/data-process/data-process';
+import { getSelectedProduct } from '../../store/product-data/product-data.selectors';
+import { resetSelectedProduct } from '../../store/product-data/product-data';
 import { AppRoute } from '../../const';
 
 /*type AddItemModalProps = {

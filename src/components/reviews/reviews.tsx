@@ -1,24 +1,21 @@
-import { /*useEffect,*/ useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-data/reviews-data.selectors';
+import { /*addReviewAction,*/ fetchReviewsAction } from '../../store/api-actions';
 
-//import { useAppSelector, useAppDispatch } from '../../hooks';
-//import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process-selectors';
-//import { /*addReviewAction,*/ fetchReviewsAction } from '../../store/api-actions';
-
-//import { ReviewsLoading } from '../reviews-loading/reviews-loading';
+import { ReviewsLoading } from '../reviews-loading/reviews-loading';
 import { Review } from '../review/review';
 import { ReviewType } from '../../types/review-type';
 import { REVIEWS_TO_SHOW_COUNT } from '../../const';
+import { setAddReviewActive } from '../../store/reviews-data/reviews-data';
 
 type ReviewsProps = {
-  //cameraId: number;
-  onAddReviewButtonClick: () => void;
-  reviews: ReviewType[];
+  cameraId: number;
+  //reviews: ReviewType[];
 }
-
-function Reviews ({ /*cameraId,*/ onAddReviewButtonClick, reviews }: ReviewsProps) {
+function Reviews ({ cameraId/*, reviews*/ }: ReviewsProps) {
   const [ reviewsToShowCount, setReviewsToShowCount ] = useState(REVIEWS_TO_SHOW_COUNT);
-
-  /*const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const reviews = useAppSelector(getReviews);
   const areReviewsLoading = useAppSelector(getReviewsLoadingStatus);
 
@@ -35,7 +32,7 @@ function Reviews ({ /*cameraId,*/ onAddReviewButtonClick, reviews }: ReviewsProp
 
   if (areReviewsLoading) {
     return <ReviewsLoading/>;
-  }*/
+  }
 
   if (!reviews.length) {
     return '';
@@ -47,6 +44,10 @@ function Reviews ({ /*cameraId,*/ onAddReviewButtonClick, reviews }: ReviewsProp
     setReviewsToShowCount((prevReviewsToShowCount) => prevReviewsToShowCount + REVIEWS_TO_SHOW_COUNT);
   };
 
+  const handleAddReviewButtoClick = () => {
+    dispatch(setAddReviewActive(true));
+  };
+
   const reviewsToShow = sortedReviews.slice(0, reviewsToShowCount);
 
   return (
@@ -54,7 +55,7 @@ function Reviews ({ /*cameraId,*/ onAddReviewButtonClick, reviews }: ReviewsProp
       <div className="container">
         <div className="page-content__headed">
           <h2 className="title title--h3">Отзывы</h2>
-          <button className="btn" type="button" onClick={onAddReviewButtonClick}>Оставить свой отзыв</button>
+          <button className="btn" type="button" onClick={handleAddReviewButtoClick}>Оставить свой отзыв</button>
         </div>
         <ul className="review-block__list">
           {reviewsToShow.map((review) =>

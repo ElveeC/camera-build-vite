@@ -1,14 +1,17 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useEffect } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
-import { getReviewPostingStatus } from '../../store/reviews-process/reviews-process-selectors';
+import { getReviewPostingStatus/*, getAddReviewActiveStatus*/ } from '../../store/reviews-data/reviews-data.selectors';
+import { setAddReviewActive } from '../../store/reviews-data/reviews-data';
 import { Status } from '../../const';
 
 
 type AddReviewModalProps = {
   cameraId: number;
-  onCloseButtonClick: () => void;
+  //onCloseButtonClick: () => void;
+  //isActive: boolean;
 }
 
 type AddReviewFormValues = {
@@ -19,8 +22,9 @@ type AddReviewFormValues = {
   rating: number;
 }
 
-function AddReviewModal ({ onCloseButtonClick, cameraId }: AddReviewModalProps) {
+function AddReviewModal ({ /*onCloseButtonClick*/ /*isActive,*/ cameraId }: AddReviewModalProps) {
   const dispatch = useAppDispatch();
+  //const isActive = useAppSelector(getAddReviewActiveStatus);
 
   const { register, handleSubmit, formState: { errors } } = useForm<AddReviewFormValues>();
   /*const onSubmit: SubmitHandler<AddReviewFormValues> = (data) => {
@@ -29,7 +33,6 @@ function AddReviewModal ({ onCloseButtonClick, cameraId }: AddReviewModalProps) 
     dispatch(addReviewAction(reviewData));
     console.log(reviewData);
   };*/
-
 
   const onSubmit: SubmitHandler<AddReviewFormValues> = ({ userName, advantage, disadvantage, review, rating }) => {
 
@@ -41,15 +44,26 @@ function AddReviewModal ({ onCloseButtonClick, cameraId }: AddReviewModalProps) 
       review: review,
       rating: Number(rating)
     }));
+
+  };
+  const handleCloseButtonClick = () => {
+    dispatch(setAddReviewActive(false));
   };
 
   const reviewPostingStatus = useAppSelector(getReviewPostingStatus);
-  if (reviewPostingStatus === Status.Success) {
-    onCloseButtonClick();
-  }
+  useEffect(() => {
+    if (reviewPostingStatus === Status.Success) {
+      dispatch(setAddReviewActive(false));
+    }
+  });
+
+  /*className={cn(
+    'modal',
+    {'is-active': isActive}
+  )}*/
 
   return (
-    <div className="modal is-active">
+    <div className='modal is-active'>
       <div className="modal__wrapper">
         <div className="modal__overlay"></div>
         <div className="modal__content">
@@ -186,7 +200,7 @@ function AddReviewModal ({ onCloseButtonClick, cameraId }: AddReviewModalProps) 
 
             </form>
           </div>
-          <button className="cross-btn" type="button" aria-label="Закрыть попап" onClick={onCloseButtonClick}>
+          <button className="cross-btn" type="button" aria-label="Закрыть попап" onClick={handleCloseButtonClick}>
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>
             </svg>

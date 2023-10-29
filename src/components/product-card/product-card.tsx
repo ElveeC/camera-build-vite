@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useAppDispatch } from '../../hooks';
-import { setSelectedProduct } from '../../store/data-process/data-process';
+import { setSelectedProduct } from '../../store/product-data/product-data';
 
 import { Rating } from '../rating/rating';
 import { AppRoute } from '../../const';

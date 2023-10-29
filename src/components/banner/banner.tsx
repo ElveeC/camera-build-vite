@@ -6,7 +6,7 @@ import 'swiper/css/bundle';
 import './banner.css';
 
 import { useAppSelector } from '../../hooks';
-import { getPromoProducts } from '../../store/promo-process/promo-process-selectors';
+import { getPromoProducts } from '../../store/promo-data/promo-data.selectors';
 
 function Banner () {
 

@@ -15,8 +15,8 @@ import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
 import { LoadingPage } from '../loading-page/loading-page';
 
 import { useAppSelector/*, useAppDispatch*/ } from '../../hooks';
-import { getProducts, getProductsLoadingStatus } from '../../store/data-process/data-process-selectors';
-import { getPromoLoadingStatus } from '../../store/promo-process/promo-process-selectors';
+import { getProducts, getProductsLoadingStatus } from '../../store/product-data/product-data.selectors';
+import { getPromoLoadingStatus } from '../../store/promo-data/promo-data.selectors';
 
 import { CARDS_PER_PAGE_NUMBER, AppRoute } from '../../const';
 

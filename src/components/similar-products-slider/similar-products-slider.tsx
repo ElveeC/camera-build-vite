@@ -6,7 +6,7 @@ import { Navigation } from 'swiper/modules';
 import './similar-products-slider.css';
 
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { getSimilarProducts, getSimilarProductsLoadingStatus } from '../../store/similar-process/similar-process-selectors';
+import { getSimilarProducts, getSimilarProductsLoadingStatus } from '../../store/similar-data/similar-data.selectors';
 import { fetchSimilarProductsAction } from '../../store/api-actions';
 
 import { ProductCard } from '../product-card/product-card';

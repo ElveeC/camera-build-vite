@@ -7,7 +7,7 @@ import { ProductPage } from '../../pages/product-page/product-page';
 import { ErrorPage } from '../../pages/error-page/error-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 
-import { getErrorStatus } from '../../store/data-process/data-process-selectors';
+import { getErrorStatus } from '../../store/product-data/product-data.selectors';
 import { useAppSelector } from '../../hooks';
 
 import { AppRoute } from '../../const';

@@ -3,7 +3,7 @@ import { ProductType, PromoType } from './product-type.js';
 import { ReviewType } from './review-type.js';
 import { Status } from '../const.js';
 
-export type DataProcessType = {
+export type ProductDataType = {
   products: ProductType[];
   areProductsLoading: boolean;
   product: ProductType | null;
@@ -12,21 +12,21 @@ export type DataProcessType = {
   hasError: boolean;
 }
 
-export type PromoProcessType = {
+export type PromoDataType = {
   promoProducts: PromoType[];
   arePromoProductsLoading: boolean;
 }
 
-export type SimilarProcessType = {
+export type SimilarDataType = {
   similarProducts: ProductType[];
   areSimilarProductsLoading: boolean;
 }
 
-export type ReviewsProcessType = {
+export type ReviewsDataType = {
   reviews: ReviewType[];
   areReviewsLoading: boolean;
   setReviewPostingStatus: Status;
-  isReviewSuccessModalActive: boolean;
+  isAddReviewModalActive: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;
