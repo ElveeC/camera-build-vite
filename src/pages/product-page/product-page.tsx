@@ -16,15 +16,13 @@ import { Rating } from '../../components/rating/rating';
 import { LoadingPage } from '../loading-page/loading-page';
 import { NotFoundPage } from '../not-found-page/not-found-page';
 
-import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchProductAction } from '../../store/api-actions';
 import { getProduct, getProductLoadingStatus } from '../../store/data-process/data-process-selectors';
-import { getRevieWSuccessModalStatus } from '../../store/reviews-process/reviews-process-selectors';
-
 import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-process/reviews-process-selectors';
 import { fetchReviewsAction } from '../../store/api-actions';
 
+import { AppRoute } from '../../const';
 
 function ProductPage () {
   const [ isReviewModalActive, setReviewModalActive ] = useState(false);
@@ -34,8 +32,6 @@ function ProductPage () {
 
   const reviews = useAppSelector(getReviews);
   const areReviewsLoading = useAppSelector(getReviewsLoadingStatus);
-
-  const isReviewSuccessModalActive = useAppSelector(getRevieWSuccessModalStatus);
 
   const dispatch = useAppDispatch();
 
@@ -51,7 +47,7 @@ function ProductPage () {
     return () => {
       isMounted = false;
     };
-  }, [dispatch, currentProduct.id, isReviewSuccessModalActive]);
+  }, [dispatch, currentProduct.id]);
 
   if (isProductLoading || areReviewsLoading) {
     return (
@@ -83,11 +79,11 @@ function ProductPage () {
   };
 
   const handleAddReviewButtoClick = () => {
-    setReviewModalActive((prevReviewModalState) => !prevReviewModalState);
+    setReviewModalActive(true);
   };
 
   const handleCloseButtonClick = () => {
-    setReviewModalActive((prevReviewModalState) => !prevReviewModalState);
+    setReviewModalActive(false);
   };
 
   return (
@@ -134,13 +130,10 @@ function ProductPage () {
             <Reviews reviews={reviews} onAddReviewButtonClick={handleAddReviewButtoClick}/>
           </div>
         </div>
-        {isReviewSuccessModalActive
-        &&
-        <ReviewSuccessModal/>}
-
         {isReviewModalActive
         &&
         <AddReviewModal onCloseButtonClick={handleCloseButtonClick} cameraId={id}/>}
+        <ReviewSuccessModal/>
         <AddItemModal />
       </main>
       <Link className="up-btn" to="#header" onClick={handleUpButtonClick}>

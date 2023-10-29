@@ -1,11 +1,9 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-//import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
-import { changeReviewSuccessModalStatus } from '../../store/reviews-process/reviews-process';
-//import './add-review-modal.css';
-//import { AppRoute } from '../../const';
+import { getReviewPostingStatus } from '../../store/reviews-process/reviews-process-selectors';
+import { Status } from '../../const';
 
 
 type AddReviewModalProps = {
@@ -14,7 +12,6 @@ type AddReviewModalProps = {
 }
 
 type AddReviewFormValues = {
-  //cameraId: number;
   userName: string;
   advantage: string;
   disadvantage: string;
@@ -24,7 +21,6 @@ type AddReviewFormValues = {
 
 function AddReviewModal ({ onCloseButtonClick, cameraId }: AddReviewModalProps) {
   const dispatch = useAppDispatch();
-  //const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm<AddReviewFormValues>();
   /*const onSubmit: SubmitHandler<AddReviewFormValues> = (data) => {
@@ -34,19 +30,6 @@ function AddReviewModal ({ onCloseButtonClick, cameraId }: AddReviewModalProps) 
     console.log(reviewData);
   };*/
 
-  //onCloseButtonClick();
-
-  // eslint-disable-next-line no-console
-  //console.log(userName);
-  // eslint-disable-next-line no-console
-  //console.log(advantage);
-  // eslint-disable-next-line no-console
-  //console.log(disadvantage);
-  // eslint-disable-next-line no-console
-  //console.log(review);
-  // eslint-disable-next-line no-console
-  //console.log(rating);
-  //};
 
   const onSubmit: SubmitHandler<AddReviewFormValues> = ({ userName, advantage, disadvantage, review, rating }) => {
 
@@ -58,13 +41,12 @@ function AddReviewModal ({ onCloseButtonClick, cameraId }: AddReviewModalProps) 
       review: review,
       rating: Number(rating)
     }));
-
-    dispatch(changeReviewSuccessModalStatus());
-    onCloseButtonClick();
-
-    //navigate(`${AppRoute.Product}/${cameraId}`);
-    //setSuccessModalActive();
   };
+
+  const reviewPostingStatus = useAppSelector(getReviewPostingStatus);
+  if (reviewPostingStatus === Status.Success) {
+    onCloseButtonClick();
+  }
 
   return (
     <div className="modal is-active">
@@ -178,7 +160,6 @@ function AddReviewModal ({ onCloseButtonClick, cameraId }: AddReviewModalProps) 
                     'form-review__item',
                     {'is-invalid': errors.review}
                   )}
-
                 >
                   <label>
                     <span className="custom-textarea__label">Комментарий

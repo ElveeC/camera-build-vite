@@ -1,25 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { NameSpace } from '../../const';
-import { fetchReviewsAction } from '../api-actions';
+import { fetchReviewsAction, addReviewAction } from '../api-actions';
 import { ReviewsProcessType } from '../../types/state';
+import { Status } from '../../const';
 
 const initialState: ReviewsProcessType = {
   reviews: [],
   areReviewsLoading: false,
-  isReviewSuccessModalActive: false,
+  setReviewPostingStatus: Status.Unsent,
 };
 
 export const reviewsProcess = createSlice({
   name: NameSpace.Reviews,
   initialState,
   reducers: {
-    changeReviewSuccessModalStatus: (state) => {
-      if (state.isReviewSuccessModalActive) {
-        state.isReviewSuccessModalActive = false;
-      } else {
-        state.isReviewSuccessModalActive = true;
-      }
-    }
+    resetReviewPostingingStatus: (state) => {
+      state.setReviewPostingStatus = Status.Unsent;
+    },
   },
 
   extraReducers(builder) {
@@ -31,8 +29,23 @@ export const reviewsProcess = createSlice({
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
         state.areReviewsLoading = false;
+      })
+      .addCase(fetchReviewsAction.rejected, (state) => {
+        state.areReviewsLoading = false;
+      })
+
+      .addCase(addReviewAction.pending, (state) => {
+        state.setReviewPostingStatus = Status.Pending;
+      })
+      .addCase(addReviewAction.fulfilled, (state, action) => {
+        state.reviews.push(action.payload);
+        state.setReviewPostingStatus = Status.Success;
+      })
+      .addCase(addReviewAction.rejected, (state) => {
+        state.setReviewPostingStatus = Status.Error;
+        toast.warn('Не удалось отправить отзыв');
       });
   }
 });
 
-export const { changeReviewSuccessModalStatus } = reviewsProcess.actions;
+export const { resetReviewPostingingStatus } = reviewsProcess.actions;

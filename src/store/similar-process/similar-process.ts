@@ -22,6 +22,9 @@ export const similarProcess = createSlice({
       .addCase(fetchSimilarProductsAction.fulfilled, (state, action) => {
         state.similarProducts = action.payload;
         state.areSimilarProductsLoading = false;
+      })
+      .addCase(fetchSimilarProductsAction.rejected, (state) => {
+        state.areSimilarProductsLoading = false;
       });
   }
 });

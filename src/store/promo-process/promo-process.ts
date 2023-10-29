@@ -21,6 +21,9 @@ export const promoProcess = createSlice({
       .addCase(fetchPromoProductsAction.fulfilled, (state, action) => {
         state.promoProducts = action.payload;
         state.arePromoProductsLoading = false;
+      })
+      .addCase(fetchPromoProductsAction.rejected, (state) => {
+        state.arePromoProductsLoading = false;
       });
   }
 });

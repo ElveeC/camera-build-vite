@@ -5,6 +5,7 @@ import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Banner } from '../../components/banner/banner';
 import { AppRoute } from '../../const';
+import './not-found-page.css';
 
 function NotFoundPage () {
 
@@ -20,7 +21,7 @@ function NotFoundPage () {
           <section className="catalog">
             <div className="container">
               <h1 className="title title--h2">Мы не нашли такую страницу</h1>
-              <Link to={AppRoute.Catalog}>Загляните в наш каталог</Link>
+              <p>Загляните в наш <Link className="not-found-link" to={AppRoute.Catalog}>каталог</Link></p>
             </div>
           </section>
         </div>

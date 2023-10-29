@@ -1,6 +1,7 @@
 import { store } from '../store/index.js';
 import { ProductType, PromoType } from './product-type.js';
 import { ReviewType } from './review-type.js';
+import { Status } from '../const.js';
 
 export type DataProcessType = {
   products: ProductType[];
@@ -8,6 +9,7 @@ export type DataProcessType = {
   product: ProductType | null;
   isProductLoading: boolean;
   selectedProduct: ProductType | null;
+  hasError: boolean;
 }
 
 export type PromoProcessType = {
@@ -23,6 +25,7 @@ export type SimilarProcessType = {
 export type ReviewsProcessType = {
   reviews: ReviewType[];
   areReviewsLoading: boolean;
+  setReviewPostingStatus: Status;
   isReviewSuccessModalActive: boolean;
 }
 

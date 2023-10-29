@@ -1,13 +1,24 @@
 import { Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../const';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { Catalog } from '../../pages/catalog/catalog';
 import { Basket } from '../../pages/basket/basket';
 import { ProductPage } from '../../pages/product-page/product-page';
+import { ErrorPage } from '../../pages/error-page/error-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 
+import { getErrorStatus } from '../../store/data-process/data-process-selectors';
+import { useAppSelector } from '../../hooks';
+
+import { AppRoute } from '../../const';
+
 function App () {
+  const hasError = useAppSelector(getErrorStatus);
+
+  if (hasError) {
+    return (
+      <ErrorPage />);
+  }
 
   return (
     <HelmetProvider>

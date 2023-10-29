@@ -42,3 +42,10 @@ export enum InfoOption {
   Description = 'description',
   Specifications = 'specifications'
 }
+
+export enum Status {
+  Unsent = 'unsent',
+  Pending = 'pending',
+  Success = 'success',
+  Error = 'error'
+}

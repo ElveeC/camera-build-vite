@@ -10,7 +10,6 @@ import { getSimilarProducts, getSimilarProductsLoadingStatus } from '../../store
 import { fetchSimilarProductsAction } from '../../store/api-actions';
 
 import { ProductCard } from '../product-card/product-card';
-import { LoadingPage } from '../../pages/loading-page/loading-page';
 
 import { SimilarProductsSliderData } from '../../const';
 
@@ -30,12 +29,10 @@ function SimilarProductsSlider ({ id }: SimilarProductsSliderProps) {
   }, [dispatch, id]);
 
   if (areSimilarProductsLoading) {
-    return (
-      <LoadingPage />
-    );
+    return '';
   }
 
-  if (!similarProducts) {
+  if (!similarProducts.length) {
     return '';
   }
 

@@ -10,6 +10,7 @@ const initialState: DataProcessType = {
   product: null,
   isProductLoading: false,
   selectedProduct: null,
+  hasError: false
 };
 
 export const dataProcess = createSlice({
@@ -29,10 +30,15 @@ export const dataProcess = createSlice({
 
       .addCase(fetchProductsAction.pending, (state) => {
         state.areProductsLoading = true;
+        state.hasError = false;
       })
       .addCase(fetchProductsAction.fulfilled, (state, action) => {
         state.products = action.payload;
         state.areProductsLoading = false;
+      })
+      .addCase(fetchProductsAction.rejected, (state) => {
+        state.areProductsLoading = false;
+        state.hasError = true;
       })
 
       .addCase(fetchProductAction.pending, (state) => {
@@ -40,6 +46,9 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchProductAction.fulfilled, (state, action) => {
         state.product = action.payload;
+        state.isProductLoading = false;
+      })
+      .addCase(fetchProductAction.rejected, (state) => {
         state.isProductLoading = false;
       });
   }
