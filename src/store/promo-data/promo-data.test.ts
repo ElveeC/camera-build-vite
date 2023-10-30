@@ -68,4 +68,3 @@ describe('PromoData Slice', () => {
     expect(result).toEqual(expectedState);
   });
 });
-

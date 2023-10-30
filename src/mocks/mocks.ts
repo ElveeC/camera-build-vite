@@ -1,7 +1,7 @@
 import { system, datatype, random, name, date } from 'faker';
 import { ProductType } from '../types/product-type';
 import { PromoType } from '../types/product-type';
-import { ReviewType, PostingReviewType } from '../types/review-type';
+import { ReviewType/*, PostingReviewType*/ } from '../types/review-type';
 
 export const makeFakeProduct = (): ProductType => ({
   id: datatype.number(),
@@ -35,26 +35,17 @@ export const makeFakePromos = () : PromoType[] => (
   ))
 );
 
-export const makeFakeReviewList = (): ReviewType[] => (
-  new Array(15).fill(null).map(() => ({
-    cameraId:  datatype.number(),
-    userName: name.firstName(),
-    advantage: random.word(),
-    disadvantage: random.word(),
-    review: random.word(),
-    rating: datatype.number(5),
-    id: datatype.uuid(),
-    createAt: date.past().toISOString()
-  }))
-);
-
-export const makeFakeReview = (): PostingReviewType => ({
-  cameraId: datatype.number(),
+export const makeFakeReview = (): ReviewType => ({
+  cameraId:  datatype.number(),
   userName: name.firstName(),
   advantage: random.word(),
   disadvantage: random.word(),
   review: random.word(),
-  rating: datatype.number(5)
+  rating: datatype.number(5),
+  id: datatype.uuid(),
+  createAt: date.past().toISOString()
 });
+
+export const makeFakeReviews = (): ReviewType[] => Array.from({ length: 10 }, makeFakeReview);
 
 export const makeFakeSimilarProducts = (): ProductType[] => Array.from({length: 15}, makeFakeProduct);

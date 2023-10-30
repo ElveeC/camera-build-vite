@@ -145,9 +145,14 @@ describe('ProductData Slice', () => {
   });
 
   it('should reset "selectedProduct" to null', () => {
+    const selectedProduct = makeFakeProduct();
+    const initialStateWithSelectedProduct = {
+      ...initialState,
+      selectedProduct: selectedProduct
+    };
     const expectedState = {...initialState};
 
-    const result = productData.reducer({...initialState}, {type: resetSelectedProduct, selectedProduct: null});
+    const result = productData.reducer({...initialStateWithSelectedProduct}, {type: resetSelectedProduct, selectedProduct: null});
 
     expect(result).toEqual(expectedState);
   });
