@@ -42,25 +42,33 @@ describe('ReviewData Slice', () => {
 
     it('should set "reviews" to an array with reviews, "areReviewsLoading" to "false" with "fetchReviewsAction.fulfilled"', () => {
       const mockReviews = makeFakeReviews();
+      const newInitialState = {
+        ...initialState,
+        areReviewsLoading: true
+      };
       const expectedState = {
         ...initialState,
         reviews: mockReviews,
         areReviewsLoading: false
       };
 
-      const result = reviewsData.reducer({...initialState}, {type: fetchReviewsAction.fulfilled.type, payload: mockReviews});
+      const result = reviewsData.reducer({...newInitialState}, {type: fetchReviewsAction.fulfilled.type, payload: mockReviews});
 
       expect(result).toEqual(expectedState);
     });
 
     it('should set "areReviewsLoading" to "false" with "fetchReviewsAction.rejected', () => {
+      const newInitialState = {
+        ...initialState,
+        areReviewsLoading: true
+      };
       const expectedState = {
         ...initialState,
         areReviewsLoading: false
       };
 
       const result = reviewsData.reducer(
-        undefined,
+        {...newInitialState},
         fetchReviewsAction.rejected
       );
 

@@ -43,6 +43,10 @@ describe('ProductData Slice', () => {
 
     it('should set "products" to an array with products, "areProductsLoading" to "false" with "fetchProductsAction.fulfilled"', () => {
       const mockProducts = makeFakeProducts();
+      const newInitialState = {
+        ...initialState,
+        areProductsLoading: true
+      };
       const expectedState = {
         ...initialState,
         products: mockProducts,
@@ -50,7 +54,7 @@ describe('ProductData Slice', () => {
       };
 
       const result = productData.reducer(
-        undefined,
+        {...newInitialState},
         fetchProductsAction.fulfilled(
           mockProducts, '', undefined)
       );
@@ -58,7 +62,11 @@ describe('ProductData Slice', () => {
       expect(result).toEqual(expectedState);
     });
 
-    it('should set "areProductsLoading" to "false" with "fetchProductsAction.rejected', () => {
+    it('should set "areProductsLoading" to "false", "hasError" to true with "fetchProductsAction.rejected', () => {
+      const newInitialState = {
+        ...initialState,
+        areProductsLoading: true
+      };
       const expectedState = {
         ...initialState,
         areProductsLoading: false,
@@ -66,7 +74,7 @@ describe('ProductData Slice', () => {
       };
 
       const result = productData.reducer(
-        undefined,
+        {...newInitialState},
         fetchProductsAction.rejected
       );
 
@@ -106,25 +114,33 @@ describe('ProductData Slice', () => {
 
     it('should set "product", "isProductLoading" to "false" with "fetchProductAction.fulfilled"', () => {
       const mockProduct = makeFakeProduct();
+      const newInitialState = {
+        ...initialState,
+        isProductLoading: true
+      };
       const expectedState = {
         ...initialState,
         product: mockProduct,
         isProductLoading: false
       };
 
-      const result = productData.reducer({...initialState}, {type: fetchProductAction.fulfilled.type, payload: mockProduct});
+      const result = productData.reducer({...newInitialState}, {type: fetchProductAction.fulfilled.type, payload: mockProduct});
 
       expect(result).toEqual(expectedState);
     });
 
     it('should set "isProductsLoading" to "false" with "fetchProductAction.rejected', () => {
+      const newInitialState = {
+        ...initialState,
+        isProductLoading: true
+      };
       const expectedState = {
         ...initialState,
         isProductLoading: false
       };
 
       const result = productData.reducer(
-        undefined,
+        {...newInitialState},
         fetchProductAction.rejected
       );
 
