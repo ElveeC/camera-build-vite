@@ -1,7 +1,13 @@
 import { system, datatype, random, name, date } from 'faker';
 import { ProductType } from '../types/product-type';
 import { PromoType } from '../types/product-type';
-import { ReviewType/*, PostingReviewType*/ } from '../types/review-type';
+import { ReviewType, PostingReviewType } from '../types/review-type';
+import { Action } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { createAPI } from '../services/api';
+import { State } from '../types/state';
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
 export const makeFakeProduct = (): ProductType => ({
   id: datatype.number(),
@@ -48,4 +54,15 @@ export const makeFakeReview = (): ReviewType => ({
 
 export const makeFakeReviews = (): ReviewType[] => Array.from({ length: 10 }, makeFakeReview);
 
+export const makeFakeNewReview = (): PostingReviewType => ({
+  cameraId:  datatype.number(),
+  userName: name.firstName(),
+  advantage: random.word(),
+  disadvantage: random.word(),
+  review: random.word(),
+  rating: datatype.number(5)
+});
+
 export const makeFakeSimilarProducts = (): ProductType[] => Array.from({length: 15}, makeFakeProduct);
+
+export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
