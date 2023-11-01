@@ -89,15 +89,15 @@ function AddReviewModal ({ /*onCloseButtonClick*/ /*isActive,*/ cameraId }: AddR
                   </legend>
                   <div className="rate__bar">
                     <div className="rate__group">
-                      <input className="visually-hidden" id="star-5" type="radio" value={5} {...register('rating', {required: true})}/>
+                      <input className="visually-hidden" id="star-5" type="radio" value={5} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-5" title="Отлично"></label>
-                      <input className="visually-hidden" id="star-4" type="radio" value={4} {...register('rating', {required: true})}/>
+                      <input className="visually-hidden" id="star-4" type="radio" value={4} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-4" title="Хорошо"></label>
-                      <input className="visually-hidden" id="star-3" type="radio" value={3} {...register('rating', {required: true})}/>
+                      <input className="visually-hidden" id="star-3" type="radio" value={3} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-3" title="Нормально"></label>
-                      <input className="visually-hidden" id="star-2" type="radio" value={2} {...register('rating', {required: true})}/>
+                      <input className="visually-hidden" id="star-2" type="radio" value={2} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-2" title="Плохо"></label>
-                      <input className="visually-hidden" id="star-1" type="radio" value={1} {...register('rating', {required: true})}/>
+                      <input className="visually-hidden" id="star-1" type="radio" value={1} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-1" title="Ужасно"></label>
                     </div>
                     <div className="rate__progress"><span className="rate__stars">0</span> <span>/</span> <span className="rate__all-stars">5</span>
@@ -122,6 +122,7 @@ function AddReviewModal ({ /*onCloseButtonClick*/ /*isActive,*/ cameraId }: AddR
                       type="text"
                       placeholder="Введите ваше имя"
                       {...register('userName', {required: true})}
+                      data-testid="nameElement"
                     />
                   </label>
                   <p className="custom-input__error">Нужно указать имя</p>
@@ -143,6 +144,7 @@ function AddReviewModal ({ /*onCloseButtonClick*/ /*isActive,*/ cameraId }: AddR
                       type="text"
                       placeholder="Основные преимущества товара"
                       {...register('advantage', {required: true})}
+                      data-testid="advantageElement"
                     />
                   </label>
                   <p className="custom-input__error">Нужно указать достоинства</p>
@@ -164,6 +166,7 @@ function AddReviewModal ({ /*onCloseButtonClick*/ /*isActive,*/ cameraId }: AddR
                       type="text"
                       placeholder="Главные недостатки товара"
                       {...register('disadvantage', {required: true})}
+                      data-testid="disadvantageElement"
                     />
                   </label>
                   <p className="custom-input__error">Нужно указать недостатки</p>
@@ -190,13 +193,14 @@ function AddReviewModal ({ /*onCloseButtonClick*/ /*isActive,*/ cameraId }: AddR
                           maxLength: 160,
                         }
                       )}
+                      data-testid="reviewTextElement"
                     >
                     </textarea>
                   </label>
                   <div className="custom-textarea__error">Нужно добавить комментарий</div>
                 </div>
               </div>
-              <button className="btn btn--purple form-review__btn" type="submit">Отправить отзыв</button>
+              <button className="btn btn--purple form-review__btn" type="submit" data-testid="submitElement">Отправить отзыв</button>
 
             </form>
           </div>

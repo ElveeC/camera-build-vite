@@ -23,7 +23,7 @@ describe('Component: AddItemModal', () => {
     const expectedAddToBasketText = 'Добавить в корзину';
     const basketButtonElementTestId = 'basketButtonElement';
     const expectedCloseText = 'Закрыть попап';
-    const closeButtonElementTestId = 'closeButtonElement';
+
 
     const { withStoreComponent } = withStore(<AddItemModal />, {
       DATA: {
@@ -50,7 +50,6 @@ describe('Component: AddItemModal', () => {
     expect(screen.getByText(expectedAddToBasketText)).toBeInTheDocument();
     expect(screen.getByTestId(basketButtonElementTestId)).toBeInTheDocument();
     expect(screen.getByLabelText(expectedCloseText)).toBeInTheDocument();
-    expect(screen.getByTestId(closeButtonElementTestId)).toBeInTheDocument();
   });
 
 });
