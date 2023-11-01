@@ -1,9 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
-import { Header } from '../../components/header/header';
-import { Footer } from '../../components/footer/footer';
-import { Banner } from '../../components/banner/banner';
+//import { Header } from '../../components/header/header';
+//import { Footer } from '../../components/footer/footer';
+//import { Banner } from '../../components/banner/banner';
 import { AppRoute } from '../../const';
 import './not-found-page.css';
 
@@ -14,9 +14,7 @@ function NotFoundPage () {
       <Helmet>
         <title>Camera shop. Страница не найдена</title>
       </Helmet>
-      <Header />
       <main>
-        <Banner />
         <div className="page-content">
           <section className="catalog">
             <div className="container">
@@ -26,7 +24,7 @@ function NotFoundPage () {
           </section>
         </div>
       </main>
-      <Footer />
+
     </div>
   );
 }
