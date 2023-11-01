@@ -1,17 +1,8 @@
-//import { useState } from 'react';
-//import cn from 'classnames';
-import { Navigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getSelectedProduct } from '../../store/product-data/product-data.selectors';
 import { resetSelectedProduct } from '../../store/product-data/product-data';
-import { AppRoute } from '../../const';
 
-/*type AddItemModalProps = {
-  isActive: boolean;
-  onCloseButtonClick: () => void;
-}*/
-function AddItemModal (/*isActive: AddItemModalProps*/) {
-  //const [isActive, setActive] = useState(false);
+function AddItemModal () {
 
   const dispatch = useAppDispatch();
 
@@ -35,31 +26,9 @@ function AddItemModal (/*isActive: AddItemModalProps*/) {
 
   const handleCloseButtonClick = () => {
     dispatch(resetSelectedProduct());
-    //isActive = false;
+
   };
 
-  const handleBasketButtonClick = () => (
-    <Navigate to={AppRoute.Basket} />
-  );
-
-  /*if (selectedProduct) {
-    setActive(true);
-  } else {
-    return '';
-  }*/
-
-  /*const handleCloseButtonClick = () => {
-    setActive(false);
-  };*/
-
-
-  /*const dispatch = useAppDispatch;
-  dispatch(setAddModalActive(true));
-
-  const handleCloseButtonClick = () => {
-  dispatch(setAddModalActive(false));
- };*/
-  //<div className={`modal ${isActive ? 'is-active' : ''}`}>
   return (
     <div className="modal is-active">
       <div className="modal__wrapper">
@@ -86,13 +55,13 @@ function AddItemModal (/*isActive: AddItemModalProps*/) {
             </div>
           </div>
           <div className="modal__buttons">
-            <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button" onClick={handleBasketButtonClick}>
+            <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button" data-testid="basketButtonElement">
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
               </svg>Добавить в корзину
             </button>
           </div>
-          <button className="cross-btn" type="button" aria-label="Закрыть попап" onClick={handleCloseButtonClick}>
+          <button className="cross-btn" type="button" aria-label="Закрыть попап" onClick={handleCloseButtonClick} data-testid="closeButtonElement">
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>
             </svg>
