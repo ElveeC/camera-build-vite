@@ -56,13 +56,13 @@ function Pagination ({currentPage, pageCount}: PaginationProps) {
     <div className="pagination">
       <ul className="pagination__list">
         {currentPage > BUTTONS_PER_PAGE_COUNT &&
-        <li className="pagination__item">
+        <li className="pagination__item" data-testid="backElement">
           <Link className="pagination__link pagination__link--text" onClick={handleBackButtonClick} to={`catalog/${currentPage - 1}`}>Назад</Link>
         </li>}
 
 
         {buttons.map((button, index) => (
-          <li className="pagination__item" key={`${button}${firstPageInSlice + index}`}>
+          <li className="pagination__item" key={`${button}${firstPageInSlice + index}`} data-testid="pageButtonElement">
             <Link className={cn(
               'pagination__link',
               { 'pagination__link--active': firstPageInSlice + index === currentPage}
@@ -79,7 +79,7 @@ function Pagination ({currentPage, pageCount}: PaginationProps) {
           &&
           // isNextButton
           (
-            <li className="pagination__item" >
+            <li className="pagination__item" data-testid="nextElement">
               <Link className="pagination__link pagination__link--text" onClick={handleNextButtonClick} to={`catalog/${currentPage + 1}`}>Далее</Link>
             </li>
           )

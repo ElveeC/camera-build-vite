@@ -26,7 +26,7 @@ export const makeFakeProduct = (): ProductType => ({
   reviewCount: datatype.number(100),
 });
 
-export const makeFakeProducts = (): ProductType[] => Array.from({ length: 15 }, makeFakeProduct);
+export const makeFakeProducts = (): ProductType[] => Array.from({ length: 60 }, makeFakeProduct);
 
 export const makeFakePromos = () : PromoType[] => (
   new Array(3).fill(null).map(() => (
