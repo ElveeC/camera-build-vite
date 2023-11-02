@@ -11,7 +11,7 @@ function Review ({ reviewItem }: ReviewProps) {
     <li className="review-card">
       <div className="review-card__head">
         <p className="title title--h4">{userName}</p>
-        <time className="review-card__data" dateTime={createAt}>{humanizeDate(createAt)}</time>
+        <time className="review-card__data" dateTime={createAt} data-testid="dateElement">{humanizeDate(createAt)}</time>
       </div>
       <div className="rate review-card__rate">
         <Rating rating={rating}/>

@@ -6,6 +6,7 @@ import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { createAPI } from '../services/api';
 import { State } from '../types/state';
+import { Status } from '../const';
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
@@ -63,6 +64,32 @@ export const makeFakeNewReview = (): PostingReviewType => ({
   rating: datatype.number(5)
 });
 
-export const makeFakeSimilarProducts = (): ProductType[] => Array.from({length: 15}, makeFakeProduct);
+export const makeFakeSimilarProducts = (): ProductType[] => Array.from({length: 3}, makeFakeProduct);
 
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
+
+export const makeFakeStore = (initialState?: Partial<State>): State => ({
+  DATA: {
+    products: [],
+    areProductsLoading: false,
+    product: null,
+    isProductLoading: false,
+    selectedProduct: null,
+    hasError: false
+  },
+  PROMO: {
+    promoProducts: [],
+    arePromoProductsLoading: false
+  },
+  SIMILAR: {
+    similarProducts: [],
+    areSimilarProductsLoading: false,
+  },
+  REVIEWS: {
+    reviews: [],
+    areReviewsLoading: false,
+    setReviewPostingStatus: Status.Unsent,
+    isAddReviewModalActive: false
+  },
+  ...initialState ?? {},
+});

@@ -51,11 +51,11 @@ function Reviews ({ cameraId/*, reviews*/ }: ReviewsProps) {
   const reviewsToShow = sortedReviews.slice(0, reviewsToShowCount);
 
   return (
-    <section className="review-block">
+    <section className="review-block" data-testid="reviewsElement">
       <div className="container">
         <div className="page-content__headed">
           <h2 className="title title--h3">Отзывы</h2>
-          <button className="btn" type="button" onClick={handleAddReviewButtoClick}>Оставить свой отзыв</button>
+          <button className="btn" type="button" onClick={handleAddReviewButtoClick} data-testid="addReviewElement">Оставить свой отзыв</button>
         </div>
         <ul className="review-block__list">
           {reviewsToShow.map((review) =>
@@ -64,7 +64,7 @@ function Reviews ({ cameraId/*, reviews*/ }: ReviewsProps) {
         </ul>
         {reviewsToShowCount < sortedReviews.length &&
         <div className="review-block__buttons">
-          <button className="btn btn--purple" type="button" onClick={handleMoreButtonClick}>Показать больше отзывов
+          <button className="btn btn--purple" type="button" onClick={handleMoreButtonClick} data-testid="moreButtonElement">Показать больше отзывов
           </button>
         </div>}
       </div>

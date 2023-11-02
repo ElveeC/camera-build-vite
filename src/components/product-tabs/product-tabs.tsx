@@ -3,7 +3,6 @@ import { useState } from 'react';
 import cn from 'classnames';
 
 import { ProductType } from '../../types/product-type';
-
 import { InfoOption } from '../../const';
 
 

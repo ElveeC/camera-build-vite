@@ -23,16 +23,7 @@ describe('Component: ProductCard', () => {
     const expectedDetailsText = 'Подробнее';
 
     const {withStoreComponent} = withStore(
-      <ProductCard product={product} isSimilar={false}/>, {
-        /*DATA: {
-          products: [],
-          areProductsLoading: false,
-          product: product,
-          isProductLoading: false,
-          hasError: false,
-          selectedProduct: null,
-        },*/
-      });
+      <ProductCard product={product} isSimilar={false}/>, {});
 
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
@@ -63,16 +54,7 @@ describe('Component: ProductCard', () => {
     const expectedDetailsText = 'Подробнее';
 
     const {withStoreComponent} = withStore(
-      <ProductCard product={product} isSimilar/>, {
-        /*DATA: {
-          products: [],
-          areProductsLoading: false,
-          product: product,
-          isProductLoading: false,
-          hasError: false,
-          selectedProduct: null,
-        },*/
-      });
+      <ProductCard product={product} isSimilar/>, {});
 
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);

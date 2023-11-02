@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { useEffect/*, useState*/ } from 'react';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { Header } from '../../components/header/header';
@@ -19,21 +19,15 @@ import { NotFoundPage } from '../not-found-page/not-found-page';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchProductAction } from '../../store/api-actions';
 import { getProduct, getProductLoadingStatus } from '../../store/product-data/product-data.selectors';
-import { /*getReviews, getReviewsLoadingStatus,*/ getAddReviewActiveStatus } from '../../store/reviews-data/reviews-data.selectors';
-//import { fetchReviewsAction } from '../../store/api-actions';
-//import { setAddReviewActive } from '../../store/reviews-data/reviews-data';
+import { getAddReviewActiveStatus } from '../../store/reviews-data/reviews-data.selectors';
 
 import { AppRoute } from '../../const';
 
 function ProductPage () {
-  //const [ isAddReviewModalActive, setAddReviewModalActive ] = useState(false);
   const currentProduct = useParams();
   const selectedProduct = useAppSelector(getProduct);
   const isProductLoading = useAppSelector(getProductLoadingStatus);
   const isAddReviewModalActive = useAppSelector(getAddReviewActiveStatus);
-
-  //const reviews = useAppSelector(getReviews);
-  //const areReviewsLoading = useAppSelector(getReviewsLoadingStatus);
 
   const dispatch = useAppDispatch();
 
@@ -43,7 +37,6 @@ function ProductPage () {
     if (isMounted) {
       if (currentProduct.id) {
         dispatch(fetchProductAction(Number(currentProduct.id)));
-        //dispatch(fetchReviewsAction(Number(currentProduct.id)));
       }
     }
     return () => {
@@ -51,7 +44,7 @@ function ProductPage () {
     };
   }, [dispatch, currentProduct.id]);
 
-  if (isProductLoading /*|| areReviewsLoading*/) {
+  if (isProductLoading) {
     return (
       <LoadingPage />
     );
@@ -80,20 +73,6 @@ function ProductPage () {
     });
   };
 
-  /*const handleAddReviewButtoClick = () => {
-    dispatch(setAddReviewActive(true));
-  };*/
-
-  /*const handleCloseButtonClick = () => {
-    setReviewModalActive(false);
-  };*/
-
-  /*{isReviewModalActive
-    &&
-    <AddReviewModal isActive={isAddReviewModalActive} cameraId={id}/>}*/
-
-  //  { isAddReviewModalActive && <AddReviewModal cameraId={id}/>}
-  // <Reviews reviews={reviews}/>
   return (
     <div className="wrapper">
       <Helmet>
@@ -101,7 +80,7 @@ function ProductPage () {
       </Helmet>
       <Header />
       <main>
-        <div className="page-content">
+        <div className="page-content" data-testid="productPageElement">
           <Breadcrumbs currentPage={AppRoute.Product} productName={name}/>
           <div className="page-content__section">
             <section className="product">

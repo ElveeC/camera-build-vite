@@ -12,16 +12,7 @@ describe('Component: ProductList', () => {
     const productListElement = 'productListElement';
 
     const {withStoreComponent} = withStore(
-      <ProductList products={products}/>, {
-        /*DATA: {
-          products: products,
-          areProductsLoading: false,
-          product: null,
-          isProductLoading: false,
-          hasError: false,
-          selectedProduct: null,
-        },*/
-      });
+      <ProductList products={products}/>, {});
 
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);

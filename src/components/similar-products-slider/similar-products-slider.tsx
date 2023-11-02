@@ -37,7 +37,7 @@ function SimilarProductsSlider ({ id }: SimilarProductsSliderProps) {
   }
 
   return (
-    <section className="product-similar">
+    <section className="product-similar" data-testid="similarElement">
       <div className="container">
         <h2 className="title title--h3">Похожие товары</h2>
         <div className="product-similar__slider">
@@ -58,7 +58,7 @@ function SimilarProductsSlider ({ id }: SimilarProductsSliderProps) {
           >
 
             {similarProducts.map((similarProduct) => (
-              <SwiperSlide key={similarProduct.id}>
+              <SwiperSlide key={similarProduct.id} data-testid="similarSlideElement">
                 <ProductCard key={similarProduct.id} product={similarProduct} isSimilar/>
               </SwiperSlide>
             ))}
