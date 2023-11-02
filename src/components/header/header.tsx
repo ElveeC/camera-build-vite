@@ -25,7 +25,7 @@ function Header () {
           </ul>
         </nav>
         <div className="form-search">
-          <form>
+          <form data-testid="searchFormElement">
             <label>
               <svg className="form-search__icon" width="16" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-lens"></use>

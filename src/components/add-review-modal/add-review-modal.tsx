@@ -3,15 +3,13 @@ import { useEffect } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
-import { getReviewPostingStatus/*, getAddReviewActiveStatus*/ } from '../../store/reviews-data/reviews-data.selectors';
+import { getReviewPostingStatus } from '../../store/reviews-data/reviews-data.selectors';
 import { setAddReviewActive } from '../../store/reviews-data/reviews-data';
 import { Status } from '../../const';
 
 
 type AddReviewModalProps = {
   cameraId: number;
-  //onCloseButtonClick: () => void;
-  //isActive: boolean;
 }
 
 type AddReviewFormValues = {
@@ -22,17 +20,10 @@ type AddReviewFormValues = {
   rating: number;
 }
 
-function AddReviewModal ({ /*onCloseButtonClick*/ /*isActive,*/ cameraId }: AddReviewModalProps) {
+function AddReviewModal ({ cameraId }: AddReviewModalProps) {
   const dispatch = useAppDispatch();
-  //const isActive = useAppSelector(getAddReviewActiveStatus);
 
   const { register, handleSubmit, formState: { errors } } = useForm<AddReviewFormValues>();
-  /*const onSubmit: SubmitHandler<AddReviewFormValues> = (data) => {
-    //const rating = Number(data.rating);
-    const reviewData = {...data, cameraId: cameraId, rating: Number(data.rating)};
-    dispatch(addReviewAction(reviewData));
-    console.log(reviewData);
-  };*/
 
   const onSubmit: SubmitHandler<AddReviewFormValues> = ({ userName, advantage, disadvantage, review, rating }) => {
 
@@ -56,11 +47,6 @@ function AddReviewModal ({ /*onCloseButtonClick*/ /*isActive,*/ cameraId }: AddR
       dispatch(setAddReviewActive(false));
     }
   });
-
-  /*className={cn(
-    'modal',
-    {'is-active': isActive}
-  )}*/
 
   return (
     <div className='modal is-active'>
