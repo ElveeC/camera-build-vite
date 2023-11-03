@@ -1,9 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-
-//import { Header } from '../../components/header/header';
-//import { Footer } from '../../components/footer/footer';
-//import { Banner } from '../../components/banner/banner';
 import { AppRoute } from '../../const';
 import './not-found-page.css';
 

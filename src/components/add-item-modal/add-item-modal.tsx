@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getSelectedProduct } from '../../store/product-data/product-data.selectors';
 import { resetSelectedProduct } from '../../store/product-data/product-data';
@@ -5,8 +6,33 @@ import { resetSelectedProduct } from '../../store/product-data/product-data';
 function AddItemModal () {
 
   const dispatch = useAppDispatch();
-
   const selectedProduct = useAppSelector(getSelectedProduct);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  const handleEscapeKeydown = (evt: KeyboardEvent) => {
+    if (evt.key === 'Escape') {
+      dispatch(resetSelectedProduct());
+      document.body.style.overflow = 'unset';
+    }
+  };
+
+  const handleCloseButtonClick = () => {
+    dispatch(resetSelectedProduct());
+    document.body.style.overflow = 'unset';
+    document.removeEventListener('keydown', handleEscapeKeydown);
+  };
+
+  const handleOverlayClick = () => {
+    dispatch(resetSelectedProduct());
+    document.body.style.overflow = 'unset';
+    document.removeEventListener('keydown', handleEscapeKeydown);
+  };
+
+  useEffect(() => {
+    if (selectedProduct && buttonRef.current) {
+      buttonRef.current.focus();
+    }
+  }, [selectedProduct]);
 
   if (!selectedProduct) {
     return '';
@@ -24,15 +50,13 @@ function AddItemModal () {
     price
   } = selectedProduct;
 
-  const handleCloseButtonClick = () => {
-    dispatch(resetSelectedProduct());
-
-  };
+  document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', handleEscapeKeydown);
 
   return (
     <div className="modal is-active">
       <div className="modal__wrapper">
-        <div className="modal__overlay"></div>
+        <div className="modal__overlay" onClick={handleOverlayClick}></div>
         <div className="modal__content">
           <p className="title title--h4">Добавить товар в корзину</p>
           <div className="basket-item basket-item--short">
@@ -55,7 +79,7 @@ function AddItemModal () {
             </div>
           </div>
           <div className="modal__buttons">
-            <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button" data-testid="basketButtonElement">
+            <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button" data-testid="basketButtonElement" ref={buttonRef}>
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
               </svg>Добавить в корзину

@@ -1,10 +1,11 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
 import { getReviewPostingStatus } from '../../store/reviews-data/reviews-data.selectors';
 import { setAddReviewActive } from '../../store/reviews-data/reviews-data';
+import { getAddReviewActiveStatus } from '../../store/reviews-data/reviews-data.selectors';
 import { Status } from '../../const';
 
 
@@ -22,6 +23,9 @@ type AddReviewFormValues = {
 
 function AddReviewModal ({ cameraId }: AddReviewModalProps) {
   const dispatch = useAppDispatch();
+  const reviewPostingStatus = useAppSelector(getReviewPostingStatus);
+  const isModalActive = useAppSelector(getAddReviewActiveStatus);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const { register, handleSubmit, formState: { errors } } = useForm<AddReviewFormValues>();
 
@@ -37,21 +41,48 @@ function AddReviewModal ({ cameraId }: AddReviewModalProps) {
     }));
 
   };
+
+  const handleEscapeKeydown = useCallback((evt: KeyboardEvent) => {
+    if (evt.key === 'Escape') {
+      dispatch(setAddReviewActive(false));
+      document.body.style.overflow = 'unset';
+    }
+  }, [dispatch]);
+
   const handleCloseButtonClick = () => {
     dispatch(setAddReviewActive(false));
+    document.body.style.overflow = 'unset';
   };
 
-  const reviewPostingStatus = useAppSelector(getReviewPostingStatus);
+  const handleOverlayClick = () => {
+    dispatch(setAddReviewActive(false));
+    document.body.style.overflow = 'unset';
+  };
+
   useEffect(() => {
     if (reviewPostingStatus === Status.Success) {
       dispatch(setAddReviewActive(false));
     }
   });
 
+  useEffect(() => {
+    if (isModalActive && buttonRef.current) {
+      buttonRef.current.focus();
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKeydown);
+    };
+  }, [isModalActive, handleEscapeKeydown]);
+
+
+  document.addEventListener('keydown', handleEscapeKeydown);
+
   return (
     <div className='modal is-active'>
       <div className="modal__wrapper">
-        <div className="modal__overlay"></div>
+        <div className="modal__overlay" onClick={handleOverlayClick}></div>
         <div className="modal__content">
           <p className="title title--h4">Оставить отзыв</p>
           <div className="form-review">
@@ -186,7 +217,7 @@ function AddReviewModal ({ cameraId }: AddReviewModalProps) {
                   <div className="custom-textarea__error">Нужно добавить комментарий</div>
                 </div>
               </div>
-              <button className="btn btn--purple form-review__btn" type="submit" data-testid="submitElement">Отправить отзыв</button>
+              <button className="btn btn--purple form-review__btn" type="submit" data-testid="submitElement" ref={buttonRef}>Отправить отзыв</button>
 
             </form>
           </div>
