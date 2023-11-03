@@ -83,7 +83,7 @@ function ProductPage () {
         <div className="page-content" data-testid="productPageElement">
           <Breadcrumbs currentPage={AppRoute.Product} productName={name}/>
           <div className="page-content__section">
-            <section className="product">
+            <section className="product" data-testid="productElement">
               <div className="container">
                 <div className="product__img">
                   <picture>
@@ -111,10 +111,10 @@ function ProductPage () {
             </section>
           </div>
           <div className="page-content__section">
-            <SimilarProductsSlider id={id}/>
+            <SimilarProductsSlider id={id} data-testid="similarElement"/>
           </div>
           <div className="page-content__section">
-            <Reviews cameraId={id}/>
+            <Reviews cameraId={id} data-testid="reviewsElement"/>
           </div>
         </div>
         { isAddReviewModalActive && <AddReviewModal cameraId={id}/>}
