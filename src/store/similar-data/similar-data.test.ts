@@ -49,12 +49,6 @@ describe('SimilarData Slice', () => {
       areSimilarProductsLoading: false
     };
 
-    /*const result = similarData.reducer(
-      undefined,
-      fetchSimilarProductsAction.fulfilled(
-        mockProducts, '', undefined)
-    );*/
-
     const result = similarData.reducer({...newInitialState}, {type: fetchSimilarProductsAction.fulfilled.type, payload: mockProducts});
 
     expect(result).toEqual(expectedState);

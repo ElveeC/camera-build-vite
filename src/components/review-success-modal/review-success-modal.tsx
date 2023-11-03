@@ -19,9 +19,16 @@ function ReviewSuccessModal () {
   }, [dispatch]);
 
   useEffect(() => {
-    if (reviewPostingStatus === Status.Success && buttonRef.current) {
-      buttonRef.current.focus();
+    let isMounted = true;
+
+    if (isMounted) {
+      if (reviewPostingStatus === Status.Success && buttonRef.current) {
+        buttonRef.current.focus();
+      }
     }
+    return () => {
+      isMounted = false;
+    };
   }, [reviewPostingStatus]);
 
   const handleBackToProductButtonClick = () => {

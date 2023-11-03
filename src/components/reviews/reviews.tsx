@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getReviews, getReviewsLoadingStatus } from '../../store/reviews-data/reviews-data.selectors';
-import { /*addReviewAction,*/ fetchReviewsAction } from '../../store/api-actions';
+import { fetchReviewsAction } from '../../store/api-actions';
 
 import { ReviewsLoading } from '../reviews-loading/reviews-loading';
 import { Review } from '../review/review';
@@ -11,9 +11,8 @@ import { setAddReviewActive } from '../../store/reviews-data/reviews-data';
 
 type ReviewsProps = {
   cameraId: number;
-  //reviews: ReviewType[];
 }
-function Reviews ({ cameraId/*, reviews*/ }: ReviewsProps) {
+function Reviews ({ cameraId }: ReviewsProps) {
   const [ reviewsToShowCount, setReviewsToShowCount ] = useState(REVIEWS_TO_SHOW_COUNT);
   const dispatch = useAppDispatch();
   const reviews = useAppSelector(getReviews);

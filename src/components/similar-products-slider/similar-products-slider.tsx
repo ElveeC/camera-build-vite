@@ -23,10 +23,18 @@ function SimilarProductsSlider ({ id }: SimilarProductsSliderProps) {
   const areSimilarProductsLoading = useAppSelector(getSimilarProductsLoadingStatus);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchSimilarProductsAction(id));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (id) {
+        dispatch(fetchSimilarProductsAction(id));
+      }
     }
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, id]);
+
 
   if (areSimilarProductsLoading) {
     return '';

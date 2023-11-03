@@ -15,36 +15,11 @@ function Pagination ({currentPage, pageCount}: PaginationProps) {
 
   const handleNextButtonClick = () => {
     currentPage = currentPage + 1;
-    //dispatch(setCurrentPage(currentPage));
   };
 
   const handleBackButtonClick = () => {
     currentPage = currentPage - 1;
   };
-
-  /*const showNextButton = (totalPagesCount: number, buttonPerPageCount: number, activePage: number) => {
-    switch (totalPagesCount % buttonPerPageCount) {
-      case 0:
-        if (activePage < totalPagesCount - 2) {
-          return true;
-        }
-        break;
-      case 1:
-        if (activePage < totalPagesCount) {
-          return true;
-        }
-        break;
-      case 2:
-        if (activePage < totalPagesCount - 1) {
-          return true;
-        }
-        break;
-      default:
-        return false;
-    }
-  };
-
-  const isNextButton = showNextButton(pageCount, BUTTONS_PER_PAGE_COUNT, currentPage);*/
 
   const currentSliceNumber = calculateCurrentSliceNumber(currentPage, BUTTONS_PER_PAGE_COUNT);
 
@@ -77,7 +52,6 @@ function Pagination ({currentPage, pageCount}: PaginationProps) {
         {
           currentSliceNumber < sliceCount
           &&
-          // isNextButton
           (
             <li className="pagination__item" data-testid="nextElement">
               <Link className="pagination__link pagination__link--text" onClick={handleNextButtonClick} to={`catalog/${currentPage + 1}`}>Далее</Link>

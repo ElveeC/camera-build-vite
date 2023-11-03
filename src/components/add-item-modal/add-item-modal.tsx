@@ -29,9 +29,16 @@ function AddItemModal () {
   };
 
   useEffect(() => {
-    if (selectedProduct && buttonRef.current) {
-      buttonRef.current.focus();
+    let isMounted = true;
+
+    if (isMounted) {
+      if (selectedProduct && buttonRef.current) {
+        buttonRef.current.focus();
+      }
     }
+    return () => {
+      isMounted = false;
+    };
   }, [selectedProduct]);
 
   if (!selectedProduct) {

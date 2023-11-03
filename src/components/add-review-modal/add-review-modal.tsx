@@ -60,19 +60,32 @@ function AddReviewModal ({ cameraId }: AddReviewModalProps) {
   };
 
   useEffect(() => {
-    if (reviewPostingStatus === Status.Success) {
-      dispatch(setAddReviewActive(false));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (reviewPostingStatus === Status.Success) {
+        dispatch(setAddReviewActive(false));
+      }
     }
-  });
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, reviewPostingStatus]);
 
   useEffect(() => {
-    if (isModalActive && buttonRef.current) {
-      buttonRef.current.focus();
-      document.body.style.overflow = 'hidden';
-    }
+    let isMounted = true;
 
+    if (isMounted) {
+      if (isModalActive && buttonRef.current) {
+        buttonRef.current.focus();
+        document.body.style.overflow = 'hidden';
+      }
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKeydown);
+      };
+    }
     return () => {
-      document.removeEventListener('keydown', handleEscapeKeydown);
+      isMounted = false;
     };
   }, [isModalActive, handleEscapeKeydown]);
 

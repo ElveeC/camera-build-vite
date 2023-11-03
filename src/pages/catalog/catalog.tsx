@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-//import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { ProductList } from '../../components/product-list/product-list';
@@ -14,7 +13,7 @@ import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
 
 import { LoadingPage } from '../loading-page/loading-page';
 
-import { useAppSelector/*, useAppDispatch*/ } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import { getProducts, getProductsLoadingStatus } from '../../store/product-data/product-data.selectors';
 import { getPromoLoadingStatus } from '../../store/promo-data/promo-data.selectors';
 
@@ -23,11 +22,6 @@ import { CARDS_PER_PAGE_NUMBER, AppRoute } from '../../const';
 
 function Catalog () {
   const { page } = useParams();
-  //const dispatch = useAppDispatch();
-  /* if (page) {
-  dispatch(setCurrentPage(parseInt(page, 10)));
-}
-*/
   let currentPage;
 
   if (page) {
