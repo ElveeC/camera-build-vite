@@ -34,7 +34,7 @@ function Reviews ({ cameraId }: ReviewsProps) {
   }
 
   if (!reviews.length) {
-    return '';
+    return null;
   }
 
   const sortedReviews = reviews.slice().sort((a: ReviewType, b: ReviewType) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime());

@@ -42,7 +42,7 @@ function AddItemModal () {
   }, [selectedProduct]);
 
   if (!selectedProduct) {
-    return '';
+    return null;
   }
 
   const {

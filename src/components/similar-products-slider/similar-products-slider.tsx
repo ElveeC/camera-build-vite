@@ -37,11 +37,11 @@ function SimilarProductsSlider ({ id }: SimilarProductsSliderProps) {
 
 
   if (areSimilarProductsLoading) {
-    return '';
+    return null;
   }
 
   if (!similarProducts.length) {
-    return '';
+    return null;
   }
 
   return (
