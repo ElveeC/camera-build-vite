@@ -25,10 +25,8 @@ function SimilarProductsSlider ({ id }: SimilarProductsSliderProps) {
   useEffect(() => {
     let isMounted = true;
 
-    if (isMounted) {
-      if (id) {
-        dispatch(fetchSimilarProductsAction(id));
-      }
+    if (isMounted && id) {
+      dispatch(fetchSimilarProductsAction(id));
     }
     return () => {
       isMounted = false;
