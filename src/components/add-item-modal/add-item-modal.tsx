@@ -16,13 +16,6 @@ function AddItemModal () {
     }
   }, [dispatch]);
 
-  /*const handleEscapeKeydown = (evt: KeyboardEvent) => {
-    if (evt.key === 'Escape') {
-      dispatch(resetSelectedProduct());
-      document.body.style.overflow = 'unset';
-    }
-  };*/
-
   const handleCloseButtonClick = () => {
     dispatch(resetSelectedProduct());
     document.body.style.overflow = 'unset';
@@ -70,8 +63,6 @@ function AddItemModal () {
     price
   } = selectedProduct;
 
-  //document.body.style.overflow = 'hidden';
-  //document.addEventListener('keydown', handleEscapeKeydown);
 
   return (
     <div className="modal is-active">

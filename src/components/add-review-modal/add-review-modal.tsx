@@ -91,8 +91,6 @@ function AddReviewModal ({ cameraId }: AddReviewModalProps) {
   }, [isModalActive, handleEscapeKeydown]);
 
 
-  //document.addEventListener('keydown', handleEscapeKeydown);
-
   return (
     <div className='modal is-active'>
       <div className="modal__wrapper">

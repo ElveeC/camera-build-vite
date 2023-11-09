@@ -12,23 +12,19 @@ import { Pagination } from '../../components/pagination/pagination';
 import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
 
 import { LoadingPage } from '../loading-page/loading-page';
+import { NotFoundPage } from '../not-found-page/not-found-page';
 
 import { useAppSelector } from '../../hooks';
 import { getProducts, getProductsLoadingStatus } from '../../store/product-data/product-data.selectors';
 import { getPromoLoadingStatus } from '../../store/promo-data/promo-data.selectors';
 
-import { CARDS_PER_PAGE_NUMBER, AppRoute } from '../../const';
+import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX } from '../../const';
 
 
 function Catalog () {
   const { page } = useParams();
-  let currentPage;
 
-  if (page) {
-    currentPage = parseInt(page, 10);
-  } else {
-    currentPage = 1;
-  }
+  const currentPage = page ? parseInt(page, PAGE_RADIX) : 1;
 
   const products = useAppSelector(getProducts);
   const areProductsLoading = useAppSelector(getProductsLoadingStatus);
@@ -42,6 +38,12 @@ function Catalog () {
   const productsToShow = products.slice((currentPage - 1) * CARDS_PER_PAGE_NUMBER, currentPage * CARDS_PER_PAGE_NUMBER);
 
   const pageCount = Math.ceil(products.length / CARDS_PER_PAGE_NUMBER);
+
+  if (currentPage > pageCount) {
+    return (
+      <NotFoundPage />
+    );
+  }
 
   return (
     <div className="wrapper">

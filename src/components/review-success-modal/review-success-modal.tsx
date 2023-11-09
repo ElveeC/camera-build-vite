@@ -40,7 +40,6 @@ function ReviewSuccessModal () {
     if (reviewPostingStatus === Status.Success) {
       dispatch(resetReviewPostingingStatus());
       document.body.style.overflow = 'unset';
-      //document.removeEventListener('keydown', handleEscapeKeydown);
     }
   };
 
@@ -48,17 +47,14 @@ function ReviewSuccessModal () {
     if (reviewPostingStatus === Status.Success) {
       dispatch(resetReviewPostingingStatus());
       document.body.style.overflow = 'unset';
-      //document.removeEventListener('keydown', handleEscapeKeydown);
     }
   };
 
   const handleOverlayClick = () => {
     dispatch(resetReviewPostingingStatus());
     document.body.style.overflow = 'unset';
-    //document.removeEventListener('keydown', handleEscapeKeydown);
   };
 
-  //document.addEventListener('keydown', handleEscapeKeydown);
 
   return (
     <div
