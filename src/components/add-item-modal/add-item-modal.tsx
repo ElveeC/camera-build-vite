@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getSelectedProduct } from '../../store/product-data/product-data.selectors';
 import { resetSelectedProduct } from '../../store/product-data/product-data';
@@ -9,12 +9,19 @@ function AddItemModal () {
   const selectedProduct = useAppSelector(getSelectedProduct);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const handleEscapeKeydown = (evt: KeyboardEvent) => {
+  const handleEscapeKeydown = useCallback((evt: KeyboardEvent) => {
     if (evt.key === 'Escape') {
       dispatch(resetSelectedProduct());
       document.body.style.overflow = 'unset';
     }
-  };
+  }, [dispatch]);
+
+  /*const handleEscapeKeydown = (evt: KeyboardEvent) => {
+    if (evt.key === 'Escape') {
+      dispatch(resetSelectedProduct());
+      document.body.style.overflow = 'unset';
+    }
+  };*/
 
   const handleCloseButtonClick = () => {
     dispatch(resetSelectedProduct());
@@ -34,12 +41,18 @@ function AddItemModal () {
     if (isMounted) {
       if (selectedProduct && buttonRef.current) {
         buttonRef.current.focus();
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', handleEscapeKeydown);
       }
+
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKeydown);
+      };
     }
     return () => {
       isMounted = false;
     };
-  }, [selectedProduct]);
+  }, [selectedProduct, handleEscapeKeydown]);
 
   if (!selectedProduct) {
     return null;
@@ -57,8 +70,8 @@ function AddItemModal () {
     price
   } = selectedProduct;
 
-  document.body.style.overflow = 'hidden';
-  document.addEventListener('keydown', handleEscapeKeydown);
+  //document.body.style.overflow = 'hidden';
+  //document.addEventListener('keydown', handleEscapeKeydown);
 
   return (
     <div className="modal is-active">

@@ -15,6 +15,7 @@ function ReviewSuccessModal () {
   const handleEscapeKeydown = useCallback((evt: KeyboardEvent) => {
     if (evt.key === 'Escape') {
       dispatch(resetReviewPostingingStatus());
+      document.body.style.overflow = 'unset';
     }
   }, [dispatch]);
 
@@ -24,18 +25,22 @@ function ReviewSuccessModal () {
     if (isMounted) {
       if (reviewPostingStatus === Status.Success && buttonRef.current) {
         buttonRef.current.focus();
+        document.addEventListener('keydown', handleEscapeKeydown);
       }
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKeydown);
+      };
     }
     return () => {
       isMounted = false;
     };
-  }, [reviewPostingStatus]);
+  }, [reviewPostingStatus, handleEscapeKeydown]);
 
   const handleBackToProductButtonClick = () => {
     if (reviewPostingStatus === Status.Success) {
       dispatch(resetReviewPostingingStatus());
       document.body.style.overflow = 'unset';
-      document.removeEventListener('keydown', handleEscapeKeydown);
+      //document.removeEventListener('keydown', handleEscapeKeydown);
     }
   };
 
@@ -43,17 +48,17 @@ function ReviewSuccessModal () {
     if (reviewPostingStatus === Status.Success) {
       dispatch(resetReviewPostingingStatus());
       document.body.style.overflow = 'unset';
-      document.removeEventListener('keydown', handleEscapeKeydown);
+      //document.removeEventListener('keydown', handleEscapeKeydown);
     }
   };
 
   const handleOverlayClick = () => {
     dispatch(resetReviewPostingingStatus());
     document.body.style.overflow = 'unset';
-    document.removeEventListener('keydown', handleEscapeKeydown);
+    //document.removeEventListener('keydown', handleEscapeKeydown);
   };
 
-  document.addEventListener('keydown', handleEscapeKeydown);
+  //document.addEventListener('keydown', handleEscapeKeydown);
 
   return (
     <div

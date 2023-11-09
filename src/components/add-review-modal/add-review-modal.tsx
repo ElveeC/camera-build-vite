@@ -79,6 +79,7 @@ function AddReviewModal ({ cameraId }: AddReviewModalProps) {
       if (isModalActive && buttonRef.current) {
         buttonRef.current.focus();
         document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', handleEscapeKeydown);
       }
       return () => {
         document.removeEventListener('keydown', handleEscapeKeydown);
@@ -90,7 +91,7 @@ function AddReviewModal ({ cameraId }: AddReviewModalProps) {
   }, [isModalActive, handleEscapeKeydown]);
 
 
-  document.addEventListener('keydown', handleEscapeKeydown);
+  //document.addEventListener('keydown', handleEscapeKeydown);
 
   return (
     <div className='modal is-active'>
