@@ -1,3 +1,13 @@
 .swiper-slide .is-active {
  width: 100%;
 }
+
+.swiper-button-disabled,
+.swiper-button-disabled:hover,
+.swiper-button-disabled:active,
+.swiper-button-disabled:focus {
+  color: #ddd;
+  background-color: #f8f8f8;
+  pointer-events: none;
+  cursor: unset;
+}
