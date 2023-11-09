@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, MouseEvent, useState } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
@@ -26,6 +26,7 @@ function AddReviewModal ({ cameraId }: AddReviewModalProps) {
   const reviewPostingStatus = useAppSelector(getReviewPostingStatus);
   const isModalActive = useAppSelector(getAddReviewActiveStatus);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const [ starsCount, setStarsCount ] = useState(0);
 
   const { register, handleSubmit, formState: { errors } } = useForm<AddReviewFormValues>();
 
@@ -91,6 +92,11 @@ function AddReviewModal ({ cameraId }: AddReviewModalProps) {
   }, [isModalActive, handleEscapeKeydown]);
 
 
+  const handleStarClick = (evt: MouseEvent<HTMLInputElement>) => {
+    setStarsCount(Number(evt.currentTarget.value));
+  };
+
+
   return (
     <div className='modal is-active'>
       <div className="modal__wrapper">
@@ -117,19 +123,19 @@ function AddReviewModal ({ cameraId }: AddReviewModalProps) {
                     </svg>
                   </legend>
                   <div className="rate__bar">
-                    <div className="rate__group">
-                      <input className="visually-hidden" id="star-5" type="radio" value={5} {...register('rating', {required: true})} data-testid='starElement'/>
+                    <div className="rate__group" >
+                      <input className="visually-hidden" onClick={handleStarClick} id="star-5" type="radio" value={5} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-5" title="Отлично"></label>
-                      <input className="visually-hidden" id="star-4" type="radio" value={4} {...register('rating', {required: true})} data-testid='starElement'/>
+                      <input className="visually-hidden" onClick={handleStarClick} id="star-4" type="radio" value={4} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-4" title="Хорошо"></label>
-                      <input className="visually-hidden" id="star-3" type="radio" value={3} {...register('rating', {required: true})} data-testid='starElement'/>
+                      <input className="visually-hidden" onClick={handleStarClick} id="star-3" type="radio" value={3} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-3" title="Нормально"></label>
-                      <input className="visually-hidden" id="star-2" type="radio" value={2} {...register('rating', {required: true})} data-testid='starElement'/>
+                      <input className="visually-hidden" onClick={handleStarClick} id="star-2" type="radio" value={2} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-2" title="Плохо"></label>
-                      <input className="visually-hidden" id="star-1" type="radio" value={1} {...register('rating', {required: true})} data-testid='starElement'/>
+                      <input className="visually-hidden" onClick={handleStarClick} id="star-1" type="radio" value={1} {...register('rating', {required: true})} data-testid='starElement'/>
                       <label className="rate__label" htmlFor="star-1" title="Ужасно"></label>
                     </div>
-                    <div className="rate__progress"><span className="rate__stars">0</span> <span>/</span> <span className="rate__all-stars">5</span>
+                    <div className="rate__progress"><span className="rate__stars">{starsCount}</span> <span>/</span> <span className="rate__all-stars">5</span>
                     </div>
                   </div>
                   <p className="rate__message">Нужно оценить товар</p>
