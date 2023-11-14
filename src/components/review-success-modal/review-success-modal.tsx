@@ -65,9 +65,10 @@ function ReviewSuccessModal () {
         { 'is-active': reviewPostingStatus === Status.Success}
       )}
     >
-      <FocusLock ref={focusRef} returnFocus>
-        <div className="modal__wrapper">
-          <div className="modal__overlay" onClick={handleOverlayClick}></div>
+
+      <div className="modal__wrapper">
+        <div className="modal__overlay" onClick={handleOverlayClick}></div>
+        <FocusLock ref={focusRef} returnFocus>
           <div className="modal__content" data-testid="reviewSuccessElement">
             <p className="title title--h4">Спасибо за отзыв</p>
             <svg className="modal__icon" width="80" height="78" aria-hidden="true">
@@ -83,8 +84,8 @@ function ReviewSuccessModal () {
               </svg>
             </button>
           </div>
-        </div>
-      </FocusLock>
+        </FocusLock>
+      </div>
     </div>
   );
 }

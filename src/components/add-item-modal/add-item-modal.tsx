@@ -67,9 +67,10 @@ function AddItemModal () {
 
   return (
     <div className="modal is-active">
-      <FocusLock ref={focusRef} returnFocus>
-        <div className="modal__wrapper">
-          <div className="modal__overlay" onClick={handleOverlayClick}></div>
+
+      <div className="modal__wrapper">
+        <div className="modal__overlay" onClick={handleOverlayClick}></div>
+        <FocusLock ref={focusRef} returnFocus>
           <div className="modal__content">
             <p className="title title--h4">Добавить товар в корзину</p>
             <div className="basket-item basket-item--short">
@@ -104,8 +105,8 @@ function AddItemModal () {
               </svg>
             </button>
           </div>
-        </div>
-      </FocusLock>
+        </FocusLock>
+      </div>
     </div>
   );
 }
