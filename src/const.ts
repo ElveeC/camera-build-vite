@@ -1,3 +1,9 @@
+export const CARDS_PER_PAGE_NUMBER = 9;
+export const BUTTONS_PER_PAGE_COUNT = 3;
+export const REVIEWS_TO_SHOW_COUNT = 3;
+export const PAGE_RADIX = 10;
+export const MIN_SEARCH_SYMBOLS_COUNT = 3;
+
 export enum AppRoute {
   Catalog = '/',
   Product = '/product',
@@ -26,11 +32,6 @@ export enum BannerSliderData {
   AutoPlayDelay = 3000,
   SlidesPerView = 1
 }
-
-export const CARDS_PER_PAGE_NUMBER = 9;
-export const BUTTONS_PER_PAGE_COUNT = 3;
-export const REVIEWS_TO_SHOW_COUNT = 3;
-export const PAGE_RADIX = 10;
 
 export enum SimilarProductsSliderData {
   Speed = 2000,
