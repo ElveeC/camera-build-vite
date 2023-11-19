@@ -1,13 +1,15 @@
-import { useRef, useState, ChangeEvent } from 'react';
+import { useRef, useState, ChangeEvent, MouseEvent } from 'react';
+import {useNavigate} from 'react-router-dom';
 import cn from 'classnames';
 import { getProducts } from '../../store/product-data/product-data.selectors';
 import { useAppSelector } from '../../hooks';
 import { ProductType } from '../../types/product-type';
-import { MIN_SEARCH_SYMBOLS_COUNT } from '../../const';
+import { MIN_SEARCH_SYMBOLS_COUNT, AppRoute } from '../../const';
 
 function SearchForm () {
   const searchRef = useRef<HTMLInputElement | null>(null);
   const products = useAppSelector(getProducts);
+  const navigate = useNavigate();
 
   const [ results, setResults ] = useState<ProductType[]>([]);
   const [ searchText, setSearchText ] = useState('');
@@ -26,6 +28,10 @@ function SearchForm () {
     }
   };
 
+  const handleNameClick = (evt: MouseEvent<HTMLLIElement>) => {
+    navigate(`${AppRoute.Product}/${evt.currentTarget.value}`);
+  };
+
   return (
     <div className={cn(
       'form-search',
@@ -42,7 +48,7 @@ function SearchForm () {
         {
           results.length !== 0 &&
           <ul className="form-search__select-list scroller">
-            {results.map((result) => (<li key={result.id} className="form-search__select-item" tabIndex={0}>{result.name}</li>))}
+            {results.map((result) => (<li key={result.id} className="form-search__select-item" value={result.id} onClick={handleNameClick} tabIndex={0}>{result.name}</li>))}
           </ul>
         }
 
