@@ -15,10 +15,11 @@ import { LoadingPage } from '../loading-page/loading-page';
 import { NotFoundPage } from '../not-found-page/not-found-page';
 
 import { useAppSelector } from '../../hooks';
-import { getProducts, getProductsLoadingStatus } from '../../store/product-data/product-data.selectors';
+import { getProducts, getProductsLoadingStatus, getSortByPopularityStatus, getSortByPriceStatus, getMinToMaxSortStatus } from '../../store/product-data/product-data.selectors';
 import { getPromoLoadingStatus } from '../../store/promo-data/promo-data.selectors';
 
 import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX } from '../../const';
+import { sortByPriceMaxtoMin, sortByPriceMintoMax, sortLessPopularFirst, sortMostPopularFirst } from '../../utils';
 
 
 function Catalog () {
@@ -29,13 +30,38 @@ function Catalog () {
   const products = useAppSelector(getProducts);
   const areProductsLoading = useAppSelector(getProductsLoadingStatus);
   const arePromoProductsLoading = useAppSelector(getPromoLoadingStatus);
+  const isPriceChecked = useAppSelector(getSortByPriceStatus);
+  const isPopularChecked = useAppSelector(getSortByPopularityStatus);
+  const isMinToMax = useAppSelector(getMinToMaxSortStatus);
 
   if (areProductsLoading || arePromoProductsLoading) {
     return (
       <LoadingPage />
     );
   }
-  const productsToShow = products.slice((currentPage - 1) * CARDS_PER_PAGE_NUMBER, currentPage * CARDS_PER_PAGE_NUMBER);
+  let sortedProducts = products.slice();
+
+  if (isPriceChecked) {
+    switch (isMinToMax) {
+      case true:
+        sortedProducts = sortByPriceMintoMax(sortedProducts);
+        break;
+      default:
+        sortedProducts = sortByPriceMaxtoMin(sortedProducts);
+    }
+  }
+
+  if (isPopularChecked) {
+    switch (isMinToMax) {
+      case true:
+        sortedProducts = sortLessPopularFirst(sortedProducts);
+        break;
+      default:
+        sortedProducts = sortMostPopularFirst(sortedProducts);
+    }
+  }
+
+  const productsToShow = sortedProducts.slice((currentPage - 1) * CARDS_PER_PAGE_NUMBER, currentPage * CARDS_PER_PAGE_NUMBER);
 
   const pageCount = Math.ceil(products.length / CARDS_PER_PAGE_NUMBER);
 

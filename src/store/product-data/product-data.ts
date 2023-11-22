@@ -10,6 +10,10 @@ const initialState: ProductDataType = {
   product: null,
   isProductLoading: false,
   selectedProduct: null,
+  isPopularChecked: false,
+  isPriceChecked: false,
+  isMinToMax: false,
+  isMaxToMin: false,
   hasError: false
 };
 
@@ -24,7 +28,24 @@ export const productData = createSlice({
     resetSelectedProduct: (state) => {
       state.selectedProduct = null;
     },
+
+    setSortByPriceStatus: (state, action:PayloadAction<boolean>) => {
+      state.isPriceChecked = action.payload;
+    },
+
+    setSortByPopularityStatus: (state, action:PayloadAction<boolean>) => {
+      state.isPopularChecked = action.payload;
+    },
+
+    setMinToMaxSortStatus: (state, action:PayloadAction<boolean>) => {
+      state.isMinToMax = action.payload;
+    },
+
+    setMaxToMinSortStatus: (state, action:PayloadAction<boolean>) => {
+      state.isMaxToMin = action.payload;
+    }
   },
+
   extraReducers(builder) {
     builder
 
@@ -54,4 +75,4 @@ export const productData = createSlice({
   }
 });
 
-export const { setSelectedProduct, resetSelectedProduct } = productData.actions;
+export const { setSelectedProduct, resetSelectedProduct, setSortByPriceStatus, setSortByPopularityStatus, setMaxToMinSortStatus, setMinToMaxSortStatus } = productData.actions;

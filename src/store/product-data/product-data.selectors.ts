@@ -10,3 +10,9 @@ export const getProduct = (state: State): ProductType | null => state[NameSpace.
 export const getProductLoadingStatus = (state: State): boolean => state[NameSpace.Data].isProductLoading;
 
 export const getSelectedProduct = (state: State): ProductType | null =>state[NameSpace.Data].selectedProduct;
+
+export const getSortByPriceStatus = (state: State): boolean => state[NameSpace.Data].isPriceChecked;
+export const getSortByPopularityStatus = (state: State): boolean => state[NameSpace.Data].isPopularChecked;
+
+export const getMinToMaxSortStatus = (state: State): boolean => state[NameSpace.Data].isMinToMax;
+export const getMaxToMinSortStatus = (state: State): boolean => state[NameSpace.Data].isMaxToMin;
