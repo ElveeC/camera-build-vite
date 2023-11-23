@@ -23,7 +23,11 @@ describe('Component: ProductPage', () => {
         product: mockProduct,
         isProductLoading: false,
         selectedProduct: null,
-        hasError: false
+        hasError: false,
+        isPopularChecked: false,
+        isPriceChecked: false,
+        isMinToMax: false,
+        isMaxToMin: false,
       },
       PROMO: {
         promoProducts: [],

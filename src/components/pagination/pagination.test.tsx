@@ -22,6 +22,10 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          isPopularChecked: false,
+          isPriceChecked: false,
+          isMinToMax: false,
+          isMaxToMin: false,
         },
       });
 
@@ -48,6 +52,10 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          isPopularChecked: false,
+          isPriceChecked: false,
+          isMinToMax: false,
+          isMaxToMin: false,
         },
       });
 
@@ -73,6 +81,10 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          isPopularChecked: false,
+          isPriceChecked: false,
+          isMinToMax: false,
+          isMaxToMin: false,
         },
       });
 
@@ -99,6 +111,10 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          isPopularChecked: false,
+          isPriceChecked: false,
+          isMinToMax: false,
+          isMaxToMin: false,
         },
       });
 
@@ -125,6 +141,10 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          isPopularChecked: false,
+          isPriceChecked: false,
+          isMinToMax: false,
+          isMaxToMin: false,
         },
       });
 

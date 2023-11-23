@@ -9,7 +9,11 @@ describe('ProductData Slice', () => {
     product: null,
     isProductLoading: false,
     selectedProduct: null,
-    hasError: false
+    hasError: false,
+    isPopularChecked: false,
+    isPriceChecked: false,
+    isMinToMax: false,
+    isMaxToMin: false,
   };
   describe('fetchProductsAction', () => {
     it('should return the initial state with an empty action', () => {
