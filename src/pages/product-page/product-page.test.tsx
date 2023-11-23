@@ -28,6 +28,8 @@ describe('Component: ProductPage', () => {
         isPriceChecked: false,
         isMinToMax: false,
         isMaxToMin: false,
+        isPhotoChecked: false,
+        isVideoChecked: false,
       },
       PROMO: {
         promoProducts: [],

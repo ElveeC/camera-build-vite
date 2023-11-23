@@ -14,6 +14,8 @@ describe('ProductData Slice', () => {
     isPriceChecked: false,
     isMinToMax: false,
     isMaxToMin: false,
+    isPhotoChecked: false,
+    isVideoChecked: false,
   };
   describe('fetchProductsAction', () => {
     it('should return the initial state with an empty action', () => {

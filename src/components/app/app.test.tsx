@@ -41,6 +41,8 @@ describe('Application Routing', () => {
         isPriceChecked: false,
         isMinToMax: false,
         isMaxToMin: false,
+        isPhotoChecked: false,
+        isVideoChecked: false,
       },
       SIMILAR: {
         similarProducts: [],

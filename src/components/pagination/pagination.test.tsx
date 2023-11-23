@@ -26,6 +26,8 @@ describe('Component: Pagination', () => {
           isPriceChecked: false,
           isMinToMax: false,
           isMaxToMin: false,
+          isPhotoChecked: false,
+          isVideoChecked: false,
         },
       });
 
@@ -56,6 +58,8 @@ describe('Component: Pagination', () => {
           isPriceChecked: false,
           isMinToMax: false,
           isMaxToMin: false,
+          isPhotoChecked: false,
+          isVideoChecked: false,
         },
       });
 
@@ -85,6 +89,8 @@ describe('Component: Pagination', () => {
           isPriceChecked: false,
           isMinToMax: false,
           isMaxToMin: false,
+          isPhotoChecked: false,
+          isVideoChecked: false,
         },
       });
 
@@ -115,6 +121,8 @@ describe('Component: Pagination', () => {
           isPriceChecked: false,
           isMinToMax: false,
           isMaxToMin: false,
+          isPhotoChecked: false,
+          isVideoChecked: false,
         },
       });
 
@@ -145,6 +153,8 @@ describe('Component: Pagination', () => {
           isPriceChecked: false,
           isMinToMax: false,
           isMaxToMin: false,
+          isPhotoChecked: false,
+          isVideoChecked: false,
         },
       });
 

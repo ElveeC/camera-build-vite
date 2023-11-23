@@ -51,3 +51,8 @@ export enum Status {
   Success = 'success',
   Error = 'error'
 }
+
+export enum Category {
+  Video = 'Видеокамера',
+  Photo = 'Фотоаппарат'
+}

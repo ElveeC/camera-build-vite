@@ -13,6 +13,8 @@ export type ProductDataType = {
   isPriceChecked: boolean;
   isMinToMax: boolean;
   isMaxToMin: boolean;
+  isPhotoChecked: boolean;
+  isVideoChecked: boolean;
   hasError: boolean;
 }
 

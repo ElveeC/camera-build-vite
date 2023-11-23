@@ -80,6 +80,8 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
     isPriceChecked: false,
     isMinToMax: false,
     isMaxToMin: false,
+    isPhotoChecked: false,
+    isVideoChecked: false,
   },
   PROMO: {
     promoProducts: [],

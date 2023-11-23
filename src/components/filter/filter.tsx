@@ -1,4 +1,29 @@
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { setPhotoCheckedStatus, setVideoCheckedStatus } from '../../store/product-data/product-data';
+import { getPhotoCheckedStatus, getVideoCheckedStatus } from '../../store/product-data/product-data.selectors';
+
 function Filter () {
+  const dispatch = useAppDispatch();
+  const isPhotoChecked = useAppSelector(getPhotoCheckedStatus);
+  const isVideoChecked = useAppSelector(getVideoCheckedStatus);
+
+  const handlePhotoClick = () => {
+    if (isPhotoChecked) {
+      dispatch(setPhotoCheckedStatus(false));
+    } else {
+      dispatch(setPhotoCheckedStatus(true));
+    }
+    dispatch(setVideoCheckedStatus(false));
+  };
+
+  const handleVideoClick = () => {
+    if (isVideoChecked) {
+      dispatch(setVideoCheckedStatus(false));
+    } else {
+      dispatch(setVideoCheckedStatus(true));
+    }
+    dispatch(setPhotoCheckedStatus(false));
+  };
 
   return (
     <div className="catalog-filter">
@@ -23,14 +48,14 @@ function Filter () {
           <legend className="title title--h5">Категория</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="photocamera" />
+              <input type="checkbox" name="photocamera" checked={isPhotoChecked} onChange={handlePhotoClick}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Фотокамера</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="videocamera" />
+              <input type="checkbox" name="videocamera" checked={isVideoChecked} onChange={handleVideoClick}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Видеокамера</span>
             </label>
@@ -47,14 +72,14 @@ function Filter () {
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="film" />
+              <input type="checkbox" name="film" disabled={isVideoChecked}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Плёночная</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="snapshot" />
+              <input type="checkbox" name="snapshot" disabled={isVideoChecked}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Моментальная</span>
             </label>

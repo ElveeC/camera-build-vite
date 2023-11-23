@@ -37,6 +37,8 @@ describe('Component: AddItemModal', () => {
         isPriceChecked: false,
         isMinToMax: false,
         isMaxToMin: false,
+        isPhotoChecked: false,
+        isVideoChecked: false,
       },
     });
     const preparedComponent = withHistory(withStoreComponent);

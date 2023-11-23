@@ -15,10 +15,10 @@ import { LoadingPage } from '../loading-page/loading-page';
 import { NotFoundPage } from '../not-found-page/not-found-page';
 
 import { useAppSelector } from '../../hooks';
-import { getProducts, getProductsLoadingStatus, getSortByPopularityStatus, getSortByPriceStatus, getMinToMaxSortStatus } from '../../store/product-data/product-data.selectors';
+import { getProducts, getProductsLoadingStatus, getSortByPopularityStatus, getSortByPriceStatus, getMinToMaxSortStatus, getPhotoCheckedStatus, getVideoCheckedStatus } from '../../store/product-data/product-data.selectors';
 import { getPromoLoadingStatus } from '../../store/promo-data/promo-data.selectors';
 
-import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX } from '../../const';
+import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX, Category } from '../../const';
 import { sortByPriceMaxtoMin, sortByPriceMintoMax, sortLessPopularFirst, sortMostPopularFirst } from '../../utils';
 
 
@@ -33,6 +33,8 @@ function Catalog () {
   const isPriceChecked = useAppSelector(getSortByPriceStatus);
   const isPopularChecked = useAppSelector(getSortByPopularityStatus);
   const isMinToMax = useAppSelector(getMinToMaxSortStatus);
+  const isPhotoChecked = useAppSelector(getPhotoCheckedStatus);
+  const isVideoChecked = useAppSelector(getVideoCheckedStatus);
 
   if (areProductsLoading || arePromoProductsLoading) {
     return (
@@ -40,6 +42,7 @@ function Catalog () {
     );
   }
   let sortedProducts = products.slice();
+  let filteredProducts;
 
   if (isPriceChecked) {
     switch (isMinToMax) {
@@ -61,9 +64,21 @@ function Catalog () {
     }
   }
 
-  const productsToShow = sortedProducts.slice((currentPage - 1) * CARDS_PER_PAGE_NUMBER, currentPage * CARDS_PER_PAGE_NUMBER);
+  switch (isVideoChecked) {
+    case true:
+      filteredProducts = sortedProducts.filter((product) => product.category === Category.Video);
+      break;
+    case false:
+      if (isPhotoChecked) {
+        filteredProducts = sortedProducts.filter((product) => product.category === Category.Photo);
+      } else {
+        filteredProducts = sortedProducts;
+      }
+  }
 
-  const pageCount = Math.ceil(products.length / CARDS_PER_PAGE_NUMBER);
+  const productsToShow = filteredProducts.slice((currentPage - 1) * CARDS_PER_PAGE_NUMBER, currentPage * CARDS_PER_PAGE_NUMBER);
+
+  const pageCount = Math.ceil(filteredProducts.length / CARDS_PER_PAGE_NUMBER);
 
   if (currentPage > pageCount) {
     return (

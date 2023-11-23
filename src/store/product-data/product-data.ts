@@ -14,6 +14,8 @@ const initialState: ProductDataType = {
   isPriceChecked: false,
   isMinToMax: false,
   isMaxToMin: false,
+  isPhotoChecked: false,
+  isVideoChecked: false,
   hasError: false
 };
 
@@ -43,7 +45,15 @@ export const productData = createSlice({
 
     setMaxToMinSortStatus: (state, action:PayloadAction<boolean>) => {
       state.isMaxToMin = action.payload;
-    }
+    },
+
+    setPhotoCheckedStatus: (state, action:PayloadAction<boolean>) => {
+      state.isPhotoChecked = action.payload;
+    },
+
+    setVideoCheckedStatus: (state, action:PayloadAction<boolean>) => {
+      state.isVideoChecked = action.payload;
+    },
   },
 
   extraReducers(builder) {
@@ -75,4 +85,4 @@ export const productData = createSlice({
   }
 });
 
-export const { setSelectedProduct, resetSelectedProduct, setSortByPriceStatus, setSortByPopularityStatus, setMaxToMinSortStatus, setMinToMaxSortStatus } = productData.actions;
+export const { setSelectedProduct, resetSelectedProduct, setSortByPriceStatus, setSortByPopularityStatus, setMaxToMinSortStatus, setMinToMaxSortStatus, setPhotoCheckedStatus, setVideoCheckedStatus } = productData.actions;

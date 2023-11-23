@@ -20,6 +20,8 @@ describe('Component: Catalog', () => {
         isPriceChecked: false,
         isMinToMax: false,
         isMaxToMin: false,
+        isPhotoChecked: false,
+        isVideoChecked: false,
       },
       PROMO: {
         promoProducts: mockPromoProducts,

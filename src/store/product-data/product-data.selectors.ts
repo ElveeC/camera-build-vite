@@ -16,3 +16,6 @@ export const getSortByPopularityStatus = (state: State): boolean => state[NameSp
 
 export const getMinToMaxSortStatus = (state: State): boolean => state[NameSpace.Data].isMinToMax;
 export const getMaxToMinSortStatus = (state: State): boolean => state[NameSpace.Data].isMaxToMin;
+
+export const getPhotoCheckedStatus = (state: State): boolean => state[NameSpace.Data].isPhotoChecked;
+export const getVideoCheckedStatus = (state: State): boolean => state[NameSpace.Data].isVideoChecked;
