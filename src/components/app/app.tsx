@@ -20,12 +20,15 @@ function App () {
       <ErrorPage />);
   }
 
+  /* <Route path={AppRoute.Catalog} element={<Catalog />}>
+          <Route path="catalog/:page" element={<Catalog />} />
+        </Route>*/
+
   return (
     <HelmetProvider>
       <Routes>
 
         <Route path={AppRoute.Catalog} element={<Catalog />}>
-          <Route path="catalog/:page" element={<Catalog />} />
         </Route>
 
         <Route

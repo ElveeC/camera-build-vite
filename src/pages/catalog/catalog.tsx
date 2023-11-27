@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import { ProductList } from '../../components/product-list/product-list';
@@ -15,16 +16,25 @@ import { LoadingPage } from '../loading-page/loading-page';
 import { NotFoundPage } from '../not-found-page/not-found-page';
 
 import { useAppSelector } from '../../hooks';
-import { getProducts, getProductsLoadingStatus, getSortByPopularityStatus, getSortByPriceStatus, getMinToMaxSortStatus, getPhotoCheckedStatus, getVideoCheckedStatus } from '../../store/product-data/product-data.selectors';
+import { getProducts, getProductsLoadingStatus, getSortByPopularityStatus, getSortByPriceStatus, getMinToMaxSortStatus/*, getPhotoCheckedStatus, getVideoCheckedStatus*/ } from '../../store/product-data/product-data.selectors';
 import { getPromoLoadingStatus } from '../../store/promo-data/promo-data.selectors';
 
-import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX, Category } from '../../const';
+//import { getCurrentPageNumber } from '../../store/product-data/product-data.selectors';
+
+import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX, Category, CategoryOption } from '../../const';
 import { sortByPriceMaxtoMin, sortByPriceMintoMax, sortLessPopularFirst, sortMostPopularFirst } from '../../utils';
+//import { ProductType } from '../../types/product-type';
 
 
 function Catalog () {
-  const { page } = useParams();
+  //const { page } = useParams();
 
+  //const currentPage = page ? parseInt(page, PAGE_RADIX) : 1;
+  //const currentPage = useAppSelector(getCurrentPageNumber);
+  const[searchParams] = useSearchParams();
+  const page = searchParams.get('page');
+  const category = searchParams.get('category');
+  const types = searchParams.getAll('type');
   const currentPage = page ? parseInt(page, PAGE_RADIX) : 1;
 
   const products = useAppSelector(getProducts);
@@ -33,8 +43,8 @@ function Catalog () {
   const isPriceChecked = useAppSelector(getSortByPriceStatus);
   const isPopularChecked = useAppSelector(getSortByPopularityStatus);
   const isMinToMax = useAppSelector(getMinToMaxSortStatus);
-  const isPhotoChecked = useAppSelector(getPhotoCheckedStatus);
-  const isVideoChecked = useAppSelector(getVideoCheckedStatus);
+  //const isPhotoChecked = useAppSelector(getPhotoCheckedStatus);
+  //const isVideoChecked = useAppSelector(getVideoCheckedStatus);
 
   if (areProductsLoading || arePromoProductsLoading) {
     return (
@@ -64,16 +74,19 @@ function Catalog () {
     }
   }
 
-  switch (isVideoChecked) {
-    case true:
+  switch (category) {
+    case CategoryOption.Video:
       filteredProducts = sortedProducts.filter((product) => product.category === Category.Video);
       break;
-    case false:
-      if (isPhotoChecked) {
-        filteredProducts = sortedProducts.filter((product) => product.category === Category.Photo);
-      } else {
-        filteredProducts = sortedProducts;
-      }
+    case CategoryOption.Photo:
+      filteredProducts = sortedProducts.filter((product) => product.category === Category.Photo);
+      break;
+    default:
+      filteredProducts = sortedProducts;
+  }
+
+  if (types.length) {
+    filteredProducts = filteredProducts.filter((product) => types.includes(product.type));
   }
 
   const productsToShow = filteredProducts.slice((currentPage - 1) * CARDS_PER_PAGE_NUMBER, currentPage * CARDS_PER_PAGE_NUMBER);

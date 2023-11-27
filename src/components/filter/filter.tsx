@@ -1,28 +1,45 @@
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { setPhotoCheckedStatus, setVideoCheckedStatus } from '../../store/product-data/product-data';
-import { getPhotoCheckedStatus, getVideoCheckedStatus } from '../../store/product-data/product-data.selectors';
+import { useSearchParams } from 'react-router-dom';
+//import { useState } from 'react';
+//import { useAppSelector, useAppDispatch } from '../../hooks';
+//import { setPhotoCheckedStatus, setVideoCheckedStatus } from '../../store/product-data/product-data';
+//import { getPhotoCheckedStatus, getVideoCheckedStatus } from '../../store/product-data/product-data.selectors';
+import { CategoryOption, /*CameraTypeOption,*/ CameraType } from '../../const';
+import { ChangeEvent } from 'react';
 
 function Filter () {
-  const dispatch = useAppDispatch();
-  const isPhotoChecked = useAppSelector(getPhotoCheckedStatus);
-  const isVideoChecked = useAppSelector(getVideoCheckedStatus);
+  const [ searchParams, setSearchParams ] = useSearchParams();
+  const category = searchParams.get('category');
+  const types = searchParams.getAll('type');
 
   const handlePhotoClick = () => {
-    if (isPhotoChecked) {
-      dispatch(setPhotoCheckedStatus(false));
+    if (category === CategoryOption.Photo) {
+      searchParams.delete('category');
+
     } else {
-      dispatch(setPhotoCheckedStatus(true));
+      searchParams.set('page', '1');
+      searchParams.set('category', CategoryOption.Photo);
     }
-    dispatch(setVideoCheckedStatus(false));
+    setSearchParams(searchParams);
   };
 
   const handleVideoClick = () => {
-    if (isVideoChecked) {
-      dispatch(setVideoCheckedStatus(false));
+    if (category === CategoryOption.Video) {
+      searchParams.delete('category');
     } else {
-      dispatch(setVideoCheckedStatus(true));
+      searchParams.set('page', '1');
+      searchParams.set('category', CategoryOption.Video);
     }
-    dispatch(setPhotoCheckedStatus(false));
+    setSearchParams(searchParams);
+  };
+
+  const handleTypeChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    if (types.includes(evt.target.value)) {
+      searchParams.delete('type', evt.target.value);
+    } else {
+      searchParams.set('page', '1');
+      searchParams.append('type', evt.target.value);
+    }
+    setSearchParams(searchParams);
   };
 
   return (
@@ -48,14 +65,14 @@ function Filter () {
           <legend className="title title--h5">Категория</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="photocamera" checked={isPhotoChecked} onChange={handlePhotoClick}/>
+              <input type="checkbox" name="photocamera" checked={category === CategoryOption.Photo} onChange={handlePhotoClick}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Фотокамера</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="videocamera" checked={isVideoChecked} onChange={handleVideoClick}/>
+              <input type="checkbox" name="videocamera" checked={category === CategoryOption.Video} onChange={handleVideoClick}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Видеокамера</span>
             </label>
@@ -65,28 +82,28 @@ function Filter () {
           <legend className="title title--h5">Тип камеры</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="digital" />
+              <input type="checkbox" name="digital" value={CameraType.Digital} checked={types.includes(CameraType.Digital)} onChange={handleTypeChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Цифровая</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="film" disabled={isVideoChecked}/>
+              <input type="checkbox" name="film" value={CameraType.Film} disabled={category === CategoryOption.Video} checked={types.includes(CameraType.Film)} onChange={handleTypeChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Плёночная</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="snapshot" disabled={isVideoChecked}/>
+              <input type="checkbox" name="snapshot" value={CameraType.Snapshot} disabled={category === CategoryOption.Video} checked={types.includes(CameraType.Snapshot)} onChange={handleTypeChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Моментальная</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="collection" />
+              <input type="checkbox" name="collection" value={CameraType.Collection} checked={types.includes(CameraType.Collection)} onChange={handleTypeChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Коллекционная</span>
             </label>

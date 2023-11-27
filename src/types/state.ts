@@ -16,6 +16,7 @@ export type ProductDataType = {
   isPhotoChecked: boolean;
   isVideoChecked: boolean;
   hasError: boolean;
+  currentPageNumber: number;
 }
 
 export type PromoDataType = {

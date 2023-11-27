@@ -56,3 +56,22 @@ export enum Category {
   Video = 'Видеокамера',
   Photo = 'Фотоаппарат'
 }
+
+export enum CategoryOption {
+  Video = 'video',
+  Photo = 'photo'
+}
+
+export enum CameraType {
+  Digital = 'Цифровая',
+  Film ='Плёночная',
+  Snapshot = 'Моментальная',
+  Collection = 'Коллекционная'
+}
+
+/*export enum CameraTypeOption {
+  Digital = 'digital',
+  Film ='film',
+  Snapshot = 'snapshot',
+  Collection = 'collection'
+}*/

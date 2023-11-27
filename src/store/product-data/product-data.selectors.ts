@@ -19,3 +19,5 @@ export const getMaxToMinSortStatus = (state: State): boolean => state[NameSpace.
 
 export const getPhotoCheckedStatus = (state: State): boolean => state[NameSpace.Data].isPhotoChecked;
 export const getVideoCheckedStatus = (state: State): boolean => state[NameSpace.Data].isVideoChecked;
+
+export const getCurrentPageNumber = (state: State): number => state[NameSpace.Data].currentPageNumber;
