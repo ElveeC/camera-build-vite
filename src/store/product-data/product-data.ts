@@ -17,16 +17,16 @@ const initialState: ProductDataType = {
   isPhotoChecked: false,
   isVideoChecked: false,
   hasError: false,
-  currentPageNumber: 1
+  //currentPageNumber: 1
 };
 
 export const productData = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {
-    setCurrentPageNumber: (state, action: PayloadAction<number>) => {
+    /*setCurrentPageNumber: (state, action: PayloadAction<number>) => {
       state.currentPageNumber = action.payload;
-    },
+    },*/
 
     setSelectedProduct: (state, action: PayloadAction<ProductType>) => {
       state.selectedProduct = action.payload;
@@ -90,4 +90,4 @@ export const productData = createSlice({
   }
 });
 
-export const { setCurrentPageNumber, setSelectedProduct, resetSelectedProduct, setSortByPriceStatus, setSortByPopularityStatus, setMaxToMinSortStatus, setMinToMaxSortStatus, setPhotoCheckedStatus, setVideoCheckedStatus } = productData.actions;
+export const { /*setCurrentPageNumber,*/ setSelectedProduct, resetSelectedProduct, setSortByPriceStatus, setSortByPopularityStatus, setMaxToMinSortStatus, setMinToMaxSortStatus, setPhotoCheckedStatus, setVideoCheckedStatus } = productData.actions;
