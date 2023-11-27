@@ -33,8 +33,12 @@ function Filter () {
   };
 
   const handleTypeChange = (evt: ChangeEvent<HTMLInputElement>) => {
+
     if (types.includes(evt.target.value)) {
-      searchParams.delete('type', evt.target.value);
+      const newTypes = types.filter((type) => type !== evt.target.value);
+      searchParams.delete('type');
+      //searchParams.delete('type', evt.target.value);
+      newTypes.forEach((type) => searchParams.append('type', type));
     } else {
       searchParams.set('page', '1');
       searchParams.append('type', evt.target.value);
