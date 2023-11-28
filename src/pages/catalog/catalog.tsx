@@ -21,7 +21,7 @@ import { getPromoLoadingStatus } from '../../store/promo-data/promo-data.selecto
 
 //import { getCurrentPageNumber } from '../../store/product-data/product-data.selectors';
 
-import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX, Category, CategoryOption } from '../../const';
+import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX, CategoryFilter, CategoryName } from '../../const';
 import { sortByPriceMaxtoMin, sortByPriceMintoMax, sortLessPopularFirst, sortMostPopularFirst } from '../../utils';
 //import { ProductType } from '../../types/product-type';
 
@@ -35,6 +35,8 @@ function Catalog () {
   const page = searchParams.get('page');
   const category = searchParams.get('category');
   const types = searchParams.getAll('type');
+  const levels = searchParams.getAll('level');
+
   const currentPage = page ? parseInt(page, PAGE_RADIX) : 1;
 
   const products = useAppSelector(getProducts);
@@ -75,11 +77,11 @@ function Catalog () {
   }
 
   switch (category) {
-    case CategoryOption.Video:
-      filteredProducts = sortedProducts.filter((product) => product.category === Category.Video);
+    case CategoryName.Video:
+      filteredProducts = sortedProducts.filter((product) => product.category === CategoryFilter.Video);
       break;
-    case CategoryOption.Photo:
-      filteredProducts = sortedProducts.filter((product) => product.category === Category.Photo);
+    case CategoryName.Photo:
+      filteredProducts = sortedProducts.filter((product) => product.category === CategoryFilter.Photo);
       break;
     default:
       filteredProducts = sortedProducts;
@@ -87,6 +89,10 @@ function Catalog () {
 
   if (types.length) {
     filteredProducts = filteredProducts.filter((product) => types.includes(product.type));
+  }
+
+  if (levels.length) {
+    filteredProducts = filteredProducts.filter((product) => levels.includes(product.level));
   }
 
   const productsToShow = filteredProducts.slice((currentPage - 1) * CARDS_PER_PAGE_NUMBER, currentPage * CARDS_PER_PAGE_NUMBER);

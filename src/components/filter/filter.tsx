@@ -3,31 +3,38 @@ import { useSearchParams } from 'react-router-dom';
 //import { useAppSelector, useAppDispatch } from '../../hooks';
 //import { setPhotoCheckedStatus, setVideoCheckedStatus } from '../../store/product-data/product-data';
 //import { getPhotoCheckedStatus, getVideoCheckedStatus } from '../../store/product-data/product-data.selectors';
-import { CategoryOption, /*CameraTypeOption,*/ CameraType } from '../../const';
+import { CategoryName, LevelFilter, /*CameraTypeOption,*/ TypeFilter } from '../../const';
 import { ChangeEvent } from 'react';
 
 function Filter () {
   const [ searchParams, setSearchParams ] = useSearchParams();
   const category = searchParams.get('category');
   const types = searchParams.getAll('type');
+  const levels = searchParams.getAll('level');
 
   const handlePhotoClick = () => {
-    if (category === CategoryOption.Photo) {
+    if (category === CategoryName.Photo) {
       searchParams.delete('category');
 
     } else {
       searchParams.set('page', '1');
-      searchParams.set('category', CategoryOption.Photo);
+      searchParams.set('category', CategoryName.Photo);
     }
     setSearchParams(searchParams);
   };
 
   const handleVideoClick = () => {
-    if (category === CategoryOption.Video) {
+    if (category === CategoryName.Video) {
       searchParams.delete('category');
+
     } else {
       searchParams.set('page', '1');
-      searchParams.set('category', CategoryOption.Video);
+      searchParams.set('category', CategoryName.Video);
+      if (types) {
+        const newTypes = types.filter((type) => type !== TypeFilter.Film && type !== TypeFilter.Snapshot);
+        searchParams.delete('type');
+        newTypes.forEach((type) => searchParams.append('type', type));
+      }
     }
     setSearchParams(searchParams);
   };
@@ -42,6 +49,19 @@ function Filter () {
     } else {
       searchParams.set('page', '1');
       searchParams.append('type', evt.target.value);
+    }
+    setSearchParams(searchParams);
+  };
+
+  const handleLevelChange = (evt: ChangeEvent<HTMLInputElement>) => {
+
+    if (levels.includes(evt.target.value)) {
+      const newLevels = levels.filter((level) => level !== evt.target.value);
+      searchParams.delete('level');
+      newLevels.forEach((level) => searchParams.append('level', level));
+    } else {
+      searchParams.set('page', '1');
+      searchParams.append('level', evt.target.value);
     }
     setSearchParams(searchParams);
   };
@@ -69,14 +89,14 @@ function Filter () {
           <legend className="title title--h5">Категория</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="photocamera" checked={category === CategoryOption.Photo} onChange={handlePhotoClick}/>
+              <input type="checkbox" name="photocamera" checked={category === CategoryName.Photo} onChange={handlePhotoClick}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Фотокамера</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="videocamera" checked={category === CategoryOption.Video} onChange={handleVideoClick}/>
+              <input type="checkbox" name="videocamera" checked={category === CategoryName.Video} onChange={handleVideoClick}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Видеокамера</span>
             </label>
@@ -86,28 +106,28 @@ function Filter () {
           <legend className="title title--h5">Тип камеры</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="digital" value={CameraType.Digital} checked={types.includes(CameraType.Digital)} onChange={handleTypeChange}/>
+              <input type="checkbox" name="digital" value={TypeFilter.Digital} checked={types.includes(TypeFilter.Digital)} onChange={handleTypeChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Цифровая</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="film" value={CameraType.Film} disabled={category === CategoryOption.Video} checked={types.includes(CameraType.Film)} onChange={handleTypeChange}/>
+              <input type="checkbox" name="film" value={TypeFilter.Film} disabled={category === CategoryName.Video} checked={types.includes(TypeFilter.Film)} onChange={handleTypeChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Плёночная</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="snapshot" value={CameraType.Snapshot} disabled={category === CategoryOption.Video} checked={types.includes(CameraType.Snapshot)} onChange={handleTypeChange}/>
+              <input type="checkbox" name="snapshot" value={TypeFilter.Snapshot} disabled={category === CategoryName.Video} checked={types.includes(TypeFilter.Snapshot)} onChange={handleTypeChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Моментальная</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="collection" value={CameraType.Collection} checked={types.includes(CameraType.Collection)} onChange={handleTypeChange}/>
+              <input type="checkbox" name="collection" value={TypeFilter.Collection} checked={types.includes(TypeFilter.Collection)} onChange={handleTypeChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Коллекционная</span>
             </label>
@@ -117,21 +137,21 @@ function Filter () {
           <legend className="title title--h5">Уровень</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="zero" />
+              <input type="checkbox" name="zero" value={LevelFilter.Zero} checked={levels.includes(LevelFilter.Zero)} onChange={handleLevelChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Нулевой</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="non-professional" />
+              <input type="checkbox" name="non-professional" value={LevelFilter.NonProfessional} checked={levels.includes(LevelFilter.NonProfessional)} onChange={handleLevelChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Любительский</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="professional" />
+              <input type="checkbox" name="professional" value={LevelFilter.Professional} checked={levels.includes(LevelFilter.Professional)} onChange={handleLevelChange}/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Профессиональный</span>
             </label>

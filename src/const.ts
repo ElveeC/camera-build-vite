@@ -52,17 +52,17 @@ export enum Status {
   Error = 'error'
 }
 
-export enum Category {
+export enum CategoryFilter {
   Video = 'Видеокамера',
   Photo = 'Фотоаппарат'
 }
 
-export enum CategoryOption {
+export enum CategoryName {
   Video = 'video',
   Photo = 'photo'
 }
 
-export enum CameraType {
+export enum TypeFilter {
   Digital = 'Цифровая',
   Film ='Плёночная',
   Snapshot = 'Моментальная',
@@ -75,3 +75,9 @@ export enum CameraType {
   Snapshot = 'snapshot',
   Collection = 'collection'
 }*/
+
+export enum LevelFilter {
+  Zero = 'Нулевой',
+  NonProfessional = 'Любительский',
+  Professional = 'Профессиональный'
+}
