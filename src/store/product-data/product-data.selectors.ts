@@ -21,3 +21,5 @@ export const getPhotoCheckedStatus = (state: State): boolean => state[NameSpace.
 export const getVideoCheckedStatus = (state: State): boolean => state[NameSpace.Data].isVideoChecked;
 
 //export const getCurrentPageNumber = (state: State): number => state[NameSpace.Data].currentPageNumber;
+
+//export const getMinPriceValue = (state: State): number | undefined => state[NameSpace.Data].minPriceValue;

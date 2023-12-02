@@ -11,31 +11,31 @@ import { Filter } from '../../components/filter/filter';
 import { Sorting } from '../../components/sorting/sorting';
 import { Pagination } from '../../components/pagination/pagination';
 import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
+import { NothingFoundMessage } from '../../components/nothing-found-message/nothing-found-message';
 
 import { LoadingPage } from '../loading-page/loading-page';
-import { NotFoundPage } from '../not-found-page/not-found-page';
+//import { NotFoundPage } from '../not-found-page/not-found-page';
 
 import { useAppSelector } from '../../hooks';
-import { getProducts, getProductsLoadingStatus, getSortByPopularityStatus, getSortByPriceStatus, getMinToMaxSortStatus/*, getPhotoCheckedStatus, getVideoCheckedStatus*/ } from '../../store/product-data/product-data.selectors';
+import { getProducts, getProductsLoadingStatus, getSortByPopularityStatus, getSortByPriceStatus, getMinToMaxSortStatus,/*, getPhotoCheckedStatus, getVideoCheckedStatus*/
+  /*getMinPriceValue*/} from '../../store/product-data/product-data.selectors';
 import { getPromoLoadingStatus } from '../../store/promo-data/promo-data.selectors';
 
-//import { getCurrentPageNumber } from '../../store/product-data/product-data.selectors';
 
 import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX, CategoryFilter, CategoryName } from '../../const';
 import { sortByPriceMaxtoMin, sortByPriceMintoMax, sortLessPopularFirst, sortMostPopularFirst } from '../../utils';
-//import { ProductType } from '../../types/product-type';
 
 
 function Catalog () {
-  //const { page } = useParams();
 
-  //const currentPage = page ? parseInt(page, PAGE_RADIX) : 1;
-  //const currentPage = useAppSelector(getCurrentPageNumber);
   const[searchParams] = useSearchParams();
   const page = searchParams.get('page');
   const category = searchParams.get('category');
   const types = searchParams.getAll('type');
   const levels = searchParams.getAll('level');
+  const priceMinParam = searchParams.get('price_min');
+  //const minPriceValue = useAppSelector(getMinPriceValue);
+  const priceMaxParam = searchParams.get('price_max');
 
   const currentPage = page ? parseInt(page, PAGE_RADIX) : 1;
 
@@ -95,15 +95,32 @@ function Catalog () {
     filteredProducts = filteredProducts.filter((product) => levels.includes(product.level));
   }
 
+  if (priceMaxParam) {
+    filteredProducts = filteredProducts.filter((product) => product.price <= Number(priceMaxParam));
+  }
+
+  /*if (minPriceValue) {
+    filteredProducts = filteredProducts.filter((product) => product.price >= minPriceValue);
+  }*/
+
+  if (priceMinParam) {
+    filteredProducts = filteredProducts.filter((product) => product.price >= Number(priceMinParam));
+  }
+
+  const prices = filteredProducts.map((product) => product.price);
+
+  const minPrice = filteredProducts.length ? Math.min(...prices) : null;
+  const maxPrice = filteredProducts.length ? Math.max(...prices) : null;
+
   const productsToShow = filteredProducts.slice((currentPage - 1) * CARDS_PER_PAGE_NUMBER, currentPage * CARDS_PER_PAGE_NUMBER);
 
   const pageCount = Math.ceil(filteredProducts.length / CARDS_PER_PAGE_NUMBER);
 
-  if (currentPage > pageCount) {
+  /*if (currentPage > pageCount) {
     return (
       <NotFoundPage />
     );
-  }
+  }*/
 
   return (
     <div className="wrapper">
@@ -120,12 +137,19 @@ function Catalog () {
               <h1 className="title title--h2">Каталог фото- и видеотехники</h1>
               <div className="page-content__columns">
                 <div className="catalog__aside">
-                  <Filter />
+                  <Filter minPrice={minPrice} maxPrice={maxPrice}/>
                 </div>
                 <div className="catalog__content">
                   <Sorting />
-                  <ProductList products={productsToShow}/>
-                  <Pagination currentPage={currentPage} pageCount={pageCount}/>
+                  {currentPage > pageCount && <NothingFoundMessage />}
+                  {
+                    currentPage <= pageCount &&
+                    <ProductList products={productsToShow}/>
+                  }
+                  {
+                    currentPage <= pageCount && pageCount > 1 &&
+                    <Pagination currentPage={currentPage} pageCount={pageCount}/>
+                  }
                 </div>
               </div>
             </div>

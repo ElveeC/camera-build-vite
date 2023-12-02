@@ -17,6 +17,7 @@ export type ProductDataType = {
   isVideoChecked: boolean;
   hasError: boolean;
   //currentPageNumber: number;
+  //minPriceValue: number | undefined;
 }
 
 export type PromoDataType = {

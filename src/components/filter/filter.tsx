@@ -1,16 +1,110 @@
 import { useSearchParams } from 'react-router-dom';
-//import { useState } from 'react';
-//import { useAppSelector, useAppDispatch } from '../../hooks';
-//import { setPhotoCheckedStatus, setVideoCheckedStatus } from '../../store/product-data/product-data';
-//import { getPhotoCheckedStatus, getVideoCheckedStatus } from '../../store/product-data/product-data.selectors';
+import { ChangeEvent, useState } from 'react';
 import { CategoryName, LevelFilter, /*CameraTypeOption,*/ TypeFilter } from '../../const';
-import { ChangeEvent } from 'react';
 
-function Filter () {
+//import { setMinPriceValue } from '../../store/product-data/product-data';
+//import { getMinPriceValue } from '../../store/product-data/product-data.selectors';
+
+type FilterProps = {
+  minPrice: number | null;
+  maxPrice: number | null;
+}
+
+function Filter ({ minPrice, maxPrice }: FilterProps) {
   const [ searchParams, setSearchParams ] = useSearchParams();
   const category = searchParams.get('category');
   const types = searchParams.getAll('type');
   const levels = searchParams.getAll('level');
+  const priceMinParam = searchParams.get('price_min');
+  const priceMaxParam = searchParams.get('price_max');
+
+  const initialPriceMin = priceMinParam ? priceMinParam : '';
+  const initialPriceMax = priceMaxParam ? priceMaxParam : '';
+  const [ priceMinValue, setPriceMinValue ] = useState(initialPriceMin);
+
+  //const priceMinValue = useAppSelector(getMinPriceValue);
+  //const dispatch = useAppDispatch();
+
+  const [ priceMaxValue, setPriceMaxValue ] = useState(initialPriceMax);
+
+  const handleMinPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const inputMinValue = evt.target.value;
+    searchParams.set('page', '1');
+
+    if (priceMaxParam && Number(inputMinValue) > Number(priceMaxParam)) {
+      setPriceMinValue(priceMaxParam);
+      //dispatch(setMinPriceValue(Number(priceMaxParam)));
+      searchParams.set('price_min', priceMaxParam);
+    } else {
+      //dispatch(setMinPriceValue(Number(inputMinValue)));
+      setPriceMinValue(inputMinValue);
+      searchParams.set('price_min', inputMinValue);
+    }
+
+    if (!evt.target.value) {
+      searchParams.delete('price_min');
+      setPriceMinValue('');
+    }
+    setSearchParams(searchParams);
+  };
+
+  const handleMinPriceBlur = (evt: ChangeEvent<HTMLInputElement>) => {
+    const inputMinValue = evt.target.value;
+    //searchParams.set('price_min', inputMinValue);
+    if (minPrice && Number(inputMinValue) < minPrice) {
+      setPriceMinValue(minPrice.toString());
+      //dispatch(setMinPriceValue(minPrice));
+      searchParams.set('price_min', minPrice.toString());
+    }
+    /*if (priceMaxParam && Number(inputMinValue) > Number(priceMaxParam)) {
+      setPriceMinValue(priceMaxParam);
+      searchParams.set('price_min', priceMaxParam);
+    }*/
+    /*if (priceMaxValue && Number(inputMinValue) > Number(priceMaxValue)) {
+      //dispatch(setMinPriceValue(Number(priceMaxValue)));
+      searchParams.set('price_min', priceMaxValue);
+      setPriceMinValue(priceMaxValue);
+    }*/
+
+    if (!evt.target.value) {
+      searchParams.delete('price_min');
+      setPriceMinValue('');
+      // dispatch(setMinPriceValue(undefined));
+    }
+    setSearchParams(searchParams);
+  };
+
+  const handleMaxPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    searchParams.set('page', '1');
+    const inputMaxValue = evt.target.value;
+    //searchParams.set('price_max', inputMaxValue);
+    setPriceMaxValue(inputMaxValue);
+
+    if (!evt.target.value) {
+      searchParams.delete('price_max');
+      setPriceMaxValue('');
+    }
+    setSearchParams(searchParams);
+  };
+
+  const handleMaxPriceBlur = (evt: ChangeEvent<HTMLInputElement>) => {
+    const inputMaxValue = evt.target.value;
+    searchParams.set('price_max', inputMaxValue);
+    if (maxPrice && Number(inputMaxValue) > maxPrice) {
+      setPriceMaxValue(maxPrice.toString());
+      searchParams.set('price_max', maxPrice.toString());
+    }
+
+    if (priceMinParam && Number(inputMaxValue) < Number(priceMinParam)) {
+      setPriceMaxValue(priceMinParam);
+      searchParams.set('price_max', priceMinParam);
+    }
+    if (!evt.target.value) {
+      searchParams.delete('price_max');
+      setPriceMaxValue('');
+    }
+    setSearchParams(searchParams);
+  };
 
   const handlePhotoClick = () => {
     if (category === CategoryName.Photo) {
@@ -75,12 +169,12 @@ function Filter () {
           <div className="catalog-filter__price-range">
             <div className="custom-input">
               <label>
-                <input type="number" name="price" placeholder="от" />
+                <input type="number" name="price" placeholder={minPrice ? minPrice.toString() : 'от'} onChange={handleMinPriceChange} onBlur={handleMinPriceBlur} value={priceMinValue}/>
               </label>
             </div>
             <div className="custom-input">
               <label>
-                <input type="number" name="priceUp" placeholder="до" />
+                <input type="number" name="priceUp" placeholder={maxPrice ? maxPrice.toString() : 'до'} onChange={handleMaxPriceChange} onBlur={handleMaxPriceBlur} value={priceMaxValue}/>
               </label>
             </div>
           </div>
