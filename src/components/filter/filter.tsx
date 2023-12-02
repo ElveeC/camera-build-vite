@@ -160,6 +160,18 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
     setSearchParams(searchParams);
   };
 
+  const handleResetClick = () => {
+    setPriceMinValue('');
+    setPriceMaxValue('');
+    searchParams.set('page', '1');
+    searchParams.delete('category');
+    searchParams.delete('type');
+    searchParams.delete('price_min');
+    searchParams.delete('price_max');
+    searchParams.delete('level');
+    setSearchParams(searchParams);
+  };
+
   return (
     <div className="catalog-filter">
       <form action="#">
@@ -251,7 +263,7 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
             </label>
           </div>
         </fieldset>
-        <button className="btn catalog-filter__reset-btn" type="reset">Сбросить фильтры
+        <button className="btn catalog-filter__reset-btn" type="reset" onClick={handleResetClick}>Сбросить фильтры
         </button>
       </form>
     </div>
