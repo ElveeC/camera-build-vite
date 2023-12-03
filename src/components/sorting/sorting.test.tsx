@@ -10,6 +10,10 @@ describe('Component: Sorting', () => {
     const expectedPopularProductsText = 'по популярности';
     const expectedUpLabelText = 'По возрастанию';
     const expectedDownLabelText = 'По убыванию';
+    const priceElement = 'priceElement';
+    const popularElement = 'popularElement';
+    const minToMaxElement = 'minToMaxElement';
+    const maxToMinElement = 'maxToMinElement';
 
     const { withStoreComponent } = withStore(<Sorting />, {});
     const preparedComponent = withHistory(withStoreComponent);
@@ -21,5 +25,9 @@ describe('Component: Sorting', () => {
     expect(screen.getByText(expectedPopularProductsText)).toBeInTheDocument();
     expect(screen.getByLabelText(expectedUpLabelText)).toBeInTheDocument();
     expect(screen.getByLabelText(expectedDownLabelText)).toBeInTheDocument();
+    expect(screen.getByTestId(priceElement)).not.toBeChecked();
+    expect(screen.getByTestId(popularElement)).not.toBeChecked();
+    expect(screen.getByTestId(minToMaxElement)).not.toBeChecked();
+    expect(screen.getByTestId(maxToMinElement)).not.toBeChecked();
   });
 });

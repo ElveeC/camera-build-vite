@@ -172,14 +172,14 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
           <legend className="title title--h5">Категория</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="photocamera" checked={category === CategoryName.Photo} onChange={handlePhotoClick}/>
+              <input type="checkbox" name="photocamera" checked={category === CategoryName.Photo} onChange={handlePhotoClick} data-testid='photoElement'/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Фотокамера</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="videocamera" checked={category === CategoryName.Video} onChange={handleVideoClick}/>
+              <input type="checkbox" name="videocamera" checked={category === CategoryName.Video} onChange={handleVideoClick} data-testid='videoElement'/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Видеокамера</span>
             </label>
@@ -189,28 +189,28 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
           <legend className="title title--h5">Тип камеры</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="digital" value={TypeFilter.Digital} checked={types.includes(TypeFilter.Digital)} onChange={handleTypeChange}/>
+              <input type="checkbox" name="digital" value={TypeFilter.Digital} checked={types.includes(TypeFilter.Digital)} onChange={handleTypeChange} data-testid='digitalElement'/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Цифровая</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="film" value={TypeFilter.Film} disabled={category === CategoryName.Video} checked={types.includes(TypeFilter.Film)} onChange={handleTypeChange}/>
+              <input type="checkbox" name="film" value={TypeFilter.Film} disabled={category === CategoryName.Video} checked={types.includes(TypeFilter.Film)} onChange={handleTypeChange} data-testid='filmElement'/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Плёночная</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="snapshot" value={TypeFilter.Snapshot} disabled={category === CategoryName.Video} checked={types.includes(TypeFilter.Snapshot)} onChange={handleTypeChange}/>
+              <input type="checkbox" name="snapshot" value={TypeFilter.Snapshot} disabled={category === CategoryName.Video} checked={types.includes(TypeFilter.Snapshot)} onChange={handleTypeChange} data-testid='snapshotElement'/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Моментальная</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="collection" value={TypeFilter.Collection} checked={types.includes(TypeFilter.Collection)} onChange={handleTypeChange}/>
+              <input type="checkbox" name="collection" value={TypeFilter.Collection} checked={types.includes(TypeFilter.Collection)} onChange={handleTypeChange} data-testid='collectionElement'/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Коллекционная</span>
             </label>
@@ -220,21 +220,21 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
           <legend className="title title--h5">Уровень</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="zero" value={LevelFilter.Zero} checked={levels.includes(LevelFilter.Zero)} onChange={handleLevelChange}/>
+              <input type="checkbox" name="zero" value={LevelFilter.Zero} checked={levels.includes(LevelFilter.Zero)} onChange={handleLevelChange} data-testid='zeroElement'/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Нулевой</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="non-professional" value={LevelFilter.NonProfessional} checked={levels.includes(LevelFilter.NonProfessional)} onChange={handleLevelChange}/>
+              <input type="checkbox" name="non-professional" value={LevelFilter.NonProfessional} checked={levels.includes(LevelFilter.NonProfessional)} onChange={handleLevelChange} data-testid='nonProfessionalElement'/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Любительский</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="professional" value={LevelFilter.Professional} checked={levels.includes(LevelFilter.Professional)} onChange={handleLevelChange}/>
+              <input type="checkbox" name="professional" value={LevelFilter.Professional} checked={levels.includes(LevelFilter.Professional)} onChange={handleLevelChange} data-testid='professionalElement'/>
               <span className="custom-checkbox__icon"></span>
               <span className="custom-checkbox__label">Профессиональный</span>
             </label>

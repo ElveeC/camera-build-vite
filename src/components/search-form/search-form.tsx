@@ -51,7 +51,6 @@ function SearchForm () {
             {results.map((result) => (<li key={result.id} className="form-search__select-item" value={result.id} onClick={handleNameClick} tabIndex={0}>{result.name}</li>))}
           </ul>
         }
-
       </form>
 
       <button className="form-search__reset" type="reset" onClick={handleResetButtonClick}>
@@ -59,7 +58,6 @@ function SearchForm () {
           <use xlinkHref="#icon-close"></use>
         </svg><span className="visually-hidden">Сбросить поиск</span>
       </button>
-
     </div>
   );
 }
