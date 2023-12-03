@@ -16,12 +16,6 @@ describe('Component: Catalog', () => {
         isProductLoading: false,
         selectedProduct: null,
         hasError: false,
-        isPopularChecked: false,
-        isPriceChecked: false,
-        isMinToMax: false,
-        isMaxToMin: false,
-        isPhotoChecked: false,
-        isVideoChecked: false,
       },
       PROMO: {
         promoProducts: mockPromoProducts,

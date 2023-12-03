@@ -69,15 +69,31 @@ export enum TypeFilter {
   Collection = 'Коллекционная'
 }
 
-/*export enum CameraTypeOption {
-  Digital = 'digital',
-  Film ='film',
-  Snapshot = 'snapshot',
-  Collection = 'collection'
-}*/
-
 export enum LevelFilter {
   Zero = 'Нулевой',
   NonProfessional = 'Любительский',
   Professional = 'Профессиональный'
+}
+
+export enum FilterOption {
+  Category = 'category',
+  Type = 'type',
+  Level = 'level',
+  PriceMin = 'price_min',
+  PriceMax = 'price_max'
+}
+
+export enum SortOption {
+  Price = 'price',
+  Popular = 'popular'
+}
+
+export enum SortOrder {
+  MinToMax = 'min_to_max',
+  MaxToMin = 'max_to_min'
+}
+
+export enum SortType {
+  Sort = 'sort',
+  Order = 'order'
 }

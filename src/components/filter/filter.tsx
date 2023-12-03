@@ -1,9 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
-import { CategoryName, LevelFilter, /*CameraTypeOption,*/ TypeFilter } from '../../const';
-
-//import { setMinPriceValue } from '../../store/product-data/product-data';
-//import { getMinPriceValue } from '../../store/product-data/product-data.selectors';
+import { CategoryName, LevelFilter, TypeFilter, FilterOption } from '../../const';
 
 type FilterProps = {
   minPrice: number | null;
@@ -12,19 +9,15 @@ type FilterProps = {
 
 function Filter ({ minPrice, maxPrice }: FilterProps) {
   const [ searchParams, setSearchParams ] = useSearchParams();
-  const category = searchParams.get('category');
-  const types = searchParams.getAll('type');
-  const levels = searchParams.getAll('level');
-  const priceMinParam = searchParams.get('price_min');
-  const priceMaxParam = searchParams.get('price_max');
+  const category = searchParams.get(FilterOption.Category);
+  const types = searchParams.getAll(FilterOption.Type);
+  const levels = searchParams.getAll(FilterOption.Level);
+  const priceMinParam = searchParams.get(FilterOption.PriceMin);
+  const priceMaxParam = searchParams.get(FilterOption.PriceMax);
 
   const initialPriceMin = priceMinParam ? priceMinParam : '';
   const initialPriceMax = priceMaxParam ? priceMaxParam : '';
   const [ priceMinValue, setPriceMinValue ] = useState(initialPriceMin);
-
-  //const priceMinValue = useAppSelector(getMinPriceValue);
-  //const dispatch = useAppDispatch();
-
   const [ priceMaxValue, setPriceMaxValue ] = useState(initialPriceMax);
 
   const handleMinPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -33,16 +26,14 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
 
     if (priceMaxParam && Number(inputMinValue) > Number(priceMaxParam)) {
       setPriceMinValue(priceMaxParam);
-      //dispatch(setMinPriceValue(Number(priceMaxParam)));
-      searchParams.set('price_min', priceMaxParam);
+      searchParams.set(FilterOption.PriceMin, priceMaxParam);
     } else {
-      //dispatch(setMinPriceValue(Number(inputMinValue)));
       setPriceMinValue(inputMinValue);
-      searchParams.set('price_min', inputMinValue);
+      searchParams.set(FilterOption.PriceMin, inputMinValue);
     }
 
     if (!evt.target.value) {
-      searchParams.delete('price_min');
+      searchParams.delete(FilterOption.PriceMin);
       setPriceMinValue('');
     }
     setSearchParams(searchParams);
@@ -50,26 +41,14 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
 
   const handleMinPriceBlur = (evt: ChangeEvent<HTMLInputElement>) => {
     const inputMinValue = evt.target.value;
-    //searchParams.set('price_min', inputMinValue);
     if (minPrice && Number(inputMinValue) < minPrice) {
       setPriceMinValue(minPrice.toString());
-      //dispatch(setMinPriceValue(minPrice));
-      searchParams.set('price_min', minPrice.toString());
+      searchParams.set(FilterOption.PriceMin, minPrice.toString());
     }
-    /*if (priceMaxParam && Number(inputMinValue) > Number(priceMaxParam)) {
-      setPriceMinValue(priceMaxParam);
-      searchParams.set('price_min', priceMaxParam);
-    }*/
-    /*if (priceMaxValue && Number(inputMinValue) > Number(priceMaxValue)) {
-      //dispatch(setMinPriceValue(Number(priceMaxValue)));
-      searchParams.set('price_min', priceMaxValue);
-      setPriceMinValue(priceMaxValue);
-    }*/
 
     if (!evt.target.value) {
-      searchParams.delete('price_min');
+      searchParams.delete(FilterOption.PriceMin);
       setPriceMinValue('');
-      // dispatch(setMinPriceValue(undefined));
     }
     setSearchParams(searchParams);
   };
@@ -77,11 +56,10 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
   const handleMaxPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
     searchParams.set('page', '1');
     const inputMaxValue = evt.target.value;
-    //searchParams.set('price_max', inputMaxValue);
     setPriceMaxValue(inputMaxValue);
 
     if (!evt.target.value) {
-      searchParams.delete('price_max');
+      searchParams.delete(FilterOption.PriceMax);
       setPriceMaxValue('');
     }
     setSearchParams(searchParams);
@@ -89,18 +67,18 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
 
   const handleMaxPriceBlur = (evt: ChangeEvent<HTMLInputElement>) => {
     const inputMaxValue = evt.target.value;
-    searchParams.set('price_max', inputMaxValue);
+    searchParams.set(FilterOption.PriceMax, inputMaxValue);
     if (maxPrice && Number(inputMaxValue) > maxPrice) {
       setPriceMaxValue(maxPrice.toString());
-      searchParams.set('price_max', maxPrice.toString());
+      searchParams.set(FilterOption.PriceMax, maxPrice.toString());
     }
 
     if (priceMinParam && Number(inputMaxValue) < Number(priceMinParam)) {
       setPriceMaxValue(priceMinParam);
-      searchParams.set('price_max', priceMinParam);
+      searchParams.set(FilterOption.PriceMax, priceMinParam);
     }
     if (!evt.target.value) {
-      searchParams.delete('price_max');
+      searchParams.delete(FilterOption.PriceMax);
       setPriceMaxValue('');
     }
     setSearchParams(searchParams);
@@ -108,26 +86,26 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
 
   const handlePhotoClick = () => {
     if (category === CategoryName.Photo) {
-      searchParams.delete('category');
+      searchParams.delete(FilterOption.Category);
 
     } else {
       searchParams.set('page', '1');
-      searchParams.set('category', CategoryName.Photo);
+      searchParams.set(FilterOption.Category, CategoryName.Photo);
     }
     setSearchParams(searchParams);
   };
 
   const handleVideoClick = () => {
     if (category === CategoryName.Video) {
-      searchParams.delete('category');
+      searchParams.delete(FilterOption.Category);
 
     } else {
       searchParams.set('page', '1');
-      searchParams.set('category', CategoryName.Video);
+      searchParams.set(FilterOption.Category, CategoryName.Video);
       if (types) {
         const newTypes = types.filter((type) => type !== TypeFilter.Film && type !== TypeFilter.Snapshot);
-        searchParams.delete('type');
-        newTypes.forEach((type) => searchParams.append('type', type));
+        searchParams.delete(FilterOption.Type);
+        newTypes.forEach((type) => searchParams.append(FilterOption.Type, type));
       }
     }
     setSearchParams(searchParams);
@@ -137,12 +115,11 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
 
     if (types.includes(evt.target.value)) {
       const newTypes = types.filter((type) => type !== evt.target.value);
-      searchParams.delete('type');
-      //searchParams.delete('type', evt.target.value);
-      newTypes.forEach((type) => searchParams.append('type', type));
+      searchParams.delete(FilterOption.Type);
+      newTypes.forEach((type) => searchParams.append(FilterOption.Type, type));
     } else {
       searchParams.set('page', '1');
-      searchParams.append('type', evt.target.value);
+      searchParams.append(FilterOption.Type, evt.target.value);
     }
     setSearchParams(searchParams);
   };
@@ -151,11 +128,11 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
 
     if (levels.includes(evt.target.value)) {
       const newLevels = levels.filter((level) => level !== evt.target.value);
-      searchParams.delete('level');
-      newLevels.forEach((level) => searchParams.append('level', level));
+      searchParams.delete(FilterOption.Level);
+      newLevels.forEach((level) => searchParams.append(FilterOption.Level, level));
     } else {
       searchParams.set('page', '1');
-      searchParams.append('level', evt.target.value);
+      searchParams.append(FilterOption.Level, evt.target.value);
     }
     setSearchParams(searchParams);
   };
@@ -164,11 +141,11 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
     setPriceMinValue('');
     setPriceMaxValue('');
     searchParams.set('page', '1');
-    searchParams.delete('category');
-    searchParams.delete('type');
-    searchParams.delete('price_min');
-    searchParams.delete('price_max');
-    searchParams.delete('level');
+    searchParams.delete(FilterOption.Category);
+    searchParams.delete(FilterOption.Type);
+    searchParams.delete(FilterOption.PriceMin);
+    searchParams.delete(FilterOption.PriceMax);
+    searchParams.delete(FilterOption.Level);
     setSearchParams(searchParams);
   };
 

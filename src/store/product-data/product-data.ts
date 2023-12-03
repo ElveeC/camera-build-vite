@@ -10,28 +10,13 @@ const initialState: ProductDataType = {
   product: null,
   isProductLoading: false,
   selectedProduct: null,
-  isPopularChecked: false,
-  isPriceChecked: false,
-  isMinToMax: false,
-  isMaxToMin: false,
-  isPhotoChecked: false,
-  isVideoChecked: false,
   hasError: false,
-  //currentPageNumber: 1
-  //minPriceValue: undefined
 };
 
 export const productData = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {
-    /*setCurrentPageNumber: (state, action: PayloadAction<number>) => {
-      state.currentPageNumber = action.payload;
-    },*/
-
-    /*setMinPriceValue: (state, action: PayloadAction<number | undefined>) => {
-      state.minPriceValue = action.payload;
-    },*/
 
     setSelectedProduct: (state, action: PayloadAction<ProductType>) => {
       state.selectedProduct = action.payload;
@@ -39,31 +24,7 @@ export const productData = createSlice({
 
     resetSelectedProduct: (state) => {
       state.selectedProduct = null;
-    },
-
-    setSortByPriceStatus: (state, action:PayloadAction<boolean>) => {
-      state.isPriceChecked = action.payload;
-    },
-
-    setSortByPopularityStatus: (state, action:PayloadAction<boolean>) => {
-      state.isPopularChecked = action.payload;
-    },
-
-    setMinToMaxSortStatus: (state, action:PayloadAction<boolean>) => {
-      state.isMinToMax = action.payload;
-    },
-
-    setMaxToMinSortStatus: (state, action:PayloadAction<boolean>) => {
-      state.isMaxToMin = action.payload;
-    },
-
-    setPhotoCheckedStatus: (state, action:PayloadAction<boolean>) => {
-      state.isPhotoChecked = action.payload;
-    },
-
-    setVideoCheckedStatus: (state, action:PayloadAction<boolean>) => {
-      state.isVideoChecked = action.payload;
-    },
+    }
   },
 
   extraReducers(builder) {
@@ -95,4 +56,4 @@ export const productData = createSlice({
   }
 });
 
-export const { /*setCurrentPageNumber,*/ /*setMinPriceValue,*/ setSelectedProduct, resetSelectedProduct, setSortByPriceStatus, setSortByPopularityStatus, setMaxToMinSortStatus, setMinToMaxSortStatus, setPhotoCheckedStatus, setVideoCheckedStatus } = productData.actions;
+export const { setSelectedProduct, resetSelectedProduct } = productData.actions;

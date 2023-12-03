@@ -33,12 +33,6 @@ describe('Component: AddItemModal', () => {
         isProductLoading: false,
         hasError: false,
         selectedProduct: mockSelectedProduct,
-        isPopularChecked: false,
-        isPriceChecked: false,
-        isMinToMax: false,
-        isMaxToMin: false,
-        isPhotoChecked: false,
-        isVideoChecked: false,
       },
     });
     const preparedComponent = withHistory(withStoreComponent);

@@ -1,4 +1,3 @@
-//import { useParams } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
@@ -14,15 +13,13 @@ import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
 import { NothingFoundMessage } from '../../components/nothing-found-message/nothing-found-message';
 
 import { LoadingPage } from '../loading-page/loading-page';
-//import { NotFoundPage } from '../not-found-page/not-found-page';
 
 import { useAppSelector } from '../../hooks';
-import { getProducts, getProductsLoadingStatus, getSortByPopularityStatus, getSortByPriceStatus, getMinToMaxSortStatus,/*, getPhotoCheckedStatus, getVideoCheckedStatus*/
-  /*getMinPriceValue*/} from '../../store/product-data/product-data.selectors';
+import { getProducts, getProductsLoadingStatus } from '../../store/product-data/product-data.selectors';
 import { getPromoLoadingStatus } from '../../store/promo-data/promo-data.selectors';
 
 
-import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX, CategoryFilter, CategoryName } from '../../const';
+import { CARDS_PER_PAGE_NUMBER, AppRoute, PAGE_RADIX, CategoryFilter, CategoryName, FilterOption, SortOption, SortType, SortOrder } from '../../const';
 import { sortByPriceMaxtoMin, sortByPriceMintoMax, sortLessPopularFirst, sortMostPopularFirst } from '../../utils';
 
 
@@ -30,23 +27,22 @@ function Catalog () {
 
   const[searchParams] = useSearchParams();
   const page = searchParams.get('page');
-  const category = searchParams.get('category');
-  const types = searchParams.getAll('type');
-  const levels = searchParams.getAll('level');
-  const priceMinParam = searchParams.get('price_min');
-  //const minPriceValue = useAppSelector(getMinPriceValue);
-  const priceMaxParam = searchParams.get('price_max');
+  const category = searchParams.get(FilterOption.Category);
+  const types = searchParams.getAll(FilterOption.Type);
+  const levels = searchParams.getAll(FilterOption.Level);
+  const priceMinParam = searchParams.get(FilterOption.PriceMin);
+  const priceMaxParam = searchParams.get(FilterOption.PriceMax);
+  const order = searchParams.get(SortType.Order);
+  const sort = searchParams.get(SortType.Sort);
 
   const currentPage = page ? parseInt(page, PAGE_RADIX) : 1;
 
   const products = useAppSelector(getProducts);
   const areProductsLoading = useAppSelector(getProductsLoadingStatus);
   const arePromoProductsLoading = useAppSelector(getPromoLoadingStatus);
-  const isPriceChecked = useAppSelector(getSortByPriceStatus);
-  const isPopularChecked = useAppSelector(getSortByPopularityStatus);
-  const isMinToMax = useAppSelector(getMinToMaxSortStatus);
-  //const isPhotoChecked = useAppSelector(getPhotoCheckedStatus);
-  //const isVideoChecked = useAppSelector(getVideoCheckedStatus);
+  const isPriceChecked = sort === SortOption.Price;
+  const isPopularChecked = sort === SortOption.Popular;
+  const isMinToMax = order === SortOrder.MinToMax;
 
   if (areProductsLoading || arePromoProductsLoading) {
     return (
@@ -65,6 +61,7 @@ function Catalog () {
         sortedProducts = sortByPriceMaxtoMin(sortedProducts);
     }
   }
+
 
   if (isPopularChecked) {
     switch (isMinToMax) {
@@ -99,10 +96,6 @@ function Catalog () {
     filteredProducts = filteredProducts.filter((product) => product.price <= Number(priceMaxParam));
   }
 
-  /*if (minPriceValue) {
-    filteredProducts = filteredProducts.filter((product) => product.price >= minPriceValue);
-  }*/
-
   if (priceMinParam) {
     filteredProducts = filteredProducts.filter((product) => product.price >= Number(priceMinParam));
   }
@@ -116,11 +109,6 @@ function Catalog () {
 
   const pageCount = Math.ceil(filteredProducts.length / CARDS_PER_PAGE_NUMBER);
 
-  /*if (currentPage > pageCount) {
-    return (
-      <NotFoundPage />
-    );
-  }*/
 
   return (
     <div className="wrapper">

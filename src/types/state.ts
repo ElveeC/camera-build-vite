@@ -9,15 +9,7 @@ export type ProductDataType = {
   product: ProductType | null;
   isProductLoading: boolean;
   selectedProduct: ProductType | null;
-  isPopularChecked: boolean;
-  isPriceChecked: boolean;
-  isMinToMax: boolean;
-  isMaxToMin: boolean;
-  isPhotoChecked: boolean;
-  isVideoChecked: boolean;
   hasError: boolean;
-  //currentPageNumber: number;
-  //minPriceValue: number | undefined;
 }
 
 export type PromoDataType = {
