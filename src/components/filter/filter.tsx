@@ -21,7 +21,11 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
   const [ priceMaxValue, setPriceMaxValue ] = useState(initialPriceMax);
 
   const handleMinPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const inputMinValue = evt.target.value;
+    let inputMinValue = evt.target.value;
+
+    if (Number(inputMinValue) < 0) {
+      inputMinValue = (0 - (Number(inputMinValue))).toString();
+    }
     searchParams.set('page', '1');
 
     if (priceMaxParam && Number(inputMinValue) > Number(priceMaxParam)) {
@@ -54,8 +58,11 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
   };
 
   const handleMaxPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    let inputMaxValue = evt.target.value;
+    if (Number(inputMaxValue) < 0) {
+      inputMaxValue = (0 - (Number(inputMaxValue))).toString();
+    }
     searchParams.set('page', '1');
-    const inputMaxValue = evt.target.value;
     setPriceMaxValue(inputMaxValue);
 
     if (!evt.target.value) {
