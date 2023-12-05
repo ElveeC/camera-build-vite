@@ -4,9 +4,8 @@ import FocusLock from 'react-focus-lock';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
-import { getReviewPostingStatus } from '../../store/reviews-data/reviews-data.selectors';
+import { getReviewPostingStatus, getAddReviewActiveStatus } from '../../store/reviews-data/reviews-data.selectors';
 import { setAddReviewActive } from '../../store/reviews-data/reviews-data';
-import { getAddReviewActiveStatus } from '../../store/reviews-data/reviews-data.selectors';
 import { Status } from '../../const';
 
 
