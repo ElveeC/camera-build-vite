@@ -36,7 +36,7 @@ function ProductPage () {
     let isMounted = true;
 
     if (isMounted) {
-      if (currentProduct.id || reviewPostingStatus === Status.Success) {
+      if (currentProduct.id || currentProduct.id && reviewPostingStatus === Status.Success) {
         dispatch(fetchProductAction(Number(currentProduct.id)));
       }
     }
