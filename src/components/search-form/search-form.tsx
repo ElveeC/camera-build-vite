@@ -70,22 +70,22 @@ function SearchForm () {
   }, [focusedProductIndex]);
 
   return (
-    <FocusLock ref={focusRef} returnFocus disabled={!results.length || !searchText}>
-      <div className={cn(
-        'form-search',
-        {'list-opened': results.length && searchText.length >= MIN_SEARCH_SYMBOLS_COUNT}
-      )}
-      >
-        <form data-testid="searchFormElement" onKeyDown={handleKeyDown}>
-          <label>
-            <svg className="form-search__icon" width="16" height="16" aria-hidden="true">
-              <use xlinkHref="#icon-lens"></use>
-            </svg>
-            <input className="form-search__input" ref={searchRef} onChange={handleSearchInput} type="text" autoComplete="off" placeholder="Поиск по сайту" />
-          </label>
-          {
-            results.length !== 0 &&
-
+    <div className={cn(
+      'form-search',
+      {'list-opened': results.length && searchText.length >= MIN_SEARCH_SYMBOLS_COUNT}
+    )}
+    >
+      <FocusLock ref={focusRef} returnFocus disabled={!results.length || !searchText}>
+        <>
+          <form data-testid="searchFormElement" onKeyDown={handleKeyDown}>
+            <label>
+              <svg className="form-search__icon" width="16" height="16" aria-hidden="true">
+                <use xlinkHref="#icon-lens"></use>
+              </svg>
+              <input className="form-search__input" ref={searchRef} onChange={handleSearchInput} type="text" autoComplete="off" placeholder="Поиск по сайту" />
+            </label>
+            {
+              results.length !== 0 &&
             <ul className="form-search__select-list scroller">
               {results.map((result, index) => (
                 <li
@@ -100,16 +100,16 @@ function SearchForm () {
                   {result.name}
                 </li>))}
             </ul>
-          }
-        </form>
-
-        <button className="form-search__reset" type="reset" onClick={handleResetButtonClick}>
-          <svg width="10" height="10" aria-hidden="true">
-            <use xlinkHref="#icon-close"></use>
-          </svg><span className="visually-hidden">Сбросить поиск</span>
-        </button>
-      </div>
-    </FocusLock>
+            }
+          </form>
+          <button className="form-search__reset" type="reset" onClick={handleResetButtonClick}>
+            <svg width="10" height="10" aria-hidden="true">
+              <use xlinkHref="#icon-close"></use>
+            </svg><span className="visually-hidden">Сбросить поиск</span>
+          </button>
+        </>
+      </FocusLock>
+    </div>
   );
 }
 
