@@ -105,7 +105,7 @@ function Catalog () {
 
   const pageCount = Math.ceil(filteredProducts.length / CARDS_PER_PAGE_NUMBER);
 
-  const shoudNothingFoundMessageBeRendered = priceMinParam && priceMaxParam && Number(priceMinParam) <= Number(priceMaxParam) || !priceMinParam && !priceMaxParam;
+  const shoudNothingFoundMessageBeRendered = priceMinParam && priceMaxParam && Number(priceMinParam) <= Number(priceMaxParam) || !priceMinParam && priceMaxParam;
 
   return (
     <div className="wrapper">
