@@ -72,7 +72,7 @@ function SearchForm () {
   return (
     <div className={cn(
       'form-search',
-      {'list-opened': results.length && searchText.length >= MIN_SEARCH_SYMBOLS_COUNT}
+      {'list-opened': searchText.length }
     )}
     >
       <FocusLock ref={focusRef} returnFocus disabled={!results.length || !searchText}>
@@ -85,7 +85,7 @@ function SearchForm () {
               <input className="form-search__input" ref={searchRef} onChange={handleSearchInput} type="text" autoComplete="off" placeholder="Поиск по сайту" />
             </label>
             {
-              results.length !== 0 &&
+              results.length !== 0 && searchText.length >= MIN_SEARCH_SYMBOLS_COUNT &&
             <ul className="form-search__select-list scroller">
               {results.map((result, index) => (
                 <li
@@ -105,7 +105,8 @@ function SearchForm () {
           <button className="form-search__reset" type="reset" onClick={handleResetButtonClick}>
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>
-            </svg><span className="visually-hidden">Сбросить поиск</span>
+            </svg>
+            <span className="visually-hidden">Сбросить поиск</span>
           </button>
         </>
       </FocusLock>
