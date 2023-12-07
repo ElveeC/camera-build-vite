@@ -64,6 +64,7 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
     }
     searchParams.set('page', '1');
     setPriceMaxValue(inputMaxValue);
+    searchParams.set(FilterOption.PriceMax, inputMaxValue);
 
     if (!evt.target.value) {
       searchParams.delete(FilterOption.PriceMax);
