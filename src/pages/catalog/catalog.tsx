@@ -96,10 +96,6 @@ function Catalog () {
     filteredProducts = filteredProducts.filter((product) => product.price <= Number(priceMaxParam));
   }
 
-  if (priceMinParam) {
-    filteredProducts = filteredProducts.filter((product) => product.price >= Number(priceMinParam));
-  }
-
   const prices = filteredProducts.map((product) => product.price);
 
   const minPrice = filteredProducts.length ? Math.min(...prices) : null;

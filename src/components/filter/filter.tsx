@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { CategoryName, LevelFilter, TypeFilter, FilterOption } from '../../const';
 
 type FilterProps = {
@@ -57,6 +57,22 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
     setSearchParams(searchParams);
   };
 
+  const handleMinPriceEnter = (evt: KeyboardEvent<HTMLInputElement>) => {
+    if (evt.key === 'Enter') {
+      const inputMinValue = evt.currentTarget.value;
+      if (minPrice && Number(inputMinValue) < minPrice) {
+        setPriceMinValue(minPrice.toString());
+        searchParams.set(FilterOption.PriceMin, minPrice.toString());
+      }
+
+      if (!evt.currentTarget.value) {
+        searchParams.delete(FilterOption.PriceMin);
+        setPriceMinValue('');
+      }
+      setSearchParams(searchParams);
+    }
+  };
+
   const handleMaxPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
     let inputMaxValue = evt.target.value;
     if (Number(inputMaxValue) < 0) {
@@ -90,6 +106,28 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
       setPriceMaxValue('');
     }
     setSearchParams(searchParams);
+  };
+
+  const handleMaxPriceEnter = (evt: KeyboardEvent<HTMLInputElement>) => {
+    if (evt.key === 'Enter') {
+      const inputMaxValue = evt.currentTarget.value;
+      searchParams.set(FilterOption.PriceMax, inputMaxValue);
+      if (maxPrice && Number(inputMaxValue) > maxPrice) {
+        setPriceMaxValue(maxPrice.toString());
+        searchParams.set(FilterOption.PriceMax, maxPrice.toString());
+      }
+
+      if (priceMinParam && Number(inputMaxValue) < Number(priceMinParam)) {
+        setPriceMaxValue(priceMinParam);
+        searchParams.set(FilterOption.PriceMax, priceMinParam);
+      }
+      if (!evt.currentTarget.value) {
+        searchParams.delete(FilterOption.PriceMax);
+        setPriceMaxValue('');
+      }
+      setSearchParams(searchParams);
+    }
+
   };
 
   const handlePhotoClick = () => {
@@ -166,12 +204,12 @@ function Filter ({ minPrice, maxPrice }: FilterProps) {
           <div className="catalog-filter__price-range">
             <div className="custom-input">
               <label>
-                <input type="number" name="price" placeholder={minPrice ? minPrice.toString() : 'от'} onChange={handleMinPriceChange} onBlur={handleMinPriceBlur} value={priceMinValue}/>
+                <input type="number" name="price" placeholder={minPrice ? minPrice.toString() : 'от'} onChange={handleMinPriceChange} onBlur={handleMinPriceBlur} onKeyDown={handleMinPriceEnter} value={priceMinValue}/>
               </label>
             </div>
             <div className="custom-input">
               <label>
-                <input type="number" name="priceUp" placeholder={maxPrice ? maxPrice.toString() : 'до'} onChange={handleMaxPriceChange} onBlur={handleMaxPriceBlur} value={priceMaxValue}/>
+                <input type="number" name="priceUp" placeholder={maxPrice ? maxPrice.toString() : 'до'} onChange={handleMaxPriceChange} onBlur={handleMaxPriceBlur} onKeyDown={handleMaxPriceEnter} value={priceMaxValue}/>
               </label>
             </div>
           </div>
