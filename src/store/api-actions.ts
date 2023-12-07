@@ -4,6 +4,7 @@ import { AppDispatch, State } from '../types/state.js';
 import { ProductType, PromoType } from '../types/product-type.js';
 import { ReviewType, PostingReviewType } from '../types/review-type.js';
 import { APIRoute, NameSpace } from '../const';
+import { toast } from 'react-toastify';
 
 export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
   dispatch: AppDispatch;
@@ -12,8 +13,13 @@ export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
 }>(
   `${NameSpace.Data}/fetchProducts`,
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<ProductType[]>(APIRoute.Products);
-    return data;
+    try {
+      const {data} = await api.get<ProductType[]>(APIRoute.Products);
+      return data;
+    } catch {
+      toast.error('Ошибка загружки. Сервер недоступен');
+      throw new Error;
+    }
   },
 );
 
@@ -36,8 +42,13 @@ export const fetchProductAction = createAsyncThunk<ProductType, number, {
 }>(
   `${NameSpace.Data}/fetchProduct`,
   async (id, {extra: api}) => {
-    const {data} = await api.get<ProductType>(`${APIRoute.Products}/${id}`);
-    return data;
+    try {
+      const {data} = await api.get<ProductType>(`${APIRoute.Products}/${id}`);
+      return data;
+    } catch {
+      toast.error('Ошибка загружки. Сервер недоступен');
+      throw new Error;
+    }
   },
 );
 
@@ -72,7 +83,12 @@ export const addReviewAction = createAsyncThunk<ReviewType, PostingReviewType, {
 }>(
   `${NameSpace.Reviews}/addReview`,
   async ({ cameraId, userName, advantage, disadvantage, review, rating }, {extra: api}) => {
-    const {data} = await api.post<ReviewType>(APIRoute.Reviews, { cameraId, userName, advantage, disadvantage, review, rating });
-    return data;
+    try {
+      const {data} = await api.post<ReviewType>(APIRoute.Reviews, { cameraId, userName, advantage, disadvantage, review, rating });
+      return data;
+    } catch {
+      toast.error('Не удалось отправить отзыв. Сервер недоступен');
+      throw new Error;
+    }
   }
 );
