@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { Header } from './header';
-import { withHistory } from '../../mocks/mock-component';
+import { withStore, withHistory } from '../../mocks/mock-component';
+import { makeFakeProducts } from '../../mocks/mocks';
 
 describe('Component: Header', () => {
+  const products = makeFakeProducts();
 
   it('should render correctly', () => {
     const expectedCatalogText = 'Каталог';
@@ -12,8 +14,19 @@ describe('Component: Header', () => {
     const searchFormElement = 'searchFormElement';
     const expectedSearchPlaceholderText = 'Поиск по сайту';
 
-    const preparedComponent = withHistory(<Header />);
+    const {withStoreComponent} = withStore(
+      <Header />, {
+        DATA: {
+          products: products,
+          areProductsLoading: false,
+          product: null,
+          isProductLoading: false,
+          hasError: false,
+          selectedProduct: null,
+        },
+      });
 
+    const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
 
     expect(screen.getByText(expectedCatalogText)).toBeInTheDocument();

@@ -32,7 +32,7 @@ describe('Component: Filter', () => {
     const nonProfessionalElement = 'nonProfessionalElement';
     const professionalElement = 'professionalElement';
 
-    const { withStoreComponent } = withStore(<Filter minPrice={null} maxPrice={null}/>, {});
+    const { withStoreComponent } = withStore(<Filter minPriceAfterFiltering={null} maxPriceAfterFiltering={null}/>, {});
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
@@ -69,7 +69,7 @@ describe('Component: Filter', () => {
   it('should render correctly with checked price filter values', () => {
     const expectedFromPlaceholderText = '5000';
     const expectedToPlaceholderText = '10000';
-    const { withStoreComponent } = withStore(<Filter minPrice={5000} maxPrice={10000}/>, {});
+    const { withStoreComponent } = withStore(<Filter minPriceAfterFiltering={5000} maxPriceAfterFiltering={10000}/>, {});
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
