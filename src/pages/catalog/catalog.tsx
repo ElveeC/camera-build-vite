@@ -92,6 +92,11 @@ function Catalog () {
     filteredProducts = filteredProducts.filter((product) => levels.includes(product.level));
   }
 
+  const pricesAfterFiltering = filteredProducts.map((product) => product.price);
+
+  const minPriceAfterFiltering = filteredProducts.length ? Math.min(...pricesAfterFiltering) : null;
+  const maxPriceAfterFiltering = filteredProducts.length ? Math.max(...pricesAfterFiltering) : null;
+
   if (priceMaxParam) {
     filteredProducts = filteredProducts.filter((product) => product.price <= Number(priceMaxParam));
   }
@@ -99,10 +104,6 @@ function Catalog () {
     filteredProducts = filteredProducts.filter((product) => product.price >= Number(priceMinParam));
   }
 
-  const prices = filteredProducts.map((product) => product.price);
-
-  const minPrice = filteredProducts.length ? Math.min(...prices) : null;
-  const maxPrice = filteredProducts.length ? Math.max(...prices) : null;
 
   const productsToShow = filteredProducts.slice((currentPage - 1) * CARDS_PER_PAGE_NUMBER, currentPage * CARDS_PER_PAGE_NUMBER);
 
@@ -125,7 +126,7 @@ function Catalog () {
               <h1 className="title title--h2">Каталог фото- и видеотехники</h1>
               <div className="page-content__columns">
                 <div className="catalog__aside">
-                  <Filter minPrice={minPrice} maxPrice={maxPrice}/>
+                  <Filter minPriceAfterFiltering={minPriceAfterFiltering} maxPriceAfterFiltering={maxPriceAfterFiltering}/>
                 </div>
                 <div className="catalog__content">
                   <Sorting />
