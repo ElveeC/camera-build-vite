@@ -36,7 +36,9 @@ describe('Application Routing', () => {
         product: products[0],
         isProductLoading: false,
         selectedProduct: null,
+        selectedProducts: [],
         hasError: false,
+        isAddItemSuccessModalActive: false
       },
       SIMILAR: {
         similarProducts: [],

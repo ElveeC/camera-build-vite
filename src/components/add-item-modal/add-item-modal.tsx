@@ -2,7 +2,7 @@ import { useRef, useEffect, useCallback } from 'react';
 import FocusLock from 'react-focus-lock';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getSelectedProduct } from '../../store/product-data/product-data.selectors';
-import { resetSelectedProduct } from '../../store/product-data/product-data';
+import { resetSelectedProduct, addProductToBasket, setAddItemSuccessModalStatus } from '../../store/product-data/product-data';
 
 function AddItemModal () {
 
@@ -64,6 +64,12 @@ function AddItemModal () {
     price
   } = selectedProduct;
 
+  const handleAddToBasketClick = () => {
+    dispatch(addProductToBasket(selectedProduct));
+    dispatch(setAddItemSuccessModalStatus(true));
+    dispatch(resetSelectedProduct());
+  };
+
 
   return (
     <div className="modal is-active">
@@ -93,7 +99,13 @@ function AddItemModal () {
               </div>
             </div>
             <div className="modal__buttons">
-              <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button" data-testid="basketButtonElement" data-autofocus>
+              <button
+                className="btn btn--purple modal__btn modal__btn--fit-width"
+                type="button"
+                onClick={handleAddToBasketClick}
+                data-testid="basketButtonElement"
+                data-autofocus
+              >
                 <svg width="24" height="16" aria-hidden="true">
                   <use xlinkHref="#icon-add-basket"></use>
                 </svg>Добавить в корзину

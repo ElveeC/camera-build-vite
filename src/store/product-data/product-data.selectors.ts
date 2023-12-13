@@ -10,3 +10,6 @@ export const getProduct = (state: State): ProductType | null => state[NameSpace.
 export const getProductLoadingStatus = (state: State): boolean => state[NameSpace.Data].isProductLoading;
 
 export const getSelectedProduct = (state: State): ProductType | null =>state[NameSpace.Data].selectedProduct;
+export const getSelectedProducts = (state: State): ProductType[] => state[NameSpace.Data].selectedProducts;
+
+export const getAddItemSuccessModalStatus = (state: State): boolean => state[NameSpace.Data].isAddItemSuccessModalActive;

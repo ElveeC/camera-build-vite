@@ -9,7 +9,9 @@ export type ProductDataType = {
   product: ProductType | null;
   isProductLoading: boolean;
   selectedProduct: ProductType | null;
+  selectedProducts: ProductType[];
   hasError: boolean;
+  isAddItemSuccessModalActive: boolean;
 }
 
 export type PromoDataType = {

@@ -75,7 +75,9 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
     product: null,
     isProductLoading: false,
     selectedProduct: null,
+    selectedProducts: [],
     hasError: false,
+    isAddItemSuccessModalActive: false
   },
   PROMO: {
     promoProducts: [],

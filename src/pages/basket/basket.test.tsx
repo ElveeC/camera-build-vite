@@ -16,8 +16,10 @@ describe('Component: Basket', () => {
           areProductsLoading: false,
           product: null,
           isProductLoading: false,
-          hasError: false,
           selectedProduct: null,
+          selectedProducts: [],
+          hasError: false,
+          isAddItemSuccessModalActive: false
         },
       });
 

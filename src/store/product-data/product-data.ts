@@ -10,7 +10,9 @@ const initialState: ProductDataType = {
   product: null,
   isProductLoading: false,
   selectedProduct: null,
+  selectedProducts: [],
   hasError: false,
+  isAddItemSuccessModalActive: false
 };
 
 export const productData = createSlice({
@@ -24,8 +26,17 @@ export const productData = createSlice({
 
     resetSelectedProduct: (state) => {
       state.selectedProduct = null;
+    },
+
+    addProductToBasket: (state, action: PayloadAction<ProductType>) => {
+      state.selectedProducts.push(action.payload);
+    },
+
+    setAddItemSuccessModalStatus: (state, action: PayloadAction<boolean>) => {
+      state.isAddItemSuccessModalActive = action.payload;
     }
   },
+
 
   extraReducers(builder) {
     builder
@@ -56,4 +67,4 @@ export const productData = createSlice({
   }
 });
 
-export const { setSelectedProduct, resetSelectedProduct } = productData.actions;
+export const { setSelectedProduct, resetSelectedProduct, addProductToBasket, setAddItemSuccessModalStatus } = productData.actions;

@@ -11,6 +11,7 @@ import { Reviews } from '../../components/reviews/reviews';
 import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
 import { AddReviewModal } from '../../components/add-review-modal/add-review-modal';
 import { ReviewSuccessModal } from '../../components/review-success-modal/review-success-modal';
+import { AddItemSuccessModal } from '../../components/add-item-success-modal/add-item-success-modal';
 import { Rating } from '../../components/rating/rating';
 
 import { LoadingPage } from '../loading-page/loading-page';
@@ -18,17 +19,19 @@ import { NotFoundPage } from '../not-found-page/not-found-page';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchProductAction } from '../../store/api-actions';
-import { getProduct, getProductLoadingStatus } from '../../store/product-data/product-data.selectors';
+import { setSelectedProduct } from '../../store/product-data/product-data';
+import { getProduct, getProductLoadingStatus/*, getSelectedProduct*/ } from '../../store/product-data/product-data.selectors';
 import { getAddReviewActiveStatus, getReviewPostingStatus } from '../../store/reviews-data/reviews-data.selectors';
 
 import { AppRoute, Status } from '../../const';
 
 function ProductPage () {
   const currentProduct = useParams();
-  const selectedProduct = useAppSelector(getProduct);
+  const detailedProduct = useAppSelector(getProduct);
   const isProductLoading = useAppSelector(getProductLoadingStatus);
   const isAddReviewModalActive = useAppSelector(getAddReviewActiveStatus);
   const reviewPostingStatus = useAppSelector(getReviewPostingStatus);
+  //const selectedProduct = useAppSelector(getSelectedProduct);
 
   const dispatch = useAppDispatch();
 
@@ -51,7 +54,7 @@ function ProductPage () {
     );
   }
 
-  if (!selectedProduct) {
+  if (!detailedProduct) {
     return <NotFoundPage />;
   }
 
@@ -65,13 +68,17 @@ function ProductPage () {
     rating,
     reviewCount,
     price,
-  } = selectedProduct;
+  } = detailedProduct;
 
   const handleUpButtonClick = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const handleBuyButtonClick = () => {
+    dispatch(setSelectedProduct(detailedProduct));
   };
 
   return (
@@ -101,12 +108,12 @@ function ProductPage () {
                   </div>
 
                   <p className="product__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
-                  <button className="btn btn--purple" type="button">
+                  <button className="btn btn--purple" type="button" onClick={handleBuyButtonClick}>
                     <svg width="24" height="16" aria-hidden="true">
                       <use xlinkHref="#icon-add-basket"></use>
                     </svg>Добавить в корзину
                   </button>
-                  <ProductTabs product={selectedProduct} />
+                  <ProductTabs product={detailedProduct} />
                 </div>
               </div>
             </section>
@@ -121,6 +128,7 @@ function ProductPage () {
         { isAddReviewModalActive && <AddReviewModal cameraId={id}/>}
         <ReviewSuccessModal/>
         <AddItemModal />
+        <AddItemSuccessModal />
       </main>
       <Link className="up-btn" to="#header" onClick={handleUpButtonClick}>
         <svg width="12" height="18" aria-hidden="true">

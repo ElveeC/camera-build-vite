@@ -9,7 +9,9 @@ describe('ProductData Slice', () => {
     product: null,
     isProductLoading: false,
     selectedProduct: null,
+    selectedProducts: [],
     hasError: false,
+    isAddItemSuccessModalActive: false
   };
   describe('fetchProductsAction', () => {
     it('should return the initial state with an empty action', () => {
