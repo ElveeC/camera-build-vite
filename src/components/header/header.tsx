@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
 import { Logo } from '../logo/logo';
 import { SearchForm } from '../search-form/search-form';
+import { useAppSelector } from '../../hooks';
+import { getSelectedProducts } from '../../store/product-data/product-data.selectors';
 
 import { AppRoute } from '../../const';
 
 function Header () {
+
+  const selectedProducts = useAppSelector(getSelectedProducts);
+
   return (
     <header className="header" id="header">
       <div className="container">
@@ -30,6 +35,8 @@ function Header () {
           <svg width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg>
+          {selectedProducts.length > 0 &&
+          <span className="header__basket-count">{selectedProducts.length}</span>}
         </Link>
       </div>
     </header>
