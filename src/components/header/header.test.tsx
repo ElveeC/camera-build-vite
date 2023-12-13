@@ -23,6 +23,8 @@ describe('Component: Header', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          selectedProducts: [],
+          isAddItemSuccessModalActive: false
         },
       });
 

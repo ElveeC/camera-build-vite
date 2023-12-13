@@ -22,6 +22,8 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          selectedProducts: [],
+          isAddItemSuccessModalActive: false
         },
       });
 
@@ -48,6 +50,8 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          selectedProducts: [],
+          isAddItemSuccessModalActive: false
         },
       });
 
@@ -73,6 +77,8 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          selectedProducts: [],
+          isAddItemSuccessModalActive: false
         },
       });
 
@@ -99,6 +105,8 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          selectedProducts: [],
+          isAddItemSuccessModalActive: false
         },
       });
 
@@ -125,6 +133,8 @@ describe('Component: Pagination', () => {
           isProductLoading: false,
           hasError: false,
           selectedProduct: null,
+          selectedProducts: [],
+          isAddItemSuccessModalActive: false
         },
       });
 

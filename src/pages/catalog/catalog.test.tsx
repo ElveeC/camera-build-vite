@@ -16,6 +16,8 @@ describe('Component: Catalog', () => {
         isProductLoading: false,
         selectedProduct: null,
         hasError: false,
+        selectedProducts: [],
+        isAddItemSuccessModalActive: false
       },
       PROMO: {
         promoProducts: mockPromoProducts,

@@ -24,6 +24,8 @@ describe('Component: ProductPage', () => {
         isProductLoading: false,
         selectedProduct: null,
         hasError: false,
+        selectedProducts: [],
+        isAddItemSuccessModalActive: false
       },
       PROMO: {
         promoProducts: [],

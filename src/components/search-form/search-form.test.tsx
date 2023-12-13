@@ -17,6 +17,8 @@ describe('Component: SearchForm', () => {
         isProductLoading: false,
         selectedProduct: null,
         hasError: false,
+        selectedProducts: [],
+        isAddItemSuccessModalActive: false
       }
     });
     const preparedComponent = withHistory(withStoreComponent);

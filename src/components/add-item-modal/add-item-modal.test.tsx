@@ -33,6 +33,8 @@ describe('Component: AddItemModal', () => {
         isProductLoading: false,
         hasError: false,
         selectedProduct: mockSelectedProduct,
+        selectedProducts: [],
+        isAddItemSuccessModalActive: false
       },
     });
     const preparedComponent = withHistory(withStoreComponent);
