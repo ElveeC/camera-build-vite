@@ -19,11 +19,21 @@ describe('Component: ProductCard', () => {
     const expectedReviewCount = `${reviewCount}`;
     const expectedPriceText = 'Цена:';
     const expectedPrice = `${price} ₽`;
-    const expectedBuyText = 'Купить';
     const expectedDetailsText = 'Подробнее';
 
     const {withStoreComponent} = withStore(
-      <ProductCard product={product} isSimilar={false}/>, {});
+      <ProductCard product={product} isSimilar={false}/>, {
+        DATA: {
+          products: [],
+          areProductsLoading: false,
+          product: product,
+          isProductLoading: false,
+          hasError: false,
+          selectedProduct: null,
+          selectedProducts: [],
+          isAddItemSuccessModalActive: false
+        },
+      });
 
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
@@ -33,7 +43,6 @@ describe('Component: ProductCard', () => {
     expect(screen.getByText(expectedReviewCount)).toBeInTheDocument();
     expect(screen.getByText(expectedPriceText)).toBeInTheDocument();
     expect(screen.getByText(expectedPrice)).toBeInTheDocument();
-    expect(screen.getByText(expectedBuyText)).toBeInTheDocument();
     expect(screen.getByText(expectedDetailsText)).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
@@ -50,11 +59,21 @@ describe('Component: ProductCard', () => {
     const expectedReviewCount = `${reviewCount}`;
     const expectedPriceText = 'Цена:';
     const expectedPrice = `${price} ₽`;
-    const expectedBuyText = 'Купить';
     const expectedDetailsText = 'Подробнее';
 
     const {withStoreComponent} = withStore(
-      <ProductCard product={product} isSimilar/>, {});
+      <ProductCard product={product} isSimilar/>, {
+        DATA: {
+          products: [],
+          areProductsLoading: false,
+          product: product,
+          isProductLoading: false,
+          hasError: false,
+          selectedProduct: null,
+          selectedProducts: [],
+          isAddItemSuccessModalActive: false
+        },
+      });
 
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
@@ -64,7 +83,6 @@ describe('Component: ProductCard', () => {
     expect(screen.getByText(expectedReviewCount)).toBeInTheDocument();
     expect(screen.getByText(expectedPriceText)).toBeInTheDocument();
     expect(screen.getByText(expectedPrice)).toBeInTheDocument();
-    expect(screen.getByText(expectedBuyText)).toBeInTheDocument();
     expect(screen.getByText(expectedDetailsText)).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
   });

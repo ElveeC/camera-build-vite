@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { SimilarProductsSlider } from './similar-products-slider';
 import { withStore, withHistory } from '../../mocks/mock-component';
-import { makeFakeSimilarProducts } from '../../mocks/mocks';
+import { makeFakeSimilarProducts, makeFakeProducts } from '../../mocks/mocks';
 
 describe('Component: SimilarProductsSlider', () => {
   const mockSimilarProducts = makeFakeSimilarProducts();
+  const products = makeFakeProducts();
 
   it('should render correctly', () => {
 
@@ -14,6 +15,16 @@ describe('Component: SimilarProductsSlider', () => {
     const expectedNextSlideLabelText = 'Следующий слайд';
 
     const { withStoreComponent } = withStore(<SimilarProductsSlider id={1}/>, {
+      DATA: {
+        products: products,
+        areProductsLoading: false,
+        product: null,
+        isProductLoading: false,
+        hasError: false,
+        selectedProduct: null,
+        selectedProducts: [],
+        isAddItemSuccessModalActive: false
+      },
       SIMILAR: {
         similarProducts: mockSimilarProducts,
         areSimilarProductsLoading: false
@@ -34,6 +45,16 @@ describe('Component: SimilarProductsSlider', () => {
     const notExpectedSimilarElementByTestId = 'similarElement';
 
     const { withStoreComponent } = withStore(<SimilarProductsSlider id={1}/>, {
+      DATA: {
+        products: products,
+        areProductsLoading: false,
+        product: null,
+        isProductLoading: false,
+        hasError: false,
+        selectedProduct: null,
+        selectedProducts: [],
+        isAddItemSuccessModalActive: false
+      },
       SIMILAR: {
         similarProducts: [],
         areSimilarProductsLoading: false
@@ -51,6 +72,16 @@ describe('Component: SimilarProductsSlider', () => {
     const notExpectedSimilarElementByTestId = 'similarElement';
 
     const { withStoreComponent } = withStore(<SimilarProductsSlider id={1}/>, {
+      DATA: {
+        products: products,
+        areProductsLoading: false,
+        product: null,
+        isProductLoading: false,
+        hasError: false,
+        selectedProduct: null,
+        selectedProducts: [],
+        isAddItemSuccessModalActive: false
+      },
       SIMILAR: {
         similarProducts: mockSimilarProducts,
         areSimilarProductsLoading: true

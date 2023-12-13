@@ -6,6 +6,7 @@ type ProductListProps = {
 }
 
 function ProductList ({ products }: ProductListProps) {
+
   return (
     <div className="cards catalog__cards" data-testid="productListElement">
       {products.map((product) => (

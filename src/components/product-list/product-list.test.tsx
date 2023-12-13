@@ -12,7 +12,18 @@ describe('Component: ProductList', () => {
     const productListElement = 'productListElement';
 
     const {withStoreComponent} = withStore(
-      <ProductList products={products}/>, {});
+      <ProductList products={products}/>, {
+        DATA: {
+          products: products,
+          areProductsLoading: false,
+          product: null,
+          isProductLoading: false,
+          hasError: false,
+          selectedProduct: null,
+          selectedProducts: [],
+          isAddItemSuccessModalActive: false
+        },
+      });
 
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);

@@ -10,6 +10,7 @@ import { Filter } from '../../components/filter/filter';
 import { Sorting } from '../../components/sorting/sorting';
 import { Pagination } from '../../components/pagination/pagination';
 import { AddItemModal } from '../../components/add-item-modal/add-item-modal';
+import { AddItemSuccessModal } from '../../components/add-item-success-modal/add-item-success-modal';
 import { NothingFoundMessage } from '../../components/nothing-found-message/nothing-found-message';
 
 import { LoadingPage } from '../loading-page/loading-page';
@@ -145,6 +146,7 @@ function Catalog () {
           </section>
         </div>
         <AddItemModal />
+        <AddItemSuccessModal />
       </main>
       <Footer />
     </div>
