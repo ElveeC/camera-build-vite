@@ -20,7 +20,7 @@ import { NotFoundPage } from '../not-found-page/not-found-page';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchProductAction } from '../../store/api-actions';
 import { setSelectedProduct } from '../../store/product-data/product-data';
-import { getProduct, getProductLoadingStatus/*, getSelectedProduct*/ } from '../../store/product-data/product-data.selectors';
+import { getProduct, getProductLoadingStatus } from '../../store/product-data/product-data.selectors';
 import { getAddReviewActiveStatus, getReviewPostingStatus } from '../../store/reviews-data/reviews-data.selectors';
 
 import { AppRoute, Status } from '../../const';
@@ -31,7 +31,6 @@ function ProductPage () {
   const isProductLoading = useAppSelector(getProductLoadingStatus);
   const isAddReviewModalActive = useAppSelector(getAddReviewActiveStatus);
   const reviewPostingStatus = useAppSelector(getReviewPostingStatus);
-  //const selectedProduct = useAppSelector(getSelectedProduct);
 
   const dispatch = useAppDispatch();
 

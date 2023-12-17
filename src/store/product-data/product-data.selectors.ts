@@ -10,6 +10,13 @@ export const getProduct = (state: State): ProductType | null => state[NameSpace.
 export const getProductLoadingStatus = (state: State): boolean => state[NameSpace.Data].isProductLoading;
 
 export const getSelectedProduct = (state: State): ProductType | null =>state[NameSpace.Data].selectedProduct;
+
 export const getSelectedProducts = (state: State): ProductType[] => state[NameSpace.Data].selectedProducts;
 
+export const getUniqueBasketProducts = (state: State): ProductType[] => state[NameSpace.Data].uniqueBasketProducts;
+
 export const getAddItemSuccessModalStatus = (state: State): boolean => state[NameSpace.Data].isAddItemSuccessModalActive;
+
+export const getBasketRemoveModalStatus = (state: State): boolean => state[NameSpace.Data].isBasketRemoveModalActive;
+
+export const getProductToRemove = (state: State): ProductType | null =>state[NameSpace.Data].productToRemove;

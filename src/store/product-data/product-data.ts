@@ -11,8 +11,11 @@ const initialState: ProductDataType = {
   isProductLoading: false,
   selectedProduct: null,
   selectedProducts: [],
+  uniqueBasketProducts: [],
   hasError: false,
-  isAddItemSuccessModalActive: false
+  isAddItemSuccessModalActive: false,
+  isBasketRemoveModalActive: false,
+  productToRemove: null,
 };
 
 export const productData = createSlice({
@@ -32,9 +35,40 @@ export const productData = createSlice({
       state.selectedProducts.push(action.payload);
     },
 
+    addToUniqueBasketList: (state, action: PayloadAction<ProductType>) => {
+      //const selectedIds = selectedProducts.map((selectedProduct) => selectedProduct.id);
+      if (!state.uniqueBasketProducts.length) {
+        state.uniqueBasketProducts.push(action.payload);
+      } else {
+        if (!state.uniqueBasketProducts.find((uniqueProduct) => uniqueProduct.id === action.payload.id)) {
+          state.uniqueBasketProducts.push(action.payload);
+        }
+      }
+    },
+
+    removeProductFromBasket: (state, action: PayloadAction<number>) => {
+      state.selectedProducts = state.selectedProducts.filter((selectedProduct) => selectedProduct.id !== action.payload);
+    },
+
+    removeProductFromUniqueList: (state, action: PayloadAction<number>) => {
+      state.uniqueBasketProducts = state.uniqueBasketProducts.filter((uniqueProduct) => uniqueProduct.id !== action.payload);
+    },
+
     setAddItemSuccessModalStatus: (state, action: PayloadAction<boolean>) => {
       state.isAddItemSuccessModalActive = action.payload;
-    }
+    },
+
+    setBasketRemoveModalStatus: (state, action: PayloadAction<boolean>) => {
+      state.isBasketRemoveModalActive = action.payload;
+    },
+
+    setProductToRemove: (state, action: PayloadAction<ProductType>) => {
+      state.productToRemove = action.payload;
+    },
+
+    resetProductToRemove: (state) => {
+      state.selectedProduct = null;
+    },
   },
 
 
@@ -67,4 +101,4 @@ export const productData = createSlice({
   }
 });
 
-export const { setSelectedProduct, resetSelectedProduct, addProductToBasket, setAddItemSuccessModalStatus } = productData.actions;
+export const { setSelectedProduct, resetSelectedProduct, addProductToBasket, addToUniqueBasketList, removeProductFromBasket, removeProductFromUniqueList, setProductToRemove, resetProductToRemove, setAddItemSuccessModalStatus, setBasketRemoveModalStatus } = productData.actions;

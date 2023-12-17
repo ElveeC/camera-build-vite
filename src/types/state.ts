@@ -10,8 +10,11 @@ export type ProductDataType = {
   isProductLoading: boolean;
   selectedProduct: ProductType | null;
   selectedProducts: ProductType[];
+  uniqueBasketProducts: ProductType[];
   hasError: boolean;
   isAddItemSuccessModalActive: boolean;
+  isBasketRemoveModalActive: boolean;
+  productToRemove: ProductType | null;
 }
 
 export type PromoDataType = {

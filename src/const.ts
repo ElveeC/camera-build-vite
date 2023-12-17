@@ -97,3 +97,8 @@ export enum SortType {
   Sort = 'sort',
   Order = 'order'
 }
+
+export enum ProductQuantity {
+  MinQuantity = 1,
+  MaxQuantity = 99,
+}
