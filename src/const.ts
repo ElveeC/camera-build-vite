@@ -102,3 +102,8 @@ export enum ProductQuantity {
   MinQuantity = 1,
   MaxQuantity = 99,
 }
+
+export enum LocalStorage {
+  SelectedProducts = 'selectedProducts',
+  UniqueBasketProducts = 'uniqueBasketProducts',
+}

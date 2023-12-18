@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { NameSpace, LocalStorage } from '../../const';
 import { fetchProductsAction, fetchProductAction } from '../api-actions';
 import { ProductDataType } from '../../types/state';
 import { ProductType } from '../../types/product-type';
@@ -10,8 +10,8 @@ const initialState: ProductDataType = {
   product: null,
   isProductLoading: false,
   selectedProduct: null,
-  selectedProducts: [],
-  uniqueBasketProducts: [],
+  selectedProducts: JSON.parse(localStorage.getItem(LocalStorage.SelectedProducts) || '[]') as ProductType[],
+  uniqueBasketProducts:JSON.parse(localStorage.getItem(LocalStorage.UniqueBasketProducts) || '[]') as ProductType[],
   hasError: false,
   isAddItemSuccessModalActive: false,
   isBasketRemoveModalActive: false,
@@ -33,25 +33,29 @@ export const productData = createSlice({
 
     addProductToBasket: (state, action: PayloadAction<ProductType>) => {
       state.selectedProducts.push(action.payload);
+      localStorage.setItem(LocalStorage.SelectedProducts, JSON.stringify(state.selectedProducts));
     },
 
     addToUniqueBasketList: (state, action: PayloadAction<ProductType>) => {
-      //const selectedIds = selectedProducts.map((selectedProduct) => selectedProduct.id);
       if (!state.uniqueBasketProducts.length) {
         state.uniqueBasketProducts.push(action.payload);
+
       } else {
         if (!state.uniqueBasketProducts.find((uniqueProduct) => uniqueProduct.id === action.payload.id)) {
           state.uniqueBasketProducts.push(action.payload);
         }
       }
+      localStorage.setItem(LocalStorage.UniqueBasketProducts, JSON.stringify(state.uniqueBasketProducts));
     },
 
     removeProductFromBasket: (state, action: PayloadAction<number>) => {
       state.selectedProducts = state.selectedProducts.filter((selectedProduct) => selectedProduct.id !== action.payload);
+      localStorage.setItem(LocalStorage.SelectedProducts, JSON.stringify(state.selectedProducts));
     },
 
     removeProductFromUniqueList: (state, action: PayloadAction<number>) => {
       state.uniqueBasketProducts = state.uniqueBasketProducts.filter((uniqueProduct) => uniqueProduct.id !== action.payload);
+      localStorage.setItem(LocalStorage.UniqueBasketProducts, JSON.stringify(state.uniqueBasketProducts));
     },
 
     setAddItemSuccessModalStatus: (state, action: PayloadAction<boolean>) => {
