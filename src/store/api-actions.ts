@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { ProductType, PromoType } from '../types/product-type.js';
 import { ReviewType, PostingReviewType } from '../types/review-type.js';
+import { CouponType } from '../types/coupon-type.js';
 import { APIRoute, NameSpace } from '../const';
 import { toast } from 'react-toastify';
 
@@ -88,6 +89,23 @@ export const addReviewAction = createAsyncThunk<ReviewType, PostingReviewType, {
       return data;
     } catch {
       toast.error('Не удалось отправить отзыв. Сервер недоступен');
+      throw new Error;
+    }
+  }
+);
+
+export const sendCouponAction = createAsyncThunk<number, CouponType, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Data}/sendCoupon`,
+  async (coupon, {extra: api}) => {
+    try {
+      const {data} = await api.post<number>(APIRoute.Coupons, coupon);
+      return data;
+    } catch {
+      toast.error('Ошибка при проверке промокода');
       throw new Error;
     }
   }

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace, LocalStorage } from '../../const';
-import { fetchProductsAction, fetchProductAction } from '../api-actions';
+import { NameSpace, LocalStorage, Status } from '../../const';
+import { fetchProductsAction, fetchProductAction, sendCouponAction } from '../api-actions';
 import { ProductDataType } from '../../types/state';
 import { ProductType } from '../../types/product-type';
 
@@ -11,11 +11,15 @@ const initialState: ProductDataType = {
   isProductLoading: false,
   selectedProduct: null,
   selectedProducts: JSON.parse(localStorage.getItem(LocalStorage.SelectedProducts) || '[]') as ProductType[],
-  uniqueBasketProducts:JSON.parse(localStorage.getItem(LocalStorage.UniqueBasketProducts) || '[]') as ProductType[],
+  uniqueBasketProducts: JSON.parse(localStorage.getItem(LocalStorage.UniqueBasketProducts) || '[]') as ProductType[],
   hasError: false,
   isAddItemSuccessModalActive: false,
   isBasketRemoveModalActive: false,
   productToRemove: null,
+  setCouponSendingStatus: Status.Unsent,
+  discount: 0,
+  coupon: '',
+  isCouponValid: false
 };
 
 export const productData = createSlice({
@@ -73,6 +77,14 @@ export const productData = createSlice({
     resetProductToRemove: (state) => {
       state.selectedProduct = null;
     },
+
+    setCoupon: (state, action: PayloadAction<string>) => {
+      state.coupon = action.payload;
+    },
+
+    resetCouponStatus: (state) => {
+      state.setCouponSendingStatus = Status.Unsent;
+    }
   },
 
 
@@ -101,8 +113,23 @@ export const productData = createSlice({
       })
       .addCase(fetchProductAction.rejected, (state) => {
         state.isProductLoading = false;
+      })
+
+      .addCase(sendCouponAction.pending, (state) => {
+        state.setCouponSendingStatus = Status.Pending;
+        state.isCouponValid = false;
+      })
+      .addCase(sendCouponAction.fulfilled, (state, action) => {
+        state.setCouponSendingStatus = Status.Success;
+        state.discount = action.payload;
+        state.isCouponValid = true;
+      })
+      .addCase(sendCouponAction.rejected, (state) => {
+        state.setCouponSendingStatus = Status.Error;
+        state.isCouponValid = false;
+        state.discount = 0;
       });
   }
 });
 
-export const { setSelectedProduct, resetSelectedProduct, addProductToBasket, addToUniqueBasketList, removeProductFromBasket, removeProductFromUniqueList, setProductToRemove, resetProductToRemove, setAddItemSuccessModalStatus, setBasketRemoveModalStatus } = productData.actions;
+export const { setSelectedProduct, resetSelectedProduct, addProductToBasket, addToUniqueBasketList, removeProductFromBasket, removeProductFromUniqueList, setProductToRemove, resetProductToRemove, setAddItemSuccessModalStatus, setBasketRemoveModalStatus, setCoupon, resetCouponStatus } = productData.actions;

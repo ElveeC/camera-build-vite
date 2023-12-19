@@ -3,6 +3,8 @@ export const BUTTONS_PER_PAGE_COUNT = 3;
 export const REVIEWS_TO_SHOW_COUNT = 3;
 export const PAGE_RADIX = 10;
 export const MIN_SEARCH_SYMBOLS_COUNT = 3;
+export const INITIAL_TOTAL = 0;
+export const PER_CENT = 100;
 
 export enum AppRoute {
   Catalog = '/',
@@ -106,4 +108,6 @@ export enum ProductQuantity {
 export enum LocalStorage {
   SelectedProducts = 'selectedProducts',
   UniqueBasketProducts = 'uniqueBasketProducts',
+  Discount = 'discount',
+  Coupon = 'coupon',
 }

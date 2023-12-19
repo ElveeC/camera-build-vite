@@ -15,6 +15,10 @@ export type ProductDataType = {
   isAddItemSuccessModalActive: boolean;
   isBasketRemoveModalActive: boolean;
   productToRemove: ProductType | null;
+  discount: number;
+  coupon: string;
+  setCouponSendingStatus: Status;
+  isCouponValid: boolean;
 }
 
 export type PromoDataType = {

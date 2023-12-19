@@ -1,6 +1,7 @@
 import { NameSpace } from '../../const';
 import { State } from '../../types/state';
 import { ProductType } from '../../types/product-type';
+import { Status } from '../../const';
 
 export const getProducts = (state: State): ProductType[] => state[NameSpace.Data].products;
 export const getProductsLoadingStatus = (state: State): boolean => state[NameSpace.Data].areProductsLoading;
@@ -20,3 +21,9 @@ export const getAddItemSuccessModalStatus = (state: State): boolean => state[Nam
 export const getBasketRemoveModalStatus = (state: State): boolean => state[NameSpace.Data].isBasketRemoveModalActive;
 
 export const getProductToRemove = (state: State): ProductType | null =>state[NameSpace.Data].productToRemove;
+
+export const getCouponStatus = (state: State): boolean => state[NameSpace.Data].isCouponValid;
+export const getSavedCoupon = (state: State): string => state[NameSpace.Data].coupon;
+export const getCouponSendingStatus = (state: State): Status => state[NameSpace.Data].setCouponSendingStatus;
+
+export const getDiscount = (state: State): number => state[NameSpace.Data].discount;
