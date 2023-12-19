@@ -82,7 +82,7 @@ function Basket () {
                         <p className="custom-input__error">Промокод неверный</p>
                         <p className="custom-input__success">Промокод принят!</p>
                       </div>
-                      <button className="btn" type="submit">Применить
+                      <button className="btn" type="submit" disabled={!couponValue || couponValue.includes(' ')}>Применить
                       </button>
                     </form>
                   </div>
