@@ -1,6 +1,7 @@
 import { fetchProductsAction, fetchProductAction } from '../api-actions';
 import { productData, resetSelectedProduct, setSelectedProduct } from './product-data';
 import { makeFakeProduct, makeFakeProducts } from '../../mocks/mocks';
+import { Status } from '../../const';
 
 describe('ProductData Slice', () => {
   const initialState = {
@@ -11,7 +12,16 @@ describe('ProductData Slice', () => {
     selectedProduct: null,
     selectedProducts: [],
     hasError: false,
-    isAddItemSuccessModalActive: false
+    uniqueBasketProducts: [],
+    isAddItemSuccessModalActive: false,
+    isBasketRemoveModalActive: false,
+    productToRemove: null,
+    setCouponSendingStatus: Status.Unsent,
+    discount: 0,
+    coupon: '',
+    isCouponValid: false,
+    order: null,
+    orderPostingStatus: Status.Unsent,
   };
   describe('fetchProductsAction', () => {
     it('should return the initial state with an empty action', () => {

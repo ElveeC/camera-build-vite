@@ -27,3 +27,5 @@ export const getSavedCoupon = (state: State): string => state[NameSpace.Data].co
 export const getCouponSendingStatus = (state: State): Status => state[NameSpace.Data].setCouponSendingStatus;
 
 export const getDiscount = (state: State): number => state[NameSpace.Data].discount;
+
+export const getOrderPostingStatus = (state: State): Status => state[NameSpace.Data].orderPostingStatus;

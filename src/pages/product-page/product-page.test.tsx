@@ -25,7 +25,16 @@ describe('Component: ProductPage', () => {
         selectedProduct: null,
         hasError: false,
         selectedProducts: [],
-        isAddItemSuccessModalActive: false
+        uniqueBasketProducts: [],
+        isAddItemSuccessModalActive: false,
+        isBasketRemoveModalActive: false,
+        productToRemove: null,
+        setCouponSendingStatus: Status.Unsent,
+        discount: 0,
+        coupon: '',
+        isCouponValid: false,
+        order: null,
+        orderPostingStatus: Status.Unsent,
       },
       PROMO: {
         promoProducts: [],

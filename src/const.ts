@@ -108,6 +108,4 @@ export enum ProductQuantity {
 export enum LocalStorage {
   SelectedProducts = 'selectedProducts',
   UniqueBasketProducts = 'uniqueBasketProducts',
-  Discount = 'discount',
-  Coupon = 'coupon',
 }

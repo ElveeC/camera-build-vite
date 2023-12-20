@@ -4,6 +4,7 @@ import { AppDispatch, State } from '../types/state.js';
 import { ProductType, PromoType } from '../types/product-type.js';
 import { ReviewType, PostingReviewType } from '../types/review-type.js';
 import { CouponType } from '../types/coupon-type.js';
+import { OrderType } from '../types/order-type.js';
 import { APIRoute, NameSpace } from '../const';
 import { toast } from 'react-toastify';
 
@@ -106,6 +107,23 @@ export const sendCouponAction = createAsyncThunk<number, CouponType, {
       return data;
     } catch {
       toast.error('Ошибка при проверке промокода');
+      throw new Error;
+    }
+  }
+);
+
+export const postOrderAction = createAsyncThunk<number, OrderType, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Data}/postOrder`,
+  async ({ camerasIds, coupon }, {extra: api}) => {
+    try {
+      const {data} = await api.post<number>(APIRoute.Order, { camerasIds, coupon });
+      return data;
+    } catch {
+      toast.error('Не удалось отправить заказ. Сервер недоступен');
       throw new Error;
     }
   }

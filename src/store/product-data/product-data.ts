@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace, LocalStorage, Status } from '../../const';
-import { fetchProductsAction, fetchProductAction, sendCouponAction } from '../api-actions';
+import { fetchProductsAction, fetchProductAction, sendCouponAction, postOrderAction } from '../api-actions';
 import { ProductDataType } from '../../types/state';
 import { ProductType } from '../../types/product-type';
+import { OrderType } from '../../types/order-type';
 
 const initialState: ProductDataType = {
   products: [],
@@ -19,7 +20,9 @@ const initialState: ProductDataType = {
   setCouponSendingStatus: Status.Unsent,
   discount: 0,
   coupon: '',
-  isCouponValid: false
+  isCouponValid: false,
+  order: null,
+  orderPostingStatus: Status.Unsent,
 };
 
 export const productData = createSlice({
@@ -84,6 +87,26 @@ export const productData = createSlice({
 
     resetCouponStatus: (state) => {
       state.setCouponSendingStatus = Status.Unsent;
+    },
+
+    setOrder: (state, action: PayloadAction<OrderType>) => {
+      state.order = action.payload;
+    },
+
+    resetOrder: (state) => {
+      state.order = null;
+      state.selectedProducts = [];
+      state.uniqueBasketProducts = [];
+      state.setCouponSendingStatus = Status.Unsent;
+      state.coupon = '';
+      state.isCouponValid = false;
+      state.discount = 0;
+      localStorage.removeItem(LocalStorage.SelectedProducts);
+      localStorage.removeItem(LocalStorage.UniqueBasketProducts);
+    },
+
+    resetOrderStatus: (state) => {
+      state.orderPostingStatus = Status.Unsent;
     }
   },
 
@@ -128,8 +151,12 @@ export const productData = createSlice({
         state.setCouponSendingStatus = Status.Error;
         state.isCouponValid = false;
         state.discount = 0;
+      })
+
+      .addCase(postOrderAction.fulfilled, (state) => {
+        state.orderPostingStatus = Status.Success;
       });
   }
 });
 
-export const { setSelectedProduct, resetSelectedProduct, addProductToBasket, addToUniqueBasketList, removeProductFromBasket, removeProductFromUniqueList, setProductToRemove, resetProductToRemove, setAddItemSuccessModalStatus, setBasketRemoveModalStatus, setCoupon, resetCouponStatus } = productData.actions;
+export const { setSelectedProduct, resetSelectedProduct, addProductToBasket, addToUniqueBasketList, removeProductFromBasket, removeProductFromUniqueList, setProductToRemove, resetProductToRemove, setAddItemSuccessModalStatus, setBasketRemoveModalStatus, setCoupon, resetCouponStatus, resetOrder, resetOrderStatus } = productData.actions;

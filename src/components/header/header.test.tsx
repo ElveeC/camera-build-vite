@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Header } from './header';
 import { withStore, withHistory } from '../../mocks/mock-component';
 import { makeFakeProducts } from '../../mocks/mocks';
+import { Status } from '../../const';
 
 describe('Component: Header', () => {
   const products = makeFakeProducts();
@@ -24,7 +25,16 @@ describe('Component: Header', () => {
           hasError: false,
           selectedProduct: null,
           selectedProducts: [],
-          isAddItemSuccessModalActive: false
+          isAddItemSuccessModalActive: false,
+          uniqueBasketProducts: [],
+          isBasketRemoveModalActive: false,
+          productToRemove: null,
+          setCouponSendingStatus: Status.Unsent,
+          discount: 0,
+          coupon: '',
+          isCouponValid: false,
+          order: null,
+          orderPostingStatus: Status.Unsent,
         },
       });
 

@@ -2,6 +2,7 @@ import { render, screen} from '@testing-library/react';
 import { withStore, withHistory } from '../../mocks/mock-component';
 import { Pagination } from './pagination';
 import { makeFakeProducts } from '../../mocks/mocks';
+import { Status } from '../../const';
 
 describe('Component: Pagination', () => {
 
@@ -23,7 +24,16 @@ describe('Component: Pagination', () => {
           hasError: false,
           selectedProduct: null,
           selectedProducts: [],
-          isAddItemSuccessModalActive: false
+          isAddItemSuccessModalActive: false,
+          uniqueBasketProducts: [],
+          isBasketRemoveModalActive: false,
+          productToRemove: null,
+          setCouponSendingStatus: Status.Unsent,
+          discount: 0,
+          coupon: '',
+          isCouponValid: false,
+          order: null,
+          orderPostingStatus: Status.Unsent,
         },
       });
 
@@ -51,7 +61,16 @@ describe('Component: Pagination', () => {
           hasError: false,
           selectedProduct: null,
           selectedProducts: [],
-          isAddItemSuccessModalActive: false
+          isAddItemSuccessModalActive: false,
+          uniqueBasketProducts: [],
+          isBasketRemoveModalActive: false,
+          productToRemove: null,
+          setCouponSendingStatus: Status.Unsent,
+          discount: 0,
+          coupon: '',
+          isCouponValid: false,
+          order: null,
+          orderPostingStatus: Status.Unsent,
         },
       });
 
@@ -78,7 +97,16 @@ describe('Component: Pagination', () => {
           hasError: false,
           selectedProduct: null,
           selectedProducts: [],
-          isAddItemSuccessModalActive: false
+          uniqueBasketProducts: [],
+          isAddItemSuccessModalActive: false,
+          isBasketRemoveModalActive: false,
+          productToRemove: null,
+          setCouponSendingStatus: Status.Unsent,
+          discount: 0,
+          coupon: '',
+          isCouponValid: false,
+          order: null,
+          orderPostingStatus: Status.Unsent,
         },
       });
 
@@ -106,7 +134,16 @@ describe('Component: Pagination', () => {
           hasError: false,
           selectedProduct: null,
           selectedProducts: [],
-          isAddItemSuccessModalActive: false
+          uniqueBasketProducts: [],
+          isAddItemSuccessModalActive: false,
+          isBasketRemoveModalActive: false,
+          productToRemove: null,
+          setCouponSendingStatus: Status.Unsent,
+          discount: 0,
+          coupon: '',
+          isCouponValid: false,
+          order: null,
+          orderPostingStatus: Status.Unsent,
         },
       });
 
@@ -134,7 +171,16 @@ describe('Component: Pagination', () => {
           hasError: false,
           selectedProduct: null,
           selectedProducts: [],
-          isAddItemSuccessModalActive: false
+          uniqueBasketProducts: [],
+          isAddItemSuccessModalActive: false,
+          isBasketRemoveModalActive: false,
+          productToRemove: null,
+          setCouponSendingStatus: Status.Unsent,
+          discount: 0,
+          coupon: '',
+          isCouponValid: false,
+          order: null,
+          orderPostingStatus: Status.Unsent,
         },
       });
 

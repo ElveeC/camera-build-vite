@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { AddItemModal } from './add-item-modal';
 import { withStore, withHistory } from '../../mocks/mock-component';
 import { makeFakeProduct } from '../../mocks/mocks';
+import { Status } from '../../const';
 
 describe('Component: AddItemModal', () => {
   const mockSelectedProduct = makeFakeProduct();
@@ -34,7 +35,16 @@ describe('Component: AddItemModal', () => {
         hasError: false,
         selectedProduct: mockSelectedProduct,
         selectedProducts: [],
-        isAddItemSuccessModalActive: false
+        uniqueBasketProducts: [],
+        isAddItemSuccessModalActive: false,
+        isBasketRemoveModalActive: false,
+        productToRemove: null,
+        setCouponSendingStatus: Status.Unsent,
+        discount: 0,
+        coupon: '',
+        isCouponValid: false,
+        order: null,
+        orderPostingStatus: Status.Unsent,
       },
     });
     const preparedComponent = withHistory(withStoreComponent);

@@ -77,7 +77,16 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
     selectedProduct: null,
     selectedProducts: [],
     hasError: false,
-    isAddItemSuccessModalActive: false
+    uniqueBasketProducts: [],
+    isAddItemSuccessModalActive: false,
+    isBasketRemoveModalActive: false,
+    productToRemove: null,
+    setCouponSendingStatus: Status.Unsent,
+    discount: 0,
+    coupon: '',
+    isCouponValid: false,
+    order: null,
+    orderPostingStatus: Status.Unsent,
   },
   PROMO: {
     promoProducts: [],

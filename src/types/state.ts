@@ -1,6 +1,7 @@
 import { store } from '../store/index.js';
 import { ProductType, PromoType } from './product-type.js';
 import { ReviewType } from './review-type.js';
+import { OrderType } from './order-type.js';
 import { Status } from '../const.js';
 
 export type ProductDataType = {
@@ -19,6 +20,8 @@ export type ProductDataType = {
   coupon: string;
   setCouponSendingStatus: Status;
   isCouponValid: boolean;
+  order: OrderType | null;
+  orderPostingStatus: Status;
 }
 
 export type PromoDataType = {

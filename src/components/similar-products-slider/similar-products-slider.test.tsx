@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { SimilarProductsSlider } from './similar-products-slider';
 import { withStore, withHistory } from '../../mocks/mock-component';
 import { makeFakeSimilarProducts, makeFakeProducts } from '../../mocks/mocks';
+import { Status } from '../../const';
 
 describe('Component: SimilarProductsSlider', () => {
   const mockSimilarProducts = makeFakeSimilarProducts();
@@ -23,7 +24,16 @@ describe('Component: SimilarProductsSlider', () => {
         hasError: false,
         selectedProduct: null,
         selectedProducts: [],
-        isAddItemSuccessModalActive: false
+        uniqueBasketProducts: [],
+        isAddItemSuccessModalActive: false,
+        isBasketRemoveModalActive: false,
+        productToRemove: null,
+        setCouponSendingStatus: Status.Unsent,
+        discount: 0,
+        coupon: '',
+        isCouponValid: false,
+        order: null,
+        orderPostingStatus: Status.Unsent,
       },
       SIMILAR: {
         similarProducts: mockSimilarProducts,
@@ -53,7 +63,16 @@ describe('Component: SimilarProductsSlider', () => {
         hasError: false,
         selectedProduct: null,
         selectedProducts: [],
-        isAddItemSuccessModalActive: false
+        uniqueBasketProducts: [],
+        isAddItemSuccessModalActive: false,
+        isBasketRemoveModalActive: false,
+        productToRemove: null,
+        setCouponSendingStatus: Status.Unsent,
+        discount: 0,
+        coupon: '',
+        isCouponValid: false,
+        order: null,
+        orderPostingStatus: Status.Unsent,
       },
       SIMILAR: {
         similarProducts: [],
@@ -80,7 +99,16 @@ describe('Component: SimilarProductsSlider', () => {
         hasError: false,
         selectedProduct: null,
         selectedProducts: [],
-        isAddItemSuccessModalActive: false
+        uniqueBasketProducts: [],
+        isAddItemSuccessModalActive: false,
+        isBasketRemoveModalActive: false,
+        productToRemove: null,
+        setCouponSendingStatus: Status.Unsent,
+        discount: 0,
+        coupon: '',
+        isCouponValid: false,
+        order: null,
+        orderPostingStatus: Status.Unsent,
       },
       SIMILAR: {
         similarProducts: mockSimilarProducts,

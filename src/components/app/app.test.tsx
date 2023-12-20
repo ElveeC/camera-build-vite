@@ -38,7 +38,16 @@ describe('Application Routing', () => {
         selectedProduct: null,
         selectedProducts: [],
         hasError: false,
-        isAddItemSuccessModalActive: false
+        uniqueBasketProducts: [],
+        isAddItemSuccessModalActive: false,
+        isBasketRemoveModalActive: false,
+        productToRemove: null,
+        setCouponSendingStatus: Status.Unsent,
+        discount: 0,
+        coupon: '',
+        isCouponValid: false,
+        order: null,
+        orderPostingStatus: Status.Unsent,
       },
       SIMILAR: {
         similarProducts: [],
