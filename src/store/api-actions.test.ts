@@ -4,7 +4,7 @@ import { State } from '../types/state';
 import { createAPI } from '../services/api';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { fetchProductsAction, fetchProductAction, fetchPromoProductsAction, fetchReviewsAction, fetchSimilarProductsAction, addReviewAction } from './api-actions';
+import { fetchProductsAction, fetchProductAction, fetchPromoProductsAction, fetchReviewsAction, fetchSimilarProductsAction, addReviewAction, postOrderAction, sendCouponAction } from './api-actions';
 import { makeFakeProduct, makeFakeProducts, makeFakeReviews, makeFakeNewReview, makeFakePromos, makeFakeSimilarProducts } from '../mocks/mocks';
 import { APIRoute } from '../const';
 
@@ -223,6 +223,75 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         addReviewAction.pending.type,
         addReviewAction.rejected.type,
+      ]);
+    });
+  });
+
+  describe('sendCouponAction', () => {
+    const validCouponValue = 'camera-333';
+    const invalidCouponValue = 'fkldsj';
+    const discount = 15;
+
+    it('should dispatch "sendCouponAction.pending", "sendCouponAction.fulfilled" when server response 200', async() => {
+      mockAxiosAdapter.onPost(APIRoute.Coupons, { coupon: validCouponValue }).reply(200, discount);
+
+      await store.dispatch(sendCouponAction({ coupon: validCouponValue }));
+
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const sendCouponActionFulfilled = emittedActions.at(1) as ReturnType<typeof sendCouponAction.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+        sendCouponAction.pending.type,
+        sendCouponAction.fulfilled.type,
+      ]);
+
+      expect(sendCouponActionFulfilled.payload)
+        .toEqual(discount);
+    });
+
+    it('should dispatch "sendCouponAction.pending", "sendCouponAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onPost(APIRoute.Coupons, { coupon: invalidCouponValue }).reply(400, []);
+
+      await store.dispatch(sendCouponAction({ coupon: invalidCouponValue }));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        sendCouponAction.pending.type,
+        sendCouponAction.rejected.type,
+      ]);
+    });
+  });
+
+  describe('postOrderAction', () => {
+
+    it('should dispatch "postOrderAction.pending", "postOrderAction.fulfilled" when server response 200', async() => {
+      mockAxiosAdapter.onPost(APIRoute.Order, { camerasIds: [1, 2], coupon: null }).reply(200, []);
+
+      await store.dispatch(postOrderAction({ camerasIds: [1, 2], coupon: null }));
+
+      const emittedActions = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(emittedActions);
+      const postOrderActionFulfilled = emittedActions.at(1) as ReturnType<typeof postOrderAction.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+        postOrderAction.pending.type,
+        postOrderAction.fulfilled.type,
+      ]);
+
+      expect(postOrderActionFulfilled.payload)
+        .toEqual([]);
+    });
+
+    it('should dispatch "postOrderAction.pending", "postOrderAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onPost(APIRoute.Order, { camerasIds: [1, 2], coupon: null }).reply(400, []);
+
+      await store.dispatch(postOrderAction({ camerasIds: [1, 2], coupon: null }));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        postOrderAction.pending.type,
+        postOrderAction.rejected.type,
       ]);
     });
   });

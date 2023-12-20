@@ -11,7 +11,7 @@ function BasketList () {
   }
 
   return (
-    <ul className="basket__list">
+    <ul className="basket__list" data-testid="basketListElement">
       {uniqueProducts.map ((product) => (
         <BasketProduct product={product} key={product.id}/>
       ))}

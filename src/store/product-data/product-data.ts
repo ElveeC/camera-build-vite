@@ -3,7 +3,6 @@ import { NameSpace, LocalStorage, Status } from '../../const';
 import { fetchProductsAction, fetchProductAction, sendCouponAction, postOrderAction } from '../api-actions';
 import { ProductDataType } from '../../types/state';
 import { ProductType } from '../../types/product-type';
-import { OrderType } from '../../types/order-type';
 
 const initialState: ProductDataType = {
   products: [],
@@ -78,7 +77,7 @@ export const productData = createSlice({
     },
 
     resetProductToRemove: (state) => {
-      state.selectedProduct = null;
+      state.productToRemove = null;
     },
 
     setCoupon: (state, action: PayloadAction<string>) => {
@@ -87,10 +86,6 @@ export const productData = createSlice({
 
     resetCouponStatus: (state) => {
       state.setCouponSendingStatus = Status.Unsent;
-    },
-
-    setOrder: (state, action: PayloadAction<OrderType>) => {
-      state.order = action.payload;
     },
 
     resetOrder: (state) => {
@@ -109,7 +104,6 @@ export const productData = createSlice({
       state.orderPostingStatus = Status.Unsent;
     }
   },
-
 
   extraReducers(builder) {
     builder
