@@ -106,7 +106,6 @@ export const sendCouponAction = createAsyncThunk<number, CouponType, {
       const {data} = await api.post<number>(APIRoute.Coupons, coupon);
       return data;
     } catch {
-      toast.error('Ошибка при проверке промокода');
       throw new Error;
     }
   }
