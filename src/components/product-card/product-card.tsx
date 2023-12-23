@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -28,7 +28,6 @@ function ProductCard ({ product, isSimilar }: ProductCardProps) {
   } = product;
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const selectedProducts = useAppSelector(getSelectedProducts);
 
   let isSelected = false;
@@ -38,10 +37,6 @@ function ProductCard ({ product, isSimilar }: ProductCardProps) {
 
   const handleBuyButtonClick = () => {
     dispatch(setSelectedProduct(product));
-  };
-
-  const handleBasketButtonClick = () => {
-    navigate(AppRoute.Basket);
   };
 
   return (
@@ -71,8 +66,11 @@ function ProductCard ({ product, isSimilar }: ProductCardProps) {
         <button className="btn btn--purple product-card__btn" type="button" onClick={handleBuyButtonClick}>Купить
         </button>}
         {isSelected &&
-        <button className="btn btn--purple-border product-card__btn product-card__btn--in-cart" type="button" onClick={handleBasketButtonClick}>В корзине
-        </button>}
+        <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" to={AppRoute.Basket}>
+          <svg width="16" height="16" aria-hidden="true">
+            <use xlinkHref="#icon-basket"></use>
+          </svg>В корзине
+        </Link>}
         <Link className="btn btn--transparent" to={`${AppRoute.Product}/${id}`}>Подробнее
         </Link>
       </div>
