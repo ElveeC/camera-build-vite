@@ -1,13 +1,15 @@
 import { useRef, useEffect, useCallback } from 'react';
 import FocusLock from 'react-focus-lock';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { getSelectedProduct } from '../../store/product-data/product-data.selectors';
+import { getSelectedProduct, getSelectedProducts } from '../../store/product-data/product-data.selectors';
 import { resetSelectedProduct, addProductToBasket, addToUniqueBasketList, setAddItemSuccessModalStatus } from '../../store/product-data/product-data';
+import { ProductQuantity } from '../../const';
 
 function AddItemModal () {
 
   const dispatch = useAppDispatch();
   const selectedProduct = useAppSelector(getSelectedProduct);
+  const selectedProducts = useAppSelector(getSelectedProducts);
   const focusRef = useRef<HTMLDivElement | null>(null);
 
   const handleEscapeKeydown = useCallback((evt: KeyboardEvent) => {
@@ -64,9 +66,13 @@ function AddItemModal () {
     price
   } = selectedProduct;
 
+  const selectedProductAmount = selectedProducts.filter((product) => product.id === selectedProduct.id).length;
+
   const handleAddToBasketClick = () => {
-    dispatch(addProductToBasket(selectedProduct));
-    dispatch(addToUniqueBasketList(selectedProduct));
+    if (selectedProductAmount < ProductQuantity.MaxQuantity) {
+      dispatch(addProductToBasket(selectedProduct));
+      dispatch(addToUniqueBasketList(selectedProduct));
+    }
     dispatch(setAddItemSuccessModalStatus(true));
     dispatch(resetSelectedProduct());
   };

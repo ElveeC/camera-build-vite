@@ -5,6 +5,7 @@ export const PAGE_RADIX = 10;
 export const MIN_SEARCH_SYMBOLS_COUNT = 3;
 export const INITIAL_TOTAL = 0;
 export const PER_CENT = 100;
+export const REGEX_INVALID_QUANTITY = /\D/g;
 
 export enum AppRoute {
   Catalog = '/',
