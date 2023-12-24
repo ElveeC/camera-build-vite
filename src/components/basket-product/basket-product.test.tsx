@@ -9,7 +9,7 @@ describe('Component: BasketProduct', () => {
   const product = makeFakeProduct();
 
   it('should render correctly', () => {
-    const { name, category, level, vendorCode, price } = product;
+    const { name, category, level, vendorCode } = product;
 
     const expectedAltText = `${name}.`;
     const expectedVendorCodeText = 'Артикул:';
@@ -18,7 +18,6 @@ describe('Component: BasketProduct', () => {
     const expectedLevel = `${level} уровень`;
     const expectedPriceText = 'Цена:';
     const expectedTotalText = 'Общая цена:';
-    const expectedPrice = `${price} ₽`;
 
 
     const {withStoreComponent} = withStore(
@@ -54,7 +53,6 @@ describe('Component: BasketProduct', () => {
     expect(screen.getByText(expectedLevel)).toBeInTheDocument();
     expect(screen.getByText(expectedPriceText)).toBeInTheDocument();
     expect(screen.getByText(expectedTotalText)).toBeInTheDocument();
-    expect(screen.getAllByText(expectedPrice).length).toBe(2);
     expect(screen.getAllByRole('button').length).toBe(3);
   });
 

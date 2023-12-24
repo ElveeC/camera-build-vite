@@ -24,6 +24,7 @@ import { getProduct, getProductLoadingStatus } from '../../store/product-data/pr
 import { getAddReviewActiveStatus, getReviewPostingStatus } from '../../store/reviews-data/reviews-data.selectors';
 
 import { AppRoute, Status } from '../../const';
+import { formatPrice } from '../../utils';
 
 function ProductPage () {
   const currentProduct = useParams();
@@ -106,7 +107,7 @@ function ProductPage () {
                     <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
                   </div>
 
-                  <p className="product__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
+                  <p className="product__price"><span className="visually-hidden">Цена:</span>{formatPrice(price)} ₽</p>
                   <button className="btn btn--purple" type="button" onClick={handleBuyButtonClick}>
                     <svg width="24" height="16" aria-hidden="true">
                       <use xlinkHref="#icon-add-basket"></use>

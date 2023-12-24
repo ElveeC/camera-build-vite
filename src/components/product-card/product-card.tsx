@@ -7,6 +7,7 @@ import { getSelectedProducts } from '../../store/product-data/product-data.selec
 
 import { Rating } from '../rating/rating';
 import { AppRoute } from '../../const';
+import { formatPrice } from '../../utils';
 import { ProductType } from '../../types/product-type';
 
 type ProductCardProps = {
@@ -58,7 +59,7 @@ function ProductCard ({ product, isSimilar }: ProductCardProps) {
           <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
         </div>
         <p className="product-card__title">{name}</p>
-        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{price} ₽
+        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{formatPrice(price)} ₽
         </p>
       </div>
       <div className="product-card__buttons">

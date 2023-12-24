@@ -4,6 +4,7 @@ import { getSelectedProducts } from '../../store/product-data/product-data.selec
 import { addProductToBasket, removeProductFromBasket, setBasketRemoveModalStatus, setProductToRemove } from '../../store/product-data/product-data';
 import { ProductType } from '../../types/product-type';
 import { ProductQuantity, REGEX_INVALID_QUANTITY } from '../../const';
+import { formatPrice } from '../../utils';
 
 type BasketProductProps = {
   product: ProductType;
@@ -94,7 +95,7 @@ function BasketProduct ({ product }: BasketProductProps) {
           <li className="basket-item__list-item">{level} уровень</li>
         </ul>
       </div>
-      <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
+      <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{formatPrice(price)} ₽</p>
       <div className="quantity">
         <button className="btn-icon btn-icon--prev" aria-label="уменьшить количество товара" onClick={handleMinusButtonClick} disabled={quantity <= ProductQuantity.MinQuantity}>
           <svg width="7" height="12" aria-hidden="true">
@@ -109,7 +110,7 @@ function BasketProduct ({ product }: BasketProductProps) {
           </svg>
         </button>
       </div>
-      <div className="basket-item__total-price"><span className="visually-hidden">Общая цена:</span>{price * productQuantityValue} ₽</div>
+      <div className="basket-item__total-price"><span className="visually-hidden">Общая цена:</span>{formatPrice(price * productQuantityValue)} ₽</div>
       <button className="cross-btn" type="button" aria-label="Удалить товар" onClick={handleRemoveButtonClick}>
         <svg width="10" height="10" aria-hidden="true">
           <use xlinkHref="#icon-close"></use>

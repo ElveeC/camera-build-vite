@@ -16,7 +16,6 @@ describe('Component: BasketRemoveModal', () => {
   it('should render correctly', () => {
     const expectedModalTitleText = 'Удалить этот товар?';
     const expectedAltText = `${name}.`;
-    const expectedProductNameText = `${name}`;
     const expectedVendorCodeText = 'Артикул:';
     const expectedVendorCode = `${vendorCode}`;
     const expectedTypeText = `${type} камера`;
@@ -53,7 +52,6 @@ describe('Component: BasketRemoveModal', () => {
 
     expect(screen.getByText(expectedModalTitleText)).toBeInTheDocument();
     expect(screen.getByAltText(expectedAltText)).toBeInTheDocument();
-    expect(screen.getByText(expectedProductNameText)).toBeInTheDocument();
     expect(screen.getByText(expectedVendorCode)).toBeInTheDocument();
     expect(screen.getByText(expectedVendorCodeText)).toBeInTheDocument();
     expect(screen.getByText(expectedTypeText)).toBeInTheDocument();

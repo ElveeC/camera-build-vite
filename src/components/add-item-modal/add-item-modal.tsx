@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import { getSelectedProduct, getSelectedProducts } from '../../store/product-data/product-data.selectors';
 import { resetSelectedProduct, addProductToBasket, addToUniqueBasketList, setAddItemSuccessModalStatus } from '../../store/product-data/product-data';
 import { ProductQuantity } from '../../const';
+import { formatPrice } from '../../utils';
 
 function AddItemModal () {
 
@@ -102,7 +103,7 @@ function AddItemModal () {
                   <li className="basket-item__list-item">{type}</li>
                   <li className="basket-item__list-item">{level}</li>
                 </ul>
-                <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
+                <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{formatPrice(price)} ₽</p>
               </div>
             </div>
             <div className="modal__buttons">

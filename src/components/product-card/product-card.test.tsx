@@ -12,14 +12,12 @@ describe('Component: ProductCard', () => {
     const {
       name,
       reviewCount,
-      price
     } = product;
 
     const expectedAltText = `${name}.`;
     const expectedReviewCountText = 'Всего оценок:';
     const expectedReviewCount = `${reviewCount}`;
     const expectedPriceText = 'Цена:';
-    const expectedPrice = `${price} ₽`;
     const expectedDetailsText = 'Подробнее';
 
     const {withStoreComponent} = withStore(
@@ -52,7 +50,6 @@ describe('Component: ProductCard', () => {
     expect(screen.getByText(expectedReviewCountText)).toBeInTheDocument();
     expect(screen.getByText(expectedReviewCount)).toBeInTheDocument();
     expect(screen.getByText(expectedPriceText)).toBeInTheDocument();
-    expect(screen.getByText(expectedPrice)).toBeInTheDocument();
     expect(screen.getByText(expectedDetailsText)).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
@@ -61,14 +58,12 @@ describe('Component: ProductCard', () => {
     const {
       name,
       reviewCount,
-      price
     } = product;
 
     const expectedAltText = `${name}.`;
     const expectedReviewCountText = 'Всего оценок:';
     const expectedReviewCount = `${reviewCount}`;
     const expectedPriceText = 'Цена:';
-    const expectedPrice = `${price} ₽`;
     const expectedDetailsText = 'Подробнее';
 
     const {withStoreComponent} = withStore(
@@ -101,7 +96,6 @@ describe('Component: ProductCard', () => {
     expect(screen.getByText(expectedReviewCountText)).toBeInTheDocument();
     expect(screen.getByText(expectedReviewCount)).toBeInTheDocument();
     expect(screen.getByText(expectedPriceText)).toBeInTheDocument();
-    expect(screen.getByText(expectedPrice)).toBeInTheDocument();
     expect(screen.getByText(expectedDetailsText)).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
   });

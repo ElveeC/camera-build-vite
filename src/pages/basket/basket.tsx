@@ -16,6 +16,7 @@ import { setCoupon, resetCouponStatus, resetOrder } from '../../store/product-da
 import { getSelectedProducts, getCouponStatus, getDiscount, getSavedCoupon, getCouponSendingStatus, getOrderPostingStatus } from '../../store/product-data/product-data.selectors';
 
 import { Status, INITIAL_TOTAL, PER_CENT } from '../../const';
+import { formatPrice } from '../../utils';
 
 function Basket () {
 
@@ -111,7 +112,7 @@ function Basket () {
                   </div>
                 </div>
                 <div className="basket__summary-order">
-                  <p className="basket__summary-item"><span className="basket__summary-text">Всего:</span><span className="basket__summary-value">{total} ₽</span></p>
+                  <p className="basket__summary-item"><span className="basket__summary-text">Всего:</span><span className="basket__summary-value">{formatPrice(total)} ₽</span></p>
                   <p className="basket__summary-item"><span className="basket__summary-text">Скидка:</span>
                     <span
                       className={cn(
@@ -119,10 +120,10 @@ function Basket () {
                         {'basket__summary-value--bonus': isCouponValid}
                       )}
                     >
-                      {discountValue} ₽
+                      {formatPrice(discountValue)} ₽
                     </span>
                   </p>
-                  <p className="basket__summary-item"><span className="basket__summary-text basket__summary-text--total">К оплате:</span><span className="basket__summary-value basket__summary-value--total">{finalPrice} ₽</span></p>
+                  <p className="basket__summary-item"><span className="basket__summary-text basket__summary-text--total">К оплате:</span><span className="basket__summary-value basket__summary-value--total">{formatPrice(finalPrice)} ₽</span></p>
                   <button className="btn btn--purple" type="submit" onClick={handleOrderSubmit} disabled={!selectedProducts.length}>Оформить заказ
                   </button>
                 </div>

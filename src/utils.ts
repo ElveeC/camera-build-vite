@@ -52,3 +52,14 @@ export const sortByPriceMintoMax = (products: ProductType[]) => products.sort((a
 export const sortByPriceMaxtoMin = (products: ProductType[]) => products.sort((a, b) => b.price - a.price);
 export const sortMostPopularFirst = (products: ProductType[]) => products.sort((a, b) => b.rating - a.rating);
 export const sortLessPopularFirst = (products: ProductType[]) => products.sort((a, b) => a.rating - b.rating);
+
+export const formatPrice = (price: number) => {
+  let priceString = price.toString();
+  const stringLength = priceString.length;
+  if (stringLength > 3) {
+    for (let i = stringLength - 3; i > 0; i = i - 3){
+      priceString = `${priceString.slice(0, i)} ${priceString.slice(i)}`;
+    }
+  }
+  return priceString;
+};
